@@ -1,12 +1,12 @@
 /* global describe beforeEach it */
 const chai = require('chai')
 const {expect} = require('chai')
-const db = require('../index')
+const db = require('..')
 const chaiAsPromised = require('chai-as-promised')
-const Review = db.model('Review')
+const Reviews = require('./reviews')
 chai.use(chaiAsPromised)
 
-describe('Review model', () => {
+describe('Reviews model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
@@ -15,7 +15,7 @@ describe('Review model', () => {
   const title = 'My review'
   const comments = `It's super awesome, and I love it!!!!!!`
   const rating = 5
-  const review = Review.build({
+  const review = Reviews.build({
     userId,
     productId,
     title,
@@ -27,7 +27,7 @@ describe('Review model', () => {
     const savedReview = await review.save()
     expect(savedReview.title).to.equal(title)
     expect(savedReview.rating).to.equal(rating)
-    await expect(Review.create({})).to.be.rejected
-    await expect(Review.create({userId: 10})).to.be.rejected
+    await expect(Reviews.create({})).to.be.rejected
+    await expect(Reviews.create({userId: 10})).to.be.rejected
   })
 })
