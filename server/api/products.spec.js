@@ -11,23 +11,13 @@ describe('GET /api/products/', () => {
     return db.sync({force: true})
   })
 
-  // after(() => {
-  //   return Products.truncate({ cascade: true })
-  // })
+  after(() => {
+    return Products.truncate({cascade: true})
+  })
 
-  // beforeEach(async() => {
-  //   const product = await Products.create({
-  //     name: 'Mask01',
-  //     imageUrl: 'Mask.png',
-  //     description: descriptionProduct,
-  //     price: '10000'
-  //   })
-  //   return
-  // })
-
-  it('GET /api/products', async () => {
+  it('should return products', async () => {
     const descriptionProduct = 'Ultra kawaii super cute mask'
-    const product = await Products.create({
+    await Products.create({
       name: 'Mask01',
       imageUrl: 'Mask.png',
       description: descriptionProduct,
@@ -39,5 +29,31 @@ describe('GET /api/products/', () => {
 
     expect(res.body).to.be.an('array')
     expect(res.body[0].description).to.be.equal('Ultra kawaii super cute mask')
+  })
+})
+
+describe('GET api/products/:productId', () => {
+  beforeEach(() => {
+    return db.sync({force: true})
+  })
+
+  after(() => {
+    return Products.truncate({cascade: true})
+  })
+
+  it('should return a product with the matching productId', async () => {
+    const descriptionProduct = 'Ultra kawaii super cute mask'
+    await Products.create({
+      id: 10,
+      name: 'Mask01',
+      imageUrl: 'Mask.png',
+      description: descriptionProduct,
+      price: '10000'
+    })
+    const res = await request(app)
+      .get('/api/products')
+      .expect(200)
+
+    expect(res.body[0].id).to.be.equal(10)
   })
 })
