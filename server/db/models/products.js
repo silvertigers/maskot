@@ -1,4 +1,3 @@
-const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
@@ -6,17 +5,17 @@ const Products = db.define('products', {
   title: {
     type: Sequelize.STRING,
     validation: {
-      notEmpty: true,
-    },
+      notEmpty: true
+    }
   },
   description: {
-    type: Sequelize.TEXT,
+    type: Sequelize.TEXT
   },
   price: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.INTEGER
   },
   imageUrl: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   quantity: {
     type: Sequelize.INTEGER,
