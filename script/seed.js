@@ -1,7 +1,14 @@
 'use strict'
 
 const db = require('../server/db')
-const {user, products, order, orderedProducts, category, reviews} = require('../server/db/models')
+const {
+  user,
+  products,
+  order,
+  orderedProducts,
+  category,
+  reviews
+} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -13,35 +20,108 @@ async function seed() {
   ])
 
   const Products = await Promise.all([
-    products.create({id: 1, name: "tiger mask", imageUrl: "bearmask.jpg", description: "this is a strong mask as like a tiger", quantity: 50, price: 2.02, categoryId: 2}),
-    products.create({id: 2, name: "Christmas mask", imageUrl: "bearmask.jpg", description: "lets wear this mask on our Christmas party", quantity: 20, price: 4.04, categoryId: 5}),
+    products.create({
+      id: 1,
+      name: 'tiger mask',
+      imageUrl: 'bearmask.jpg',
+      description: 'this is a strong mask as like a tiger',
+      quantity: 50,
+      price: 2.02,
+      categoryId: 2
+    }),
+    products.create({
+      id: 2,
+      name: 'Christmas mask',
+      imageUrl: 'bearmask.jpg',
+      description: 'lets wear this mask on our Christmas party',
+      quantity: 20,
+      price: 4.04,
+      categoryId: 5
+    })
   ])
 
   const orders = await Promise.all([
-    order.create({id: 1, status: "order placed" , email: "silver@myfirst.com", userId: 2,}),
-    order.create({id: 2, status: "order in process" , email: "bronze@mysecond.com", userId: 2,}),
-    order.create({id: 3, status: "order is out for delivery" , email: "gold@mythird.com", userId: 2,}),
-    order.create({id: 4, status: "order completed" , email: "platinum@myfinal.com", userId: 2,}),
+    order.create({
+      id: 1,
+      status: 'order placed',
+      email: 'silver@myfirst.com',
+      userId: 2
+    }),
+    order.create({
+      id: 2,
+      status: 'order in process',
+      email: 'bronze@mysecond.com',
+      userId: 2
+    }),
+    order.create({
+      id: 3,
+      status: 'order is out for delivery',
+      email: 'gold@mythird.com',
+      userId: 2
+    }),
+    order.create({
+      id: 4,
+      status: 'order completed',
+      email: 'platinum@myfinal.com',
+      userId: 2
+    })
   ])
 
   const OrderedProducts = await Promise.all([
-    orderedProducts.create({quantity: 5, price: 10.10, productId: 1, orderId: 1}),
-    orderedProducts.create({quantity: 3, price: 6.06, productId: 1, orderId: 2}),
-    orderedProducts.create({quantity: 2, price: 8.08, productId: 2, orderId: 3}),
-    orderedProducts.create({quantity: 1, price: 4.04, productId: 2, orderId: 4}),
+    orderedProducts.create({
+      quantity: 5,
+      price: 10.1,
+      productId: 1,
+      orderId: 1
+    }),
+    orderedProducts.create({
+      quantity: 3,
+      price: 6.06,
+      productId: 1,
+      orderId: 2
+    }),
+    orderedProducts.create({
+      quantity: 2,
+      price: 8.08,
+      productId: 2,
+      orderId: 3
+    }),
+    orderedProducts.create({quantity: 1, price: 4.04, productId: 2, orderId: 4})
   ])
 
   const categories = await Promise.all([
-    category.create({id: 1, type: "Basic"}),
-    category.create({id: 2, type: "Animal"}),
-    category.create({id: 3, type: "Cute"}),
-    category.create({id: 4, type: "Horror"}),
-    category.create({id: 5, type: "Festival"}),
+    category.create({id: 1, type: 'Basic'}),
+    category.create({id: 2, type: 'Animal'}),
+    category.create({id: 3, type: 'Cute'}),
+    category.create({id: 4, type: 'Horror'}),
+    category.create({id: 5, type: 'Festival'})
   ])
 
   const Review = await Promise.all([
-    reviews.create({title: "I like this!!!!", comments: "It is so fantastic.  All of my classmates like this and they also would like to buy this :)  TRY THIS!!!", rating: 5, productId: 1, user: 2}),
-    reviews.create({title: "OMG.....", comments: "It is the worst mask I have ever been.  The delievery had been late without any notice, customer service are not kind and they do not want to take their responsiblity.", rating: 1, productId: 2, user: 2}),
+    reviews.create({
+      title: 'I like this!!!!',
+      comments:
+        'It is so fantastic.  All of my classmates like this and they also would like to buy this :)  TRY THIS!!!',
+      rating: 5,
+      productId: 1,
+      userId: 1
+    }),
+    reviews.create({
+      title: 'I highly recommend',
+      comments:
+        'It is so fantastic.  All of my classmates like this and they also would like to buy this :)  TRY THIS!!!',
+      rating: 5,
+      productId: 1,
+      userId: 2
+    }),
+    reviews.create({
+      title: 'OMG.....',
+      comments:
+        'It is the worst mask I have ever been.  The delievery had been late without any notice, customer service are not kind and they do not want to take their responsiblity.',
+      rating: 1,
+      productId: 2,
+      userId: 2
+    })
   ])
 
   console.log(`seeded ${users.length} users`)

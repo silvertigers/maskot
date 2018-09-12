@@ -1,20 +1,21 @@
 import axios from 'axios'
 
-const GET_PRODUCT = 'GET_PRODUCT'
 const GOT_PRODUCT = 'GOT_PRODUCT'
 
 // ACTION CREATORS
 
 const gotProduct = product => {
   return {
-    type: GET_PRODUCT,
-    product: product
+    type: GOT_PRODUCT,
+    product
   }
 }
 
 export const getProduct = productId => {
   return async dispatch => {
-    const {data} = await axios.get(`api/products/${productId}`)
+    console.log('productId', productId)
+    const {data} = await axios.get(`/api/products/${productId}`)
+    console.log('PRODUCT DATA', data)
     dispatch(gotProduct(data))
   }
 }

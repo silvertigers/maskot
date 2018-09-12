@@ -11,7 +11,7 @@ describe('Reviews model', () => {
     return db.sync({force: true})
   })
   const title = 'My review'
-  const comments = `It's super awesome, and I love it!!!!!!`
+  const comments = `It's super awesome, and I love it!!!!!! I think everyone should but it, and you will not regret it at all!!!!!`
   const rating = 5
   const review = Reviews.build({
     title,
