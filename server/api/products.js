@@ -36,40 +36,40 @@ router.get('/:productId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const title = req.body.title;
-    const description = req.body.description;
-    const price = req.body.price;
-    const imageUrl = req.body.imageUrl;
-    const quantity = req.body.quantity;
+    const name = req.body.name
+    const description = req.body.description
+    const price = req.body.price
+    const imageUrl = req.body.imageUrl
+    const quantity = req.body.quantity
 
-    const data = { title, description, price, imageUrl, quantity }
+    const data = {name, description, price, imageUrl, quantity}
 
     const products = await Products.create(data)
     res.json(products)
   } catch (err) {
     next(err)
   }
-});
+})
 
 router.put('/:productId', async (req, res, next) => {
   try {
-    const id = req.params.productId;
+    const id = req.params.productId
 
-    const title = req.body.title;
-    const description = req.body.description;
-    const price = req.body.price;
-    const imageUrl = req.body.imageUrl;
-    const quantity = req.body.quantity;
+    const name = req.body.name
+    const description = req.body.description
+    const price = req.body.price
+    const imageUrl = req.body.imageUrl
+    const quantity = req.body.quantity
 
-    const data = { title, description, price, imageUrl, quantity };
+    const data = {name, description, price, imageUrl, quantity}
 
     await Products.update(data, {
       where: {
-        id,
+        id
       }
-    });
+    })
 
-    const editProduct = await Products.findById(id);
+    const editProduct = await Products.findById(id)
     res.json(editProduct)
   } catch (err) {
     next(err)
@@ -78,11 +78,11 @@ router.put('/:productId', async (req, res, next) => {
 
 router.delete('/:productId', async (req, res, next) => {
   try {
-    const id = req.params.productId;
+    const id = req.params.productId
 
     await Products.destroy({
       where: {
-        id,
+        id
       }
     })
 
@@ -93,4 +93,3 @@ router.delete('/:productId', async (req, res, next) => {
     next(err)
   }
 })
-

@@ -3,7 +3,7 @@
 const {expect} = require('chai')
 const chai = require('chai')
 const db = require('../index')
-const Products = db.model('Products')
+const Products = db.model('products')
 const chaiAsPromised = require('chai-as-promised')
 chai.use(chaiAsPromised)
 
@@ -16,24 +16,24 @@ describe('Products model', () => {
 
   beforeEach(async () => {
     mask = await Products.create({
-      title: 'perfect mask',
+      name: 'perfect mask',
       description: 'You should buy this product',
       price: 3,
       quantity: 10,
+      imageUrl: 'Mask.png'
     })
   })
 
   it('rejects null or empty entries', async () => {
-
     await expect(Products.create({})).to.be.rejected
   })
 
-  it('returns title', () => {
-    expect(mask.title).to.be.equal("perfect mask")
+  it('returns name', () => {
+    expect(mask.name).to.be.equal('perfect mask')
   })
 
   it('returns description', () => {
-    expect(mask.description).to.be.equal("You should buy this product")
+    expect(mask.description).to.be.equal('You should buy this product')
   })
 
   it('returns quantity', () => {
