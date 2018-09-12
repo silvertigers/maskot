@@ -15,5 +15,5 @@ module.exports = db.define('orderedProducts', {
     validate: {
       notEmpty: true
     }
-  },
+  }
 })
