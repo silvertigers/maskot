@@ -8,20 +8,20 @@ const PRODUCTS_ERROR = 'PRODUCTS_ERROR'
 
 // ACTION CREATORS
 
-const getProducts = (products) => {
+const getProducts = products => {
   return {
     type: GET_PRODUCTS,
     products: products
   }
 }
 
-const gotProducts = (products) => {
+const gotProducts = products => {
   return {
     type: GOT_PRODUCTS
   }
 }
 
-const productsError = (error) => {
+const productsError = error => {
   return {
     type: PRODUCTS_ERROR,
     error: error
@@ -31,12 +31,12 @@ const productsError = (error) => {
 // THUNKS
 
 export const getProducts = () => {
-  return async(dispatch) => {
+  return async dispatch => {
     try {
-      const { data } = await axios.get(`/api/posts`)
+      const {data} = await axios.get(`/api/posts`)
       await dispatch(getProducts(data))
       dispatch(gotProducts())
-    } catch(err) {
+    } catch (err) {
       dispatch(productError(err))
     }
   }
@@ -54,23 +54,23 @@ var initialState = {
 // REDUCERS
 
 const productsReducer = (products = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_PRODUCTS:
-    return {
-      ...products,
-      products: action.products
-    }
+      return {
+        ...products,
+        products: action.products
+      }
     case GOT_PRODUCTS:
-    return {
-      ...products,
-      isFetching: false
-    }
+      return {
+        ...products,
+        isFetching: false
+      }
     case PRODUCTS_ERROR:
-    return {
-      ...products,
-      error: action.error
-    }
+      return {
+        ...products,
+        error: action.error
+      }
     default:
-    return products
+      return products
   }
 }
