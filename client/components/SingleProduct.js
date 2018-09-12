@@ -24,12 +24,21 @@ class SingleProduct extends React.Component {
     const product = this.props
     return (
       <div>
-        <div id="product-image">
+        <div className="product-image">
           <img src={product.imageUrl} />
         </div>
-        <div id="product-details">
+        <div className="product-details">
           <h2>{product.name}</h2>
           <p>{product.description}></p>
+        </div>
+        <div className="add-product">
+          <button type="button">Add to cart</button>
+          <button type="button" className="plus">
+            +
+          </button>
+          <button type="button" className="minus">
+            -
+          </button>
         </div>
         {product.reviews.map(review => (
           <SingleReview key={review.id} review={review} />
