@@ -6,7 +6,7 @@ const GOT_PRODUCTS = 'GOT_PRODUCTS'
 
 // ACTION CREATORS
 
-const gotProducts = (products) => {
+const gotProducts = products => {
   return {
     type: GOT_PRODUCTS,
     products
@@ -16,16 +16,16 @@ const gotProducts = (products) => {
 // THUNKS
 
 export const getProducts = () => {
-  return async(dispatch) => {
-      const { data } = await axios.get(`/api/products`)
-      dispatch(gotProducts(data))
+  return async dispatch => {
+    const {data} = await axios.get(`/api/products`)
+    dispatch(gotProducts(data))
   }
 }
 
 // REDUCERS
 
 const productsReducer = (state = [], action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GOT_PRODUCTS:
       return action.products
     default:
