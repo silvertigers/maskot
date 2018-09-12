@@ -13,7 +13,11 @@ module.exports = db.define('reviews', {
     type: Sequelize.TEXT,
     allowNull: false,
     validate: {
-      notEmpty: true
+      notEmpty: true,
+      len: {
+        args: [100],
+        msg: 'Minimum of 100 characters'
+      }
     }
   },
   rating: {
