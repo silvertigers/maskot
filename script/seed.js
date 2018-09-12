@@ -20,24 +20,8 @@ async function seed() {
   ])
 
   const Products = await Promise.all([
-    products.create({
-      id: 1,
-      name: 'tiger mask',
-      imageUrl: 'bearmask.jpg',
-      description: 'this is a strong mask as like a tiger',
-      quantity: 50,
-      price: 2.02,
-      categoryId: 2
-    }),
-    products.create({
-      id: 2,
-      name: 'Christmas mask',
-      imageUrl: 'bearmask.jpg',
-      description: 'lets wear this mask on our Christmas party',
-      quantity: 20,
-      price: 4.04,
-      categoryId: 5
-    })
+    products.create({name: "tiger mask", imageUrl: "bearmask.jpg", description: "this is a strong mask as like a tiger", quantity: 50, price: 2.02, categoryId: 2}),
+    products.create({name: "Christmas mask", imageUrl: "bearmask.jpg", description: "lets wear this mask on our Christmas party", quantity: 20, price: 4.04, categoryId: 5}),
   ])
 
   const orders = await Promise.all([
