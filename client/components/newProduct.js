@@ -44,7 +44,7 @@ class NewProduct extends Component {
   };
 
   render() {
-    console.log(this.state)
+
     return (
       <div>
         <h2 className="title">Add a new Product</h2>
