@@ -5,7 +5,7 @@ const db = require('../db')
 const Products = db.define('products', {
   title: {
     type: Sequelize.STRING,
-    validation: {
+    validate: {
       notEmpty: true,
     },
   },
@@ -13,7 +13,10 @@ const Products = db.define('products', {
     type: Sequelize.TEXT,
   },
   price: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.DECIMAL(10,2),
+    validate: {
+      min: 0,
+    }
   },
   imageUrl: {
     type: Sequelize.STRING,
