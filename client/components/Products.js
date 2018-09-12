@@ -1,6 +1,7 @@
 import React from 'react'
-import { getProducts } from '../reducer'
+import { getProducts } from '../store/products'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const mapStateToProps = (state) => {
   return {
@@ -44,3 +45,5 @@ class Products extends React.Component {
     }
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products)
