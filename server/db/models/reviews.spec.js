@@ -10,14 +10,10 @@ describe('Reviews model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
-  const userId = 1
-  const productId = 3
   const title = 'My review'
   const comments = `It's super awesome, and I love it!!!!!!`
   const rating = 5
   const review = Reviews.build({
-    userId,
-    productId,
     title,
     comments,
     rating
@@ -27,7 +23,7 @@ describe('Reviews model', () => {
     const savedReview = await review.save()
     expect(savedReview.title).to.equal(title)
     expect(savedReview.rating).to.equal(rating)
-    await expect(Reviews.create({})).to.be.rejected
-    await expect(Reviews.create({userId: 10})).to.be.rejected
+    expect(Reviews.create({})).to.be.rejected
+    expect(Reviews.create({title})).to.be.rejected
   })
 })

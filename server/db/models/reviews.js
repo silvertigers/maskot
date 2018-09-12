@@ -1,15 +1,7 @@
 const db = require('../db')
 const Sequelize = require('sequelize')
 
-module.exports = db.define('Reviews', {
-  userId: {
-    type: Sequelize.INTEGER,
-    allowNull: false
-  },
-  productId: {
-    type: Sequelize.INTEGER,
-    allowNull: false
-  },
+module.exports = db.define('reviews', {
   title: {
     type: Sequelize.STRING,
     allowNull: false,
