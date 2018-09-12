@@ -6,6 +6,7 @@ import axios from 'axios'
 const ADD_PRODUCT = 'ADD_PRODUCT'
 const EDIT_PRODUCT = 'EDIT_PRODUCT'
 const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
+const GOT_PRODUCTS = 'GOT_PRODUCTS'
 
 /**
  * INITIAL STATE
@@ -20,6 +21,12 @@ const initialState = {
  * ACTION CREATORS
  */
 
+const gotProducts = products => {
+  return {
+    type: GOT_PRODUCTS,
+    products
+  }
+}
 
 const addProduct = newProduct => ({
   type: ADD_PRODUCT,
@@ -41,6 +48,13 @@ const removeProduct = productId => ({
 /**
  * THUNK CREATORS
  */
+
+export const getProducts = () => {
+  return async dispatch => {
+    const {data} = await axios.get(`/api/products`)
+    dispatch(gotProducts(data))
+  }
+}
 
 export const productAdd = newProduct => async dispatch => {
   try {
@@ -77,8 +91,11 @@ export const productRemove = productId => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = initialState, action) {
+
+const productsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GOT_PRODUCTS:
+      return action.products
     case ADD_PRODUCT:
       return {...state, products: [...state.products, action.newProduct]};
     case EDIT_PRODUCT:
@@ -93,3 +110,5 @@ export default function(state = initialState, action) {
       return state
   }
 }
+
+export default productsReducer

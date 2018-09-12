@@ -6,11 +6,13 @@ import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
 import {productAdd, productEdit, productRemove} from './products'
+import history from '../history'
+import { getProducts, gotProducts } from './products'
 
 const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
 
-describe('thunk creators', () => {
+describe('Thunks', () => {
   let store
   let mockAxios
 
@@ -18,6 +20,10 @@ describe('thunk creators', () => {
     newProduct: {},
     changedProduct: {},
     productid: 0,
+    products: [],
+    productError: '',
+    isFetching: true,
+    error: ''
   }
 
   beforeEach(() => {
@@ -28,6 +34,17 @@ describe('thunk creators', () => {
   afterEach(() => {
     mockAxios.restore()
     store.clearActions()
+  })
+
+  describe('getProducts', () => {
+    it('eventually dispatches the GET PRODUCTS action', async () => {
+      const fakeProducts = [{one: 'one'}, {two: 'two'}, {three: 'three'}]
+      mockAxios.onGet('/api/products').replyOnce(200, fakeProducts)
+      await store.dispatch(getProducts())
+      const actions = store.getActions()
+      expect(actions[0].type).to.be.equal('GOT_PRODUCTS')
+      expect(actions[0].products).to.be.deep.equal(fakeProducts)
+    })
   })
 
   describe('productAdd', () => {

@@ -1,30 +1,41 @@
-const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Products = db.define('products', {
-  title: {
+module.exports = db.define('products', {
+  name: {
     type: Sequelize.STRING,
+    allowNull: false,
     validate: {
-      notEmpty: true,
-    },
-  },
-  description: {
-    type: Sequelize.TEXT,
-  },
-  price: {
-    type: Sequelize.DECIMAL(10,2),
-    validate: {
-      min: 0,
+      notEmpty: true
     }
   },
   imageUrl: {
     type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   quantity: {
     type: Sequelize.INTEGER,
-    defaultValue: 0
+    defaultValue: 0,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  price: {
+    type: Sequelize.DECIMAL(10,2),
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   }
 })
-
-module.exports = Products

@@ -1,8 +1,11 @@
 /* global describe beforeEach it */
 
 const {expect} = require('chai')
+const chai = require('chai')
 const db = require('../index')
-const Products = db.model('products')
+const Products = db.model('Products')
+const chaiAsPromised = require('chai-as-promised')
+chai.use(chaiAsPromised)
 
 describe('Products model', () => {
   beforeEach(() => {
@@ -18,6 +21,11 @@ describe('Products model', () => {
       price: 3,
       quantity: 10,
     })
+  })
+
+  it('rejects null or empty entries', async () => {
+
+    await expect(Products.create({})).to.be.rejected
   })
 
   it('returns title', () => {
