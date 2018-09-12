@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import { getProducts, productAdd, productEdit, productRemove  } from '../store/products'
+import { getProducts, productRemove  } from '../store/products'
 import { Link } from 'react-router-dom'
 
 export class AdminProducts extends Component {
@@ -52,8 +52,6 @@ export class AdminProducts extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products.products,
-    newProduct: state.products.newProduct,
-    changedProduct: state.products.changedProduct,
     productId: state.products.productId,
   }
 }
@@ -61,8 +59,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getProduct: () => dispatch(getProducts()),
-    addedProduct: newProduct => dispatch(productAdd(newProduct)),
-    editedProduct: changedProduct => dispatch(productEdit(changedProduct)),
     removedProduct: productId => dispatch(productRemove(productId)),
   }
 }

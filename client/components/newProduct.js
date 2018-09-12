@@ -43,13 +43,12 @@ class NewProduct extends Component {
   };
 
   render() {
-    const props = this.state;
 
     return (
       <div>
         <h2 className="title">Add a new Product</h2>
 
-        <FormProduct textChange={this.textChange} increment={this.increment} decrement={this.decrement} handleSubmit={this.handleSubmit} props={this.state}/>
+        <FormProduct textChange={this.textChange} increment={this.increment} decrement={this.decrement} handleSubmit={this.handleSubmit} value={this.state}/>
       </div>
     )
   };
