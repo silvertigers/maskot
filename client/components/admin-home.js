@@ -5,12 +5,6 @@ import {connect} from 'react-redux'
 import {AdminProducts} from "./admin-products"
 
 export class AdminHome extends Component {
-  constructor() {
-    super()
-    this.state = {
-
-    }
-  }
 
   render() {
     return (
