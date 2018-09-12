@@ -1,27 +1,31 @@
 import React from 'react'
-import {getProduct} from '../reducer'
+import {getProduct} from '../store/product'
 import {connect} from 'react-redux'
 import SingleReview from './SingleReview'
+import {editCart} from '../store/cart'
 
 const mapStateToProps = state => {
   return {
-    product: state.product
+    product: state.product,
+    cart: state.cart
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProduct: () => dispatch(getProduct())
+    getProduct: productId => dispatch(getProduct(productId))
   }
 }
 
 class SingleProduct extends React.Component {
   componentDidMount() {
-    this.props.getProduct()
+    this.props.getProduct(this.props.match.params.productId)
   }
 
+  handleAdd() {}
+
   render() {
-    const product = this.props
+    const {product} = this.props
     return (
       <div>
         <div className="product-image">
@@ -29,7 +33,7 @@ class SingleProduct extends React.Component {
         </div>
         <div className="product-details">
           <h2>{product.name}</h2>
-          <p>{product.description}></p>
+          <p>{product.description}</p>
         </div>
         <div className="add-product">
           <button type="button">Add to cart</button>
@@ -40,12 +44,16 @@ class SingleProduct extends React.Component {
             -
           </button>
         </div>
-        {product.reviews.map(review => (
-          <SingleReview key={review.id} review={review} />
-        ))}
+        {product.reviews &&
+          product.reviews.map(review => (
+            <SingleReview key={review.id} review={review} />
+          ))}
       </div>
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)
+export const ConnectedSingleProduct = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleProduct)

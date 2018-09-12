@@ -24,7 +24,11 @@ router.get('/:productId', async (req, res, next) => {
           where: {
             productId: req.params.productId
           },
-          include: [{model: User}]
+          include: [
+            {
+              model: User
+            }
+          ]
         }
       ]
     })
