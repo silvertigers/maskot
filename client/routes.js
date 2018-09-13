@@ -9,6 +9,7 @@ import {
   AdminHome,
   Products,
   SingleProduct,
+  Cart
 } from './components'
 import {me} from './store'
 
@@ -37,11 +38,16 @@ class Routes extends Component {
             {
               isAdmin &&
             <Route path="/dashboard" component={AdminHome} />
+<<<<<<< HEAD
             }
             <Route
               path="/products/:productId"
               component={SingleProduct}
             />
+=======
+            <Route path="/products/:productId" component={SingleProduct} />
+            <Route path="/cart" component={Cart} />
+>>>>>>> feature-single-product-9
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
