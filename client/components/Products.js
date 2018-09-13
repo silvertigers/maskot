@@ -1,7 +1,6 @@
 import React from 'react'
 import { getProducts } from '../store/products'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import ProductCard from './productCard'
 import { getCategories, selectCategory } from '../store/category'
 
@@ -37,7 +36,14 @@ class Products extends React.Component {
 
 
   render() {
-    let filteredProducts = this.props.products.filter(product => {return(product.categories[0].id === this.props.category.selectedCategory)})
+    let filteredProducts = []
+    for (let i = 0; i < this.props.products.length; i++){
+      for (let j = 0; j < this.props.products[i].categories.length; j++){
+        if (this.props.products[i].categories[j].id === this.props.category.selectedCategory){
+          filteredProducts.push(this.props.products[i])
+        }
+      }
+    }
     return (
       <div className="products">
         <h1>Products</h1>
