@@ -1,29 +1,28 @@
 import React from 'react'
-import { getProducts } from '../store/products'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import {getProducts} from '../store/products'
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     products: state.products.products,
     isFetching: state.products.isFetching
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     getProducts: () => dispatch(getProducts())
   }
 }
 
 class Products extends React.Component {
-
-  componentDidMount(){
-    this.props.getProducts();
+  componentDidMount() {
+    this.props.getProducts()
   }
 
   render() {
-    if (this.props.isFetching === false){
+    if (this.props.isFetching === false) {
       return (
         <div className="products">
           <h1>Products</h1>
@@ -31,8 +30,8 @@ class Products extends React.Component {
             {this.props.products.map(product => {
               return (
                 <li key={product.id}>
-                  <Link to={`./products/${product.id}`}>
-                  <img src={product.imageUrl} />
+                  <Link to={`/products/${product.id}`}>
+                    <img src={product.imageUrl} />
                   </Link>
                   <h3>{product.title}</h3>
                   <p>{product.price}</p>
