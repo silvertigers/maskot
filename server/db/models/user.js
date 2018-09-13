@@ -27,14 +27,8 @@ const User = db.define('user', {
   googleId: {
     type: Sequelize.STRING
   },
-<<<<<<< HEAD
-  isAdmin: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
-=======
   facebookId: {
     type: Sequelize.STRING
->>>>>>> feature-single-product-9
   }
 })
 
