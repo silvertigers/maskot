@@ -38,12 +38,11 @@ const addProduct = newProduct => ({
 const editProduct = changedProduct => ({
   type: EDIT_PRODUCT,
   changedProduct,
-  productId: changedProduct.Id,
 })
 
 const removeProduct = productId => ({
   type: REMOVE_PRODUCT,
-  productId,
+  productId: Number(productId)
 })
 
 
@@ -102,7 +101,11 @@ const productsReducer = (state = initialState, action) => {
       return {...state, products: [...state.products, action.newProduct]};
     case EDIT_PRODUCT:
       return {...state, products: [...state.products].map(product => {
-        product.id === action.productId ? product = action.changedProduct : product
+        if (product.id === action.changedProduct.id) {
+          return action.changedProduct
+        } else {
+          return product
+        }
       })};
     case REMOVE_PRODUCT:
       return {...state, products: [...state.products].filter(product => {

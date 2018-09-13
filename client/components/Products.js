@@ -5,19 +5,18 @@ import { Link } from 'react-router-dom'
 import ProductCard from './productCard'
 import { getCategories, selectCategory } from '../store/category'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     products: state.products.allProducts,
     category: state.category,
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     getProducts: () => dispatch(getProducts()),
     getCategories: () => dispatch(getCategories()),
     selectCategory: (category) => dispatch(selectCategory(category)),
-    filterProducts: (filteredArr) => dispatch(filterProducts(filteredArr))
   }
 }
 

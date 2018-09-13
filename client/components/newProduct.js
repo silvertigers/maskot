@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import { withRouter } from "react-router-dom";
 import { productAdd } from '../store/products';
 import { FormProduct } from './formProduct';
 
@@ -17,6 +16,7 @@ class NewProduct extends Component {
     this.textChange = this.textChange.bind(this);
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
   textChange(event) {
     this.setState({
@@ -40,16 +40,16 @@ class NewProduct extends Component {
     event.preventDefault();
 
     await this.props.post(this.state);
+    this.props.add()
   };
 
   render() {
-    const props = this.state;
 
     return (
       <div>
         <h2 className="title">Add a new Product</h2>
 
-        <FormProduct textChange={this.textChange} increment={this.increment} decrement={this.decrement} handleSubmit={this.handleSubmit} props={this.state}/>
+        <FormProduct textChange={this.textChange} increment={this.increment} decrement={this.decrement} handleSubmit={this.handleSubmit} value={this.state}/>
       </div>
     )
   };
@@ -61,4 +61,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(withRouter(NewProduct));
+export default connect(null, mapDispatchToProps)(NewProduct);
