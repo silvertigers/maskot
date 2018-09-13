@@ -2,7 +2,6 @@ import React from 'react'
 
 const SingleReview = props => {
   const {title, comments, rating, user} = props.review
-  console.log('props', props)
   return (
     <div className="review-card">
       <div className="review-rating">{rating}</div>
