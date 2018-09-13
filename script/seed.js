@@ -30,7 +30,7 @@ async function seed() {
   const Products = await Promise.all([
     products.create({
       id: 1,
-      name: 'tiger mask',
+      name: 'Bear Mask',
       imageUrl: 'bearmask.jpg',
       description: 'this is a strong mask as like a tiger',
       quantity: 50,
@@ -38,11 +38,35 @@ async function seed() {
     }),
     products.create({
       id: 2,
-      name: 'Christmas mask',
-      imageUrl: 'bearmask.jpg',
+      name: 'Christmas Mask',
+      imageUrl: 'christmasmask.jpg',
       description: 'lets wear this mask on our Christmas party',
       quantity: 20,
       price: 4.04
+    }),
+    products.create({
+      id: 3,
+      name: 'Black Mask',
+      imageUrl: 'blackmask.jpg',
+      description: 'very slimming',
+      quantity: 33,
+      price: 5.04
+    }),
+    products.create({
+      id: 4,
+      name: 'Hello Kitty Mask',
+      imageUrl: 'hellokittymask.jpg',
+      description: 'Hello Kitty (full name: Kitty White (キティ・ホワイト Kiti Howaito)) is a fictional cartoon character produced by the Japanese company Sanrio',
+      quantity: 22,
+      price: 100.04
+    }),
+    products.create({
+      id: 5,
+      name: 'Abstract Art Mask',
+      imageUrl: 'abstractmask.jpg',
+      description: 'very post modern',
+      quantity: 2,
+      price: 2.04
     })
   ])
 
@@ -121,12 +145,32 @@ async function seed() {
       rating: 1,
       productId: 2,
       userId: 2
+    }),
+    reviews.create({
+      title: 'I like this!!!!1',
+      comments:
+        'It is so fantastic.  All of my classmates like this and they also would like to buy this :)  TRY THIS!!!',
+      rating: 5,
+      productId: 3,
+      userId: 1
+    }),
+    reviews.create({
+      title: 'I highly recommend2',
+      comments:
+        'It is so fantastic.  All of my classmates like this and they also would like to buy this :)  TRY THIS!!!',
+      rating: 5,
+      productId: 4,
+      userId: 2
     })
   ])
 
   await Promise.all(
     Products.map(async product => {
-      await product.addCategories(1);
+      await product.addCategories((Math.floor(Math.random() * 5) + 1  ));
+    }))
+  await Promise.all(
+    Products.map(async product => {
+      await product.addCategories((Math.floor(Math.random() * 5) + 1  ));
     }))
 
 
