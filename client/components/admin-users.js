@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
-import { gotUser, userRemove } from '../store/users';
+import { gotUser, userRemove, changeAuthority } from '../store/users';
+import {me} from '../store'
 import NewUser from "./newUser";
 
 class AdminUsers extends Component {
@@ -14,11 +16,24 @@ class AdminUsers extends Component {
 
   async componentDidMount() {
     this.props.gotUser();
+    this.props.loadInitialData()
   }
 
   async deleteUser(event) {
     const userId = event.target.value;
     await this.props.userRemove(userId)
+  }
+
+  async admin(event) {
+    var bool
+    (event.target.value === "true") ? bool = true : bool = false
+
+    const updatedData = {
+      id: event.target.name,
+      isAdmin: bool
+    }
+
+    await this.props.userAuthority(updatedData)
   }
 
   add() {
@@ -49,9 +64,18 @@ class AdminUsers extends Component {
               return (
                 <li key={user.id}>
                   <h3>{user.email}</h3>
-                  <p>admin? {user.isAdmin.toString()}</p>
-                  <button>EDIT</button>
-                  <button onClick={event => this.deleteUser(event)} value={user.id}>REMOVE</button>
+                  {
+                    this.props.loggedInUser !== user.id &&
+                    <div>
+                      <p>admin? {user.isAdmin.toString()}
+                        <select name={user.id} onChange={event => this.admin(event)}>
+                          <option selected={!user.isAdmin} value={false}>USER</option>
+                          <option selected={user.isAdmin} value={true}>ADMIN</option>
+                        </select>
+                      </p>
+                      <button onClick={event => this.deleteUser(event)} value={user.id}>REMOVE</button>
+                    </div>
+                  }
                 </li>
               )
             })
@@ -66,14 +90,17 @@ class AdminUsers extends Component {
 
 const mapStateToProps = state => {
   return {
-    users: state.users
+    users: state.users,
+    loggedInUser: state.user.id
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     gotUser: () => dispatch(gotUser()),
-    userRemove: userId => dispatch(userRemove(userId))
+    userRemove: userId => dispatch(userRemove(userId)),
+    userAuthority: user => dispatch(changeAuthority(user)),
+    loadInitialData: () => dispatch(me())
   }
 }
 

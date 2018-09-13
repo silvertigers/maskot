@@ -31,6 +31,25 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.put('/:userId', async (req, res, next) => {
+  try {
+    const id = req.params.userId
+
+    await user.update({
+      isAdmin: req.body.isAdmin
+    }, {
+      where: {
+        id,
+      }
+    })
+
+    const updatedUser = await user.findById(id)
+    res.json(updatedUser)
+  } catch(err) {
+    next(err)
+  }
+})
+
 router.delete('/:userId', async (req, res, next) => {
   try {
     const id = req.params.userId
