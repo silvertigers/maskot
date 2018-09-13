@@ -21,12 +21,9 @@ class EditProduct extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    this.props.getProduct(this.props.id)
+  async componentDidMount() {
+    await this.props.getProduct(this.props.id)
     this.setState(this.props.product)
-    this.setState({
-      id: this.props.id
-    })
   }
 
   textChange(event) {
@@ -55,7 +52,6 @@ class EditProduct extends Component {
   };
 
   render() {
-
     return (
       <div>
         <h2 className="title">Edit Product</h2>

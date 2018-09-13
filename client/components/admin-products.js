@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import { Link } from 'react-router-dom'
 import { getProducts, productRemove } from '../store/products'
 import NewProduct from "./newProduct"
 import EditProduct from "./editProduct"
@@ -72,7 +71,6 @@ class AdminProducts extends Component {
                 <h3>{product.name}</h3>
                 <p>{product.price}</p>
                 <button onClick={this.edit}>EDIT</button>
-                {/* <button onClick={event => this.editProduct(event)} value={product.id}>EDIT</button> */}
                 <button onClick={event => this.removeProduct(event)} value={product.id}>REMOVE</button>
                 {
                   this.state.isEdit ?
