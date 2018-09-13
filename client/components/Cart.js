@@ -13,7 +13,7 @@ const Cart = props => {
       <h1>Shopping Cart</h1>
       <h3>Items ({quantityTotal(props.cart)})</h3>
       <div className="line-items">
-        {props.cart.map(item => <LineItem key={item.id} {...item} />)}
+        {props.cart.map(item => <LineItem key={item.product.id} {...item} />)}
       </div>
       <div className="order-total">
         <h2>{orderTotal(props.cart).toFixed(2)}</h2>
