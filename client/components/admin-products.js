@@ -67,8 +67,9 @@ class AdminProducts extends Component {
           products.map(product => {
             return (
               <li key={product.id}>
-                <h3>{product.name}</h3>
-                <p>{product.price}</p>
+                <h3>Product name: {product.name}</h3>
+                <p>price: {product.price}</p>
+                <p>quantity: {product.quantity ? product.quantity : <span>OUT OF STOCK</span>}</p>
                 <button onClick={this.edit}>EDIT</button>
                 <button onClick={event => this.removeProduct(event)} value={product.id}>REMOVE</button>
                 {

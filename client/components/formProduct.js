@@ -15,12 +15,9 @@ export const FormProduct = props => {
       <label htmlFor="description">Description</label>
       <textarea type="text" name="description" value={description} onChange={event => props.textChange(event)}/>
 
-      <p>{quantity}</p>
+      <input name="quantity" onChange={event => props.textChange(event)} value={quantity} type="number"/>
       <button type="button" onClick={props.increment}>+</button>
       <button type="button" onClick={props.decrement}>-</button>
-
-      {/* <label htmlFor="quantity">Quantity</label>
-      <input type="number" value={quantity} onChange={event => props.textChange(event)}></input> */}
 
       <label name="price">Price</label>
       <input type="number" name="price" value={price} onChange={event => props.textChange(event)}></input>
