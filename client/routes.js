@@ -7,7 +7,7 @@ import {
   Signup,
   UserHome,
   AdminHome,
-  ConnectedSingleProduct
+  SingleProduct,
 } from './components'
 import {me} from './store'
 
@@ -37,7 +37,7 @@ class Routes extends Component {
             }
             <Route
               path="/products/:productId"
-              component={ConnectedSingleProduct}
+              component={SingleProduct}
             />
           </Switch>
         )}

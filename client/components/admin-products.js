@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import { getProducts, productRemove } from '../store/products'
 import NewProduct from "./newProduct"
