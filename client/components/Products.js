@@ -1,48 +1,63 @@
 import React from 'react'
-import {getProducts} from '../store/products'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import { getProducts } from '../store/products'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import ProductCard from './productCard'
+import { getCategories, selectCategory } from '../store/category'
 
 const mapStateToProps = state => {
   return {
     products: state.products.products,
-    isFetching: state.products.isFetching
+    category: state.category,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProducts: () => dispatch(getProducts())
+    getProducts: () => dispatch(getProducts()),
+    getCategories: () => dispatch(getCategories()),
+    selectCategory: (category) => dispatch(selectCategory(category)),
   }
 }
 
 class Products extends React.Component {
-  componentDidMount() {
-    this.props.getProducts()
+  constructor(){
+    super()
+    this.handleCategoryChange = this.handleCategoryChange.bind(this)
   }
 
-  render() {
-    if (this.props.isFetching === false) {
-      return (
-        <div className="products">
-          <h1>Products</h1>
-          <ul id="productsul">
-            {this.props.products.map(product => {
-              return (
-                <li key={product.id}>
-                  <Link to={`/products/${product.id}`}>
-                    <img src={product.imageUrl} />
-                  </Link>
-                  <h3>{product.title}</h3>
-                  <p>{product.price}</p>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      )
-    }
+  componentDidMount(){
+    this.props.getProducts();
+    this.props.getCategories()
   }
-}
+
+  handleCategoryChange(event){
+    this.props.selectCategory(Number(event.target.value));
+  }
+
+
+  render() {
+    let filteredProducts = this.props.products.filter(product => {return(product.categories[0].id === this.props.category.selectedCategory)})
+    return (
+      <div className="products">
+        <h1>Products</h1>
+        <select onChange={this.handleCategoryChange}>
+          {this.props.category.categories.map(category => {
+            return (
+              <option key={category.id} name={category.type} value={category.id}>{category.type}</option>
+            )
+          })}
+        </select>
+        <ul id="productsul">
+          {filteredProducts[0] && filteredProducts.map(product => {
+            return (
+              <ProductCard key={product.id} product={product} />
+            )
+          })}
+        </ul>
+      </div>
+    )}
+  }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products)

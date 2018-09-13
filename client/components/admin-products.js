@@ -51,6 +51,7 @@ class AdminProducts extends Component {
 
   render() {
     const { products } = this.props.products
+    console.log(this.props.products)
 
     return (
       <div>
