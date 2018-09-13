@@ -13,9 +13,9 @@ const gotProduct = product => {
 
 export const getProduct = productId => {
   return async dispatch => {
-    console.log('productId', productId)
+    // console.log('productId', productId)
     const {data} = await axios.get(`/api/products/${productId}`)
-    console.log('PRODUCT DATA', data)
+    // console.log('PRODUCT DATA', data)
     dispatch(gotProduct(data))
   }
 }

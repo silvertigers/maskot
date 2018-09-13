@@ -2,7 +2,7 @@ import React from 'react'
 import {getProduct} from '../store/product'
 import {connect} from 'react-redux'
 import SingleReview from './SingleReview'
-import {editCart} from '../store/cart'
+// import {editCart} from '../store/cart'
 
 const mapStateToProps = state => {
   return {
