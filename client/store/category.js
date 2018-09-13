@@ -13,7 +13,7 @@ const SELECT_CATEGORY = 'SELECT_CATEGORY'
 
 const initialState = {
   categories: [],
-  selectedCategory: ''
+  selectedCategory: 1
 }
 
 /**

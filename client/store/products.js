@@ -11,8 +11,9 @@ const GOT_PRODUCTS = 'GOT_PRODUCTS'
 /**
  * INITIAL STATE
  */
+
 const initialState = {
-  products: [],
+  allProducts: [],
   newProduct: {},
   changedProduct: {},
   productId: 0,
@@ -22,10 +23,10 @@ const initialState = {
  * ACTION CREATORS
  */
 
-const gotProducts = products => {
+const gotProducts = allProducts => {
   return {
     type: GOT_PRODUCTS,
-    products
+    allProducts
   }
 }
 
@@ -52,7 +53,7 @@ const removeProduct = productId => ({
 
 export const getProducts = () => {
   return async dispatch => {
-    const {data} = await axios.get(`/api/products`)
+    const {data} = await axios.get('/api/products')
     dispatch(gotProducts(data))
   }
 }
@@ -96,7 +97,7 @@ export const productRemove = productId => async dispatch => {
 const productsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_PRODUCTS:
-      return { ...state, products: action.products }
+      return { ...state, allProducts: action.allProducts }
     case ADD_PRODUCT:
       return {...state, products: [...state.products, action.newProduct]};
     case EDIT_PRODUCT:

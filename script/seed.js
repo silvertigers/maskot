@@ -19,6 +19,14 @@ async function seed() {
     user.create({email: 'murphy@email.com', password: '123'})
   ])
 
+  const categories = await Promise.all([
+    category.create({id: 1, type: 'Basic'}),
+    category.create({id: 2, type: 'Animal'}),
+    category.create({id: 3, type: 'Cute'}),
+    category.create({id: 4, type: 'Horror'}),
+    category.create({id: 5, type: 'Festival'})
+  ])
+
   const Products = await Promise.all([
     products.create({
       id: 1,
@@ -26,8 +34,7 @@ async function seed() {
       imageUrl: 'bearmask.jpg',
       description: 'this is a strong mask as like a tiger',
       quantity: 50,
-      price: 2.02,
-      categoryId: 2
+      price: 2.02
     }),
     products.create({
       id: 2,
@@ -35,8 +42,7 @@ async function seed() {
       imageUrl: 'bearmask.jpg',
       description: 'lets wear this mask on our Christmas party',
       quantity: 20,
-      price: 4.04,
-      categoryId: 5
+      price: 4.04
     })
   ])
 
@@ -89,13 +95,7 @@ async function seed() {
     orderedProducts.create({quantity: 1, price: 4.04, productId: 2, orderId: 4})
   ])
 
-  const categories = await Promise.all([
-    category.create({id: 1, type: 'Basic'}),
-    category.create({id: 2, type: 'Animal'}),
-    category.create({id: 3, type: 'Cute'}),
-    category.create({id: 4, type: 'Horror'}),
-    category.create({id: 5, type: 'Festival'})
-  ])
+
 
   const Review = await Promise.all([
     reviews.create({
@@ -123,6 +123,12 @@ async function seed() {
       userId: 2
     })
   ])
+
+  await Promise.all(
+    Products.map(async product => {
+      await product.addCategories(1);
+    }))
+
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${Products.length} users`)
