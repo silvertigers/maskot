@@ -13,7 +13,7 @@ const GOT_PRODUCTS = 'GOT_PRODUCTS'
  */
 
 const initialState = {
-  allProducts: [],
+  products: [],
   newProduct: {},
   changedProduct: {},
   productId: 0,
@@ -23,10 +23,10 @@ const initialState = {
  * ACTION CREATORS
  */
 
-const gotProducts = allProducts => {
+const gotProducts = products => {
   return {
     type: GOT_PRODUCTS,
-    allProducts
+    products
   }
 }
 
@@ -96,7 +96,7 @@ export const productRemove = productId => async dispatch => {
 const productsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_PRODUCTS:
-      return { ...state, allProducts: action.allProducts }
+      return { ...state, products: action.products }
     case ADD_PRODUCT:
       return {...state, products: [...state.products, action.newProduct]};
     case EDIT_PRODUCT:

@@ -7,7 +7,7 @@ import { getCategories, selectCategory } from '../store/category'
 
 const mapStateToProps = state => {
   return {
-    products: state.products.allProducts,
+    products: state.products.products,
     category: state.category,
   }
 }
