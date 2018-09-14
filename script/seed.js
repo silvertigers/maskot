@@ -15,8 +15,16 @@ async function seed() {
   console.log('db synced!')
 
   const users = await Promise.all([
-    user.create({email: 'cody@email.com', password: '123', isAdmin: true,}),
+    user.create({email: 'cody@email.com', password: '123', isAdmin: true}),
     user.create({email: 'murphy@email.com', password: '123'})
+  ])
+
+  const categories = await Promise.all([
+    category.create({type: 'Basic'}),
+    category.create({type: 'Animal'}),
+    category.create({type: 'Cute'}),
+    category.create({type: 'Horror'}),
+    category.create({type: 'Festival'})
   ])
 
   const Products = await Promise.all([
@@ -33,6 +41,13 @@ async function seed() {
       description: 'lets wear this mask on our Christmas party',
       quantity: 20,
       price: 4.04
+    }),
+    products.create({
+      name: 'Flower mask',
+      imageUrl: 'bearmask.jpg',
+      description: 'Perfect for a spring day',
+      quantity: 15,
+      price: 3.75
     }),
     products.create({
       name: 'Black Mask',
@@ -59,25 +74,21 @@ async function seed() {
 
   const orders = await Promise.all([
     order.create({
-      id: 1,
       status: 'order placed',
       email: 'silver@myfirst.com',
       userId: 2
     }),
     order.create({
-      id: 2,
       status: 'order in process',
       email: 'bronze@mysecond.com',
       userId: 2
     }),
     order.create({
-      id: 3,
       status: 'order is out for delivery',
       email: 'gold@mythird.com',
       userId: 2
     }),
     order.create({
-      id: 4,
       status: 'order completed',
       email: 'platinum@myfinal.com',
       userId: 2
@@ -108,14 +119,6 @@ async function seed() {
       price: 4.04,
       productId: 2,
       orderId: 4})
-  ])
-
-  const categories = await Promise.all([
-    category.create({type: 'Basic'}),
-    category.create({type: 'Animal'}),
-    category.create({type: 'Cute'}),
-    category.create({type: 'Horror'}),
-    category.create({type: 'Festival'})
   ])
 
   const Review = await Promise.all([
@@ -169,7 +172,7 @@ async function seed() {
     Products.map(async product => {
       await product.addCategories((Math.floor(Math.random() * 5) + 1  ));
     }))
-
+  )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${Products.length} users`)

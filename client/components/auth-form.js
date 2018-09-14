@@ -3,9 +3,6 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 
-/**
- * COMPONENT
- */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
@@ -30,6 +27,7 @@ const AuthForm = props => {
         {error && error.response && <div> {error.response.data} </div>}
       </form>
       <a href="/auth/google">{displayName} with Google</a>
+      <a href="/auth/facebook">{displayName} with Facebook</a>
     </div>
   )
 }
