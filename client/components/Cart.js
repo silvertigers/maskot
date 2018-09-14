@@ -7,7 +7,7 @@ const orderTotal = cart =>
 const quantityTotal = cart =>
   cart.reduce((total, item) => total + item.quantity, 0)
 
-const Cart = props => {
+export const Cart = props => {
   return props.cart[0] ? (
     <div>
       <h1>Shopping Cart</h1>

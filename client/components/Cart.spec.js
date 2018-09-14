@@ -1,11 +1,8 @@
 import React from 'react'
 import {shallow} from 'enzyme'
-import sinon from 'sinon'
-import chai, {expect} from 'chai'
-import sinonChai from 'sinon-chai'
-import Cart from './Cart'
+import {expect} from 'chai'
+import {Cart} from './Cart'
 import LineItem from './LineItem'
-chai.use(sinonChai)
 
 describe('<Cart/> Component', () => {
   const cart = [
@@ -18,6 +15,9 @@ describe('<Cart/> Component', () => {
       quantity: 4
     }
   ]
-  it('accepts props')
+  it('accepts props', () => {
+    const wrapper = shallow(<Cart cart={cart} />)
+    expect(wrapper.props().cart).to.be.an('array')
+  })
   it('renders a <LineItem /> component for every item in the cart')
 })
