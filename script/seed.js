@@ -74,11 +74,11 @@ async function seed() {
   ])
 
   const categories = await Promise.all([
-    category.create({id: 1, type: 'Basic'}),
-    category.create({id: 2, type: 'Animal'}),
-    category.create({id: 3, type: 'Cute'}),
-    category.create({id: 4, type: 'Horror'}),
-    category.create({id: 5, type: 'Festival'})
+    category.create({type: 'Basic'}),
+    category.create({type: 'Animal'}),
+    category.create({type: 'Cute'}),
+    category.create({type: 'Horror'}),
+    category.create({type: 'Festival'})
   ])
 
   const Review = await Promise.all([

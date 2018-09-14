@@ -22,6 +22,8 @@ export const FormProduct = props => {
       <label name="price">Price</label>
       <input type="number" name="price" value={price} onChange={event => props.textChange(event)}></input>
 
+      <label name="categoryId">Categories</label>
+
       <button disabled={!name || !description || !imageUrl}type="submit">Submit</button>
 
     </form>
