@@ -114,7 +114,11 @@ async function seed() {
       productId: 2,
       orderId: 3
     }),
-    orderedProducts.create({quantity: 1, price: 4.04, productId: 2, orderId: 4})
+    orderedProducts.create({
+      quantity: 1,
+      price: 4.04,
+      productId: 2,
+      orderId: 4})
   ])
 
   const Review = await Promise.all([
@@ -168,7 +172,6 @@ async function seed() {
     Products.map(async product => {
       await product.addCategories((Math.floor(Math.random() * 5) + 1  ));
     }))
-  )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${Products.length} users`)

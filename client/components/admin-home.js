@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import {withRouter, Route, Switch, Link} from 'react-router-dom'
-import {connect} from 'react-redux'
+import {Route, Switch, Link} from 'react-router-dom'
 import AdminProducts from "./admin-products"
+import AdminCategories from "./admin-categories"
 import AdminUsers from "./admin-users"
 
 class AdminHome extends Component {
@@ -14,10 +13,12 @@ class AdminHome extends Component {
         <h1>This is a Dashboard page for Admin</h1>
         <div className="dashboard_menu">
           <Link to="/dashboard/products">Products</Link>
+          <Link to="/dashboard/categories"> Categories</Link>
           <Link to="/dashboard/users"> User</Link>
         </div>
         <Switch>
           <Route path="/dashboard/products" component={AdminProducts}/>
+          <Route path="/dashboard/categories" component={AdminCategories}/>
           <Route path="/dashboard/users" component={AdminUsers}/>
         </Switch>
       </div>
