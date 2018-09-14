@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import { addCategory } from '../store/categories'
+import { addCategory } from '../store/category'
 import { FormCategory } from './formCategory'
 
 class NewCategory extends Component {

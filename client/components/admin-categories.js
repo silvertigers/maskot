@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import { gotCategories } from '../store/categories'
+import { getCategories } from '../store/category'
 import NewCategory from './newCategory'
 
 class AdminCategories extends Component {
@@ -59,13 +59,13 @@ class AdminCategories extends Component {
 
 const mapStateToProps = state => {
   return {
-    categories: state.categories,
+    categories: state.category,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    gotCategories: () => dispatch(gotCategories()),
+    gotCategories: () => dispatch(getCategories()),
   }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 
 export const FormProduct = props => {
-  const { name, imageUrl, description, quantity, price } = props.value
+  const { name, imageUrl, description, quantity, price, categories } = props.value
 
   return (
   <div>
@@ -23,7 +23,16 @@ export const FormProduct = props => {
       <input type="number" name="price" value={price} onChange={event => props.textChange(event)}></input>
 
       <label name="categoryId">Categories</label>
-
+      {
+        props.category.categories.map(category => {
+          return (
+            <div key={category.id}>
+            <input type="checkbox" name="categoryId" value={category.id} onClick={props.inputCategory}></input>{category.type}
+            </div>
+          )
+        })
+      }
+      <br/>
       <button disabled={!name || !description || !imageUrl}type="submit">Submit</button>
 
     </form>

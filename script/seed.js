@@ -20,8 +20,41 @@ async function seed() {
   ])
 
   const Products = await Promise.all([
-    products.create({name: "tiger mask", imageUrl: "bearmask.jpg", description: "this is a strong mask as like a tiger", quantity: 50, price: 2.02, categoryId: 2}),
-    products.create({name: "Christmas mask", imageUrl: "bearmask.jpg", description: "lets wear this mask on our Christmas party", quantity: 20, price: 4.04, categoryId: 5}),
+    products.create({
+      name: 'Bear Mask',
+      imageUrl: 'bearmask.jpg',
+      description: 'this is a strong mask as like a tiger',
+      quantity: 50,
+      price: 2.02
+    }),
+    products.create({
+      name: 'Christmas Mask',
+      imageUrl: 'christmasmask.jpg',
+      description: 'lets wear this mask on our Christmas party',
+      quantity: 20,
+      price: 4.04
+    }),
+    products.create({
+      name: 'Black Mask',
+      imageUrl: 'blackmask.jpg',
+      description: 'very slimming',
+      quantity: 33,
+      price: 5.04
+    }),
+    products.create({
+      name: 'Hello Kitty Mask',
+      imageUrl: 'hellokittymask.jpg',
+      description: 'Hello Kitty (full name: Kitty White (キティ・ホワイト Kiti Howaito)) is a fictional cartoon character produced by the Japanese company Sanrio',
+      quantity: 22,
+      price: 100.04
+    }),
+    products.create({
+      name: 'Abstract Art Mask',
+      imageUrl: 'abstractmask.jpg',
+      description: 'very post modern',
+      quantity: 2,
+      price: 2.04
+    })
   ])
 
   const orders = await Promise.all([
@@ -70,7 +103,11 @@ async function seed() {
       productId: 2,
       orderId: 3
     }),
-    orderedProducts.create({quantity: 1, price: 4.04, productId: 2, orderId: 4})
+    orderedProducts.create({
+      quantity: 1,
+      price: 4.04,
+      productId: 2,
+      orderId: 4})
   ])
 
   const categories = await Promise.all([
@@ -105,8 +142,34 @@ async function seed() {
       rating: 1,
       productId: 2,
       userId: 2
+    }),
+    reviews.create({
+      title: 'I like this!!!!1',
+      comments:
+        'It is so fantastic.  All of my classmates like this and they also would like to buy this :)  TRY THIS!!!',
+      rating: 5,
+      productId: 3,
+      userId: 1
+    }),
+    reviews.create({
+      title: 'I highly recommend2',
+      comments:
+        'It is so fantastic.  All of my classmates like this and they also would like to buy this :)  TRY THIS!!!',
+      rating: 5,
+      productId: 4,
+      userId: 2
     })
   ])
+
+  await Promise.all(
+    Products.map(async product => {
+      await product.addCategories((Math.floor(Math.random() * 5) + 1  ));
+    }))
+  await Promise.all(
+    Products.map(async product => {
+      await product.addCategories((Math.floor(Math.random() * 5) + 1  ));
+    }))
+
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${Products.length} users`)

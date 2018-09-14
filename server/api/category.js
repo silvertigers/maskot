@@ -1,13 +1,15 @@
 const router = require('express').Router()
 const Products = require('../db/models/products')
-const Categories = require('../db/models/category')
+const category = require('../db/models/category')
+
 
 module.exports = router
 
+// GET all products at /api/categories
 router.get('/', async (req, res, next) => {
   try {
-    const categories = await Categories.findAll()
-    res.json(categories)
+    const products = await category.findAll()
+    res.status(200).json(products)
   } catch (err) {
     next(err)
   }
@@ -16,8 +18,8 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     console.log(req.body)
-    const category = await Categories.create(req.body)
-    res.json(category)
+    const newCategory = await category.create(req.body)
+    res.json(newCategory)
   } catch(err) {
     next(err)
   }

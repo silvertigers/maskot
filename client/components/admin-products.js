@@ -9,7 +9,7 @@ class AdminProducts extends Component {
     super()
     this.state = {
       isAdd: false,
-      isEdit: false,
+      isEdit: 0,
     }
     this.add = this.add.bind(this)
     this.edit = this.edit.bind(this)
@@ -24,11 +24,6 @@ class AdminProducts extends Component {
     await this.props.productRemove(productId)
   }
 
-  editProduct(event) {
-    const productId = event.target.value;
-    this.props.history.push(`/products/${productId}/edit`)
-  }
-
   add() {
     this.state.isAdd ?
     this.setState({
@@ -39,13 +34,15 @@ class AdminProducts extends Component {
     })
   }
 
-  edit() {
-    this.state.isEdit ?
+  edit(event) {
+    const id = Number(event.target.value)
+
+    this.state.isEdit === id ?
     this.setState({
-      isEdit: false,
+      isEdit: 0,
     }) :
     this.setState({
-      isEdit: true,
+      isEdit: Number(event.target.value)
     })
   }
 
@@ -70,10 +67,10 @@ class AdminProducts extends Component {
                 <h3>Product name: {product.name}</h3>
                 <p>price: {product.price}</p>
                 <p>quantity: {product.quantity ? product.quantity : <span>OUT OF STOCK</span>}</p>
-                <button onClick={this.edit}>EDIT</button>
+                <button onClick={event => this.edit(event)} value={product.id}>EDIT</button>
                 <button onClick={event => this.removeProduct(event)} value={product.id}>REMOVE</button>
                 {
-                  this.state.isEdit ?
+                  this.state.isEdit == product.id ?
                   <EditProduct edit={this.edit} id={product.id} /> : <div/>
                 }
               </li>
