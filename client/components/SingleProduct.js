@@ -31,10 +31,13 @@ class SingleProduct extends React.Component {
           <p>{product.description}</p>
         </div>
         <AddToCart product={product} />
-        {product.reviews ? (
-          product.reviews.map(review => (
-            <SingleReview key={review.id} review={review} />
-          ))
+        {product.reviews && product.reviews[0] ? (
+          <div className="reviews">
+            <h2>Reviews</h2>
+            {product.reviews.map(review => (
+              <SingleReview key={review.id} review={review} />
+            ))}
+          </div>
         ) : (
           <h2>There are no reviews for this product</h2>
         )}
