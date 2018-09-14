@@ -27,13 +27,13 @@ export const FormProduct = props => {
         props.category.categories.map(category => {
           return (
             <div key={category.id}>
-            <input type="checkbox" name="categoryId" value={category.id} onClick={props.inputCategory}></input>{category.type}
+            <input type="checkbox" name="categoryId" value={category.id} onClick={props.inputCategory}checked={categories.indexOf(category.id) > -1}></input>{category.type}
             </div>
           )
         })
       }
       <br/>
-      <button disabled={!name || !description || !imageUrl}type="submit">Submit</button>
+      <button disabled={!name || !description || !imageUrl || !categories.length}type="submit">Submit</button>
 
     </form>
   </div>

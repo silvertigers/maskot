@@ -82,7 +82,18 @@ router.put('/:productId', async (req, res, next) => {
       }
     })
 
-    const editProduct = await Products.findById(id)
+    const editProduct = await Products.findById(id, {
+      include: [{
+        model: Categories,
+        attributes: ['id']
+      }]
+    })
+    await editProduct.removeCategories(editProduct.categories);
+
+    req.body.categories.forEach(id => {
+      return editProduct.addCategories(id)
+    })
+
     res.json(editProduct)
   } catch (err) {
     next(err)

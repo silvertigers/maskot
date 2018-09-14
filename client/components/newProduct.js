@@ -47,10 +47,10 @@ class NewProduct extends Component {
 
   inputCategory(event) {
     var arr = this.state.categories
-    var idx = arr.indexOf(event.target.value)
+    var idx = arr.indexOf(Number(event.target.value))
 
     if (idx === -1) {
-      arr.push(event.target.value)
+      arr.push(Number(event.target.value))
     } else {
       arr.splice(idx, 1)
     }
@@ -68,7 +68,7 @@ class NewProduct extends Component {
   };
 
   render() {
-console.log(this.state.categories)
+
     return (
       <div>
         <h2 className="title">Add a new Product</h2>

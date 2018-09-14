@@ -70,7 +70,7 @@ export const addCategory = category => async dispatch => {
 const categoryReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_CATEGORIES:
-      return {...state, categories: action.categories}
+      return {...state, categories: action.categories.sort((a, b) => a.id > b.id)}
     case SELECT_CATEGORY:
       return {...state, selectedCategory: action.selectedCategory}
     case ADD_CATEGORY:

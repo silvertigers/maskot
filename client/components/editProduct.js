@@ -28,13 +28,14 @@ class EditProduct extends Component {
     await this.props.getProduct(this.props.id)
     this.setState(this.props.product)
 
-    // this.props.categories.forEach(category => {
-    //   return selected.push(category.id)
-    // })
+    await this.props.gotCategories()
+    const selected = this.props.product.categories.map(category => {
+      return category.id
+    })
 
-    // this.setState({
-    //   categories: selected
-    // })
+    this.setState({
+      categories: selected
+    })
   }
 
   textChange(event) {
@@ -57,7 +58,13 @@ class EditProduct extends Component {
 
   inputCategory(event) {
     var arr = this.state.categories
-    arr.push(event.target.value)
+    var idx = arr.indexOf(Number(event.target.value))
+
+    if (idx === -1) {
+      arr.push(Number(event.target.value))
+    } else {
+      arr.splice(idx, 1)
+    }
     arr.sort()
     this.setState({
       categories: arr,
@@ -74,7 +81,7 @@ class EditProduct extends Component {
   };
 
   render() {
-    // console.log('state cate', this.state.categories)
+
     return (
       <div>
         <h2 className="title">Edit Product</h2>
