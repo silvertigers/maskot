@@ -68,7 +68,9 @@ class EditProduct extends Component {
     event.preventDefault();
 
     await this.props.put(this.state);
-    this.props.edit();
+    this.props.edit({target: {
+      value: this.props.id
+    }});
   };
 
   render() {
