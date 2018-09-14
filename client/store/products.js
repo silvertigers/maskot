@@ -64,7 +64,7 @@ export const productAdd = newProduct => async dispatch => {
     const action = addProduct(product);
     dispatch(action)
   } catch (err) {
-    next(err)
+    console.error(err)
   }
 }
 
@@ -75,7 +75,7 @@ export const productEdit = changedProduct => async dispatch => {
     const action = editProduct(product);
     dispatch(action)
   } catch (err) {
-    next(err)
+    console.error(err)
   }
 }
 
@@ -85,7 +85,7 @@ export const productRemove = productId => async dispatch => {
     const action = removeProduct(productId)
     dispatch(action)
   } catch (err) {
-    next(err)
+    console.error(err)
   }
 }
 
@@ -96,7 +96,7 @@ export const productRemove = productId => async dispatch => {
 const productsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_PRODUCTS:
-      return { ...state, products: action.products }
+      return { ...state, products: action.products.sort((a, b) => a.id > b.id)}
     case ADD_PRODUCT:
       return {...state, products: [...state.products, action.newProduct]};
     case EDIT_PRODUCT:
@@ -106,7 +106,7 @@ const productsReducer = (state = initialState, action) => {
         } else {
           return product
         }
-      })};
+      }).sort((a, b) => a.id > b.id)};
     case REMOVE_PRODUCT:
       return {...state, products: [...state.products].filter(product => {
         return product.id !== action.productId

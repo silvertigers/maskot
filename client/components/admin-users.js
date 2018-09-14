@@ -68,9 +68,9 @@ class AdminUsers extends Component {
                     this.props.loggedInUser !== user.id &&
                     <div>
                       <p>admin? {user.isAdmin.toString()}
-                        <select name={user.id} onChange={event => this.admin(event)}>
-                          <option selected={!user.isAdmin} value={false}>USER</option>
-                          <option selected={user.isAdmin} value={true}>ADMIN</option>
+                        <select name={user.id} onChange={event => this.admin(event)} value={user.isAdmin}>
+                          <option value={false}>USER</option>
+                          <option value={true}>ADMIN</option>
                         </select>
                       </p>
                       <button onClick={event => this.deleteUser(event)} value={user.id}>REMOVE</button>

@@ -115,7 +115,12 @@ async function seed() {
       productId: 2,
       orderId: 3
     }),
-    orderedProducts.create({quantity: 1, price: 4.04, productId: 2, orderId: 4})
+    orderedProducts.create({
+      quantity: 1,
+      price: 4.04,
+      productId: 2,
+      orderId: 4
+    })
   ])
 
   const Review = await Promise.all([
