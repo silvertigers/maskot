@@ -9,7 +9,7 @@ const quantityTotal = cart =>
 
 export const Cart = props => {
   return props.cart[0] ? (
-    <div>
+    <div id="cart">
       <h1>Shopping Cart</h1>
       <h3>Items ({quantityTotal(props.cart)})</h3>
       <div className="line-items">
