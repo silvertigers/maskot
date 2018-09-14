@@ -7,16 +7,16 @@ const orderTotal = cart =>
 const quantityTotal = cart =>
   cart.reduce((total, item) => total + item.quantity, 0)
 
-const Cart = props => {
+export const Cart = props => {
   return props.cart[0] ? (
-    <div>
+    <div id="cart">
       <h1>Shopping Cart</h1>
       <h3>Items ({quantityTotal(props.cart)})</h3>
       <div className="line-items">
-        {props.cart.map(item => <LineItem key={item.id} {...item} />)}
+        {props.cart.map(item => <LineItem key={item.product.id} {...item} />)}
       </div>
       <div className="order-total">
-        <h2>{orderTotal(props.cart)}</h2>
+        <h2>{orderTotal(props.cart).toFixed(2)}</h2>
         <p>Total</p>
       </div>
       <div className="checkout-feature">

@@ -35,8 +35,8 @@ class Routes extends Component {
           <Switch>
             <Route path="/home" component={UserHome} />
             {isAdmin && <Route path="/dashboard" component={AdminHome} />}
-            <Route path="/products/:productId" component={SingleProduct} />
             <Route path="/cart" component={Cart} />
+            <Route path="/products/:productId" component={SingleProduct} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

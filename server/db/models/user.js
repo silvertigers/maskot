@@ -29,7 +29,8 @@ const User = db.define('user', {
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
-    defaultValue: false,
+    defaultValue: false
+  },
   facebookId: {
     type: Sequelize.STRING
   }
