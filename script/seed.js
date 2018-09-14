@@ -15,7 +15,7 @@ async function seed() {
   console.log('db synced!')
 
   const users = await Promise.all([
-    user.create({email: 'cody@email.com', password: '123', isAdmin: true,}),
+    user.create({email: 'cody@email.com', password: '123', isAdmin: true}),
     user.create({email: 'murphy@email.com', password: '123'})
   ])
 
@@ -43,6 +43,14 @@ async function seed() {
       description: 'lets wear this mask on our Christmas party',
       quantity: 20,
       price: 4.04
+    }),
+    products.create({
+      id: 15,
+      name: 'Flower mask',
+      imageUrl: 'bearmask.jpg',
+      description: 'Perfect for a spring day',
+      quantity: 15,
+      price: 3.75
     })
   ])
 
@@ -95,8 +103,6 @@ async function seed() {
     orderedProducts.create({quantity: 1, price: 4.04, productId: 2, orderId: 4})
   ])
 
-
-
   const Review = await Promise.all([
     reviews.create({
       title: 'I like this!!!!',
@@ -126,9 +132,9 @@ async function seed() {
 
   await Promise.all(
     Products.map(async product => {
-      await product.addCategories(1);
-    }))
-
+      await product.addCategories(1)
+    })
+  )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${Products.length} users`)

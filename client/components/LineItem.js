@@ -3,7 +3,13 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {editCart} from '../store/cart'
 
-const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const createNumberList = number => {
+  const list = []
+  for (let i = 1; i <= number; i++) {
+    list.push(i)
+  }
+  return list
+}
 
 class LineItem extends React.Component {
   constructor(props) {
@@ -47,15 +53,13 @@ class LineItem extends React.Component {
           <h3>{name}</h3>
         </div>
         <div className="product-price">{price}</div>
-        <button type="button" onClick={this.handleDelete}>
-          X
-        </button>
+        <div>X</div>
         <select
           className="product-quantity"
           value={quantity}
           onChange={this.handleChange}
         >
-          {arr.map(num => (
+          {createNumberList(15).map(num => (
             <option key={num} value={num}>
               {num}
             </option>
@@ -64,6 +68,9 @@ class LineItem extends React.Component {
         <div className="product-total-price">
           {(price * quantity).toFixed(2)}
         </div>
+        <button type="button" onClick={this.handleDelete}>
+          X
+        </button>
       </div>
     )
   }
