@@ -15,11 +15,7 @@ const reducer = combineReducers({
   products,
   product,
   cart,
-<<<<<<< HEAD
-  category,
-=======
   category
->>>>>>> master
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

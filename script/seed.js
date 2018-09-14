@@ -172,7 +172,6 @@ async function seed() {
     Products.map(async product => {
       await product.addCategories((Math.floor(Math.random() * 5) + 1  ));
     }))
-  )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${Products.length} users`)
