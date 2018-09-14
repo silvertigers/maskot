@@ -20,61 +20,75 @@ async function seed() {
   ])
 
   const categories = await Promise.all([
-    category.create({id: 1, type: 'Basic'}),
-    category.create({id: 2, type: 'Animal'}),
-    category.create({id: 3, type: 'Cute'}),
-    category.create({id: 4, type: 'Horror'}),
-    category.create({id: 5, type: 'Festival'})
+    category.create({type: 'Basic'}),
+    category.create({type: 'Animal'}),
+    category.create({type: 'Cute'}),
+    category.create({type: 'Horror'}),
+    category.create({type: 'Festival'})
   ])
 
   const Products = await Promise.all([
     products.create({
-      id: 1,
-      name: 'tiger mask',
+      name: 'Bear Mask',
       imageUrl: 'bearmask.jpg',
       description: 'this is a strong mask as like a tiger',
       quantity: 50,
       price: 2.02
     }),
     products.create({
-      id: 2,
-      name: 'Christmas mask',
-      imageUrl: 'bearmask.jpg',
+      name: 'Christmas Mask',
+      imageUrl: 'christmasmask.jpg',
       description: 'lets wear this mask on our Christmas party',
       quantity: 20,
       price: 4.04
     }),
     products.create({
-      id: 15,
       name: 'Flower mask',
       imageUrl: 'bearmask.jpg',
       description: 'Perfect for a spring day',
       quantity: 15,
       price: 3.75
+    }),
+    products.create({
+      name: 'Black Mask',
+      imageUrl: 'blackmask.jpg',
+      description: 'very slimming',
+      quantity: 33,
+      price: 5.04
+    }),
+    products.create({
+      name: 'Hello Kitty Mask',
+      imageUrl: 'hellokittymask.jpg',
+      description: 'Hello Kitty (full name: Kitty White (キティ・ホワイト Kiti Howaito)) is a fictional cartoon character produced by the Japanese company Sanrio',
+      quantity: 22,
+      price: 100.04
+    }),
+    products.create({
+      name: 'Abstract Art Mask',
+      imageUrl: 'abstractmask.jpg',
+      description: 'very post modern',
+      quantity: 2,
+      price: 2.04
     })
   ])
 
   const orders = await Promise.all([
     order.create({
-      id: 1,
       status: 'order placed',
       email: 'silver@myfirst.com',
       userId: 2
     }),
     order.create({
-      id: 2,
       status: 'order in process',
       email: 'bronze@mysecond.com',
       userId: 2
     }),
     order.create({
-      id: 3,
       status: 'order is out for delivery',
       email: 'gold@mythird.com',
       userId: 2
     }),
     order.create({
-      id: 4,
       status: 'order completed',
       email: 'platinum@myfinal.com',
       userId: 2
@@ -127,13 +141,33 @@ async function seed() {
       rating: 1,
       productId: 2,
       userId: 2
+    }),
+    reviews.create({
+      title: 'I like this!!!!1',
+      comments:
+        'It is so fantastic.  All of my classmates like this and they also would like to buy this :)  TRY THIS!!!',
+      rating: 5,
+      productId: 3,
+      userId: 1
+    }),
+    reviews.create({
+      title: 'I highly recommend2',
+      comments:
+        'It is so fantastic.  All of my classmates like this and they also would like to buy this :)  TRY THIS!!!',
+      rating: 5,
+      productId: 4,
+      userId: 2
     })
   ])
 
   await Promise.all(
     Products.map(async product => {
-      await product.addCategories(1)
-    })
+      await product.addCategories((Math.floor(Math.random() * 5) + 1  ));
+    }))
+  await Promise.all(
+    Products.map(async product => {
+      await product.addCategories((Math.floor(Math.random() * 5) + 1  ));
+    }))
   )
 
   console.log(`seeded ${users.length} users`)
