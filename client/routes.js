@@ -43,7 +43,6 @@ class Routes extends Component {
     }
 
     window.onload = event => {
-      console.log('WINDOW.ONLOAD STORE', this.props)
       const {user, editCart} = this.props
       if (user && user.id) {
         const userCarts = window.localStorage.getItem('userCarts')
@@ -65,14 +64,13 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={Products} />
         <Route path="/products/:productId" component={SingleProduct} />
-        {isLoggedIn && (
-          <Switch>
-            <Route path="/home" component={UserHome} />
-            {isAdmin && <Route path="/dashboard" component={AdminHome} />}
-            <Route path="/cart" component={Cart} />
-            <Route path="/products/:productId" component={SingleProduct} />
-          </Switch>
-        )}
+        <Switch>
+          <Route path="/home" component={UserHome} />
+          {isLoggedIn &&
+            (isAdmin && <Route path="/dashboard" component={AdminHome} />)}
+          <Route path="/cart" component={Cart} />
+          <Route path="/products/:productId" component={SingleProduct} />
+        </Switch>
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
       </Switch>
