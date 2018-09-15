@@ -45,7 +45,7 @@ const removeUser = userId => ({
  */
 export const gotUser = () => async dispatch => {
   try {
-    const response = await axios.get('/api/users')
+    const response = await axios.get('/api/admin/users')
     const users = response.data
     const action = getUser(users)
     dispatch(action)
@@ -56,7 +56,7 @@ export const gotUser = () => async dispatch => {
 
 export const userAdd = user => async dispatch => {
   try {
-    const response = await axios.post('/api/users', user)
+    const response = await axios.post('/api/admin/users', user)
     const createdUser = response.data
     const action = addUser(createdUser)
     dispatch(action)
@@ -68,7 +68,7 @@ export const userAdd = user => async dispatch => {
 export const changeAuthority = user => async dispatch => {
   try {
     const userId = user.id
-    const response = await axios.put(`/api/users/${userId}`, user)
+    const response = await axios.put(`/api/admin/users/${userId}`, user)
     const changedUser = response.data
     const action = toggleAdmin(changedUser)
     dispatch(action)
@@ -79,7 +79,7 @@ export const changeAuthority = user => async dispatch => {
 
 export const userRemove = userId => async dispatch => {
   try {
-    await axios.delete(`/api/users/${userId}`)
+    await axios.delete(`/api/admin/users/${userId}`)
     const action = removeUser(userId)
     dispatch(action)
   } catch (err) {
