@@ -32,7 +32,7 @@ describe('Thunks', () => {
   describe('getOrders', () => {
     it('eventually dispatches the GET ORDERS action', async () => {
       const fakeOrders = [{one: 'one'}, {two: 'two'}, {three: 'three'}]
-      mockAxios.onGet('/api/orders').replyOnce(200, fakeOrders)
+      mockAxios.onGet('/api/users/2/orders').replyOnce(200, fakeOrders)
       await store.dispatch(getOrders())
       const actions = store.getActions()
       expect(actions[0].type).to.be.equal('GOT_ORDERS')

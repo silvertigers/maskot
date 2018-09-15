@@ -30,7 +30,7 @@ const gotOrders = allOrders => {
 
 export const getOrders = () => {
   return async dispatch => {
-    const {data} = await axios.get('/api/users/:userid/orders')
+    const {data} = await axios.get('/api/users/:userId/orders')
     dispatch(gotOrders(data))
   }
 }

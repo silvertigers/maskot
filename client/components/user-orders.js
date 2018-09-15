@@ -6,9 +6,9 @@ import {getOrders} from '../store/orders'
 
 const mapStateToProps = (state) => {
   return {
-    allOrders: state.allOrders
+    allOrders: state.allOrders,
+    userId: state.user.id
   }
-
 }
 
 const mapDispatchToProps = (dispatch) => {
