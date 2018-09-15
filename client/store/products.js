@@ -59,33 +59,33 @@ export const getProducts = () => {
 
 export const productAdd = newProduct => async dispatch => {
   try {
-    const response = await axios.post('/api/products', newProduct);
+    const response = await axios.post('/api/admin/products', newProduct);
     const product = response.data;
     const action = addProduct(product);
     dispatch(action)
   } catch (err) {
-    next(err)
+    console.error(err)
   }
 }
 
 export const productEdit = changedProduct => async dispatch => {
   try {
-    const response = await axios.put(`/api/products/${changedProduct.id}`, changedProduct);
+    const response = await axios.put(`/api/admin/products/${changedProduct.id}`, changedProduct);
     const product = response.data;
     const action = editProduct(product);
     dispatch(action)
   } catch (err) {
-    next(err)
+    console.error(err)
   }
 }
 
 export const productRemove = productId => async dispatch => {
   try {
-    await axios.delete(`/api/products/${productId}`)
+    await axios.delete(`/api/admin/products/${productId}`)
     const action = removeProduct(productId)
     dispatch(action)
   } catch (err) {
-    next(err)
+    console.error(err)
   }
 }
 
@@ -96,7 +96,7 @@ export const productRemove = productId => async dispatch => {
 const productsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_PRODUCTS:
-      return { ...state, products: action.products }
+      return { ...state, products: action.products.sort((a, b) => a.id > b.id)}
     case ADD_PRODUCT:
       return {...state, products: [...state.products, action.newProduct]};
     case EDIT_PRODUCT:
@@ -106,7 +106,7 @@ const productsReducer = (state = initialState, action) => {
         } else {
           return product
         }
-      })};
+      }).sort((a, b) => a.id > b.id)};
     case REMOVE_PRODUCT:
       return {...state, products: [...state.products].filter(product => {
         return product.id !== action.productId

@@ -15,21 +15,20 @@ async function seed() {
   console.log('db synced!')
 
   const users = await Promise.all([
-    user.create({email: 'cody@email.com', password: '123', isAdmin: true,}),
+    user.create({email: 'cody@email.com', password: '123', isAdmin: true}),
     user.create({email: 'murphy@email.com', password: '123'})
   ])
 
   const categories = await Promise.all([
-    category.create({id: 1, type: 'Basic'}),
-    category.create({id: 2, type: 'Animal'}),
-    category.create({id: 3, type: 'Cute'}),
-    category.create({id: 4, type: 'Horror'}),
-    category.create({id: 5, type: 'Festival'})
+    category.create({type: 'Basic'}),
+    category.create({type: 'Animal'}),
+    category.create({type: 'Cute'}),
+    category.create({type: 'Horror'}),
+    category.create({type: 'Festival'})
   ])
 
   const Products = await Promise.all([
     products.create({
-      id: 1,
       name: 'Bear Mask',
       imageUrl: 'bearmask.jpg',
       description: 'this is a strong mask as like a tiger',
@@ -37,7 +36,6 @@ async function seed() {
       price: 2.02
     }),
     products.create({
-      id: 2,
       name: 'Christmas Mask',
       imageUrl: 'christmasmask.jpg',
       description: 'lets wear this mask on our Christmas party',
@@ -45,7 +43,13 @@ async function seed() {
       price: 4.04
     }),
     products.create({
-      id: 3,
+      name: 'Flower mask',
+      imageUrl: 'bearmask.jpg',
+      description: 'Perfect for a spring day',
+      quantity: 15,
+      price: 3.75
+    }),
+    products.create({
       name: 'Black Mask',
       imageUrl: 'blackmask.jpg',
       description: 'very slimming',
@@ -53,7 +57,6 @@ async function seed() {
       price: 5.04
     }),
     products.create({
-      id: 4,
       name: 'Hello Kitty Mask',
       imageUrl: 'hellokittymask.jpg',
       description: 'Hello Kitty (full name: Kitty White (キティ・ホワイト Kiti Howaito)) is a fictional cartoon character produced by the Japanese company Sanrio',
@@ -61,7 +64,6 @@ async function seed() {
       price: 100.04
     }),
     products.create({
-      id: 5,
       name: 'Abstract Art Mask',
       imageUrl: 'abstractmask.jpg',
       description: 'very post modern',
@@ -72,26 +74,22 @@ async function seed() {
 
   const orders = await Promise.all([
     order.create({
-      id: 1,
-      status: 'order placed',
+      status: 'placed',
       email: 'silver@myfirst.com',
       userId: 2
     }),
     order.create({
-      id: 2,
-      status: 'order in process',
+      status: 'in process',
       email: 'bronze@mysecond.com',
       userId: 2
     }),
     order.create({
-      id: 3,
-      status: 'order is out for delivery',
+      status: 'cancelled',
       email: 'gold@mythird.com',
       userId: 2
     }),
     order.create({
-      id: 4,
-      status: 'order completed',
+      status: 'completed',
       email: 'platinum@myfinal.com',
       userId: 2
     })
@@ -116,10 +114,12 @@ async function seed() {
       productId: 2,
       orderId: 3
     }),
-    orderedProducts.create({quantity: 1, price: 4.04, productId: 2, orderId: 4})
+    orderedProducts.create({
+      quantity: 1,
+      price: 4.04,
+      productId: 2,
+      orderId: 4})
   ])
-
-
 
   const Review = await Promise.all([
     reviews.create({
@@ -172,7 +172,6 @@ async function seed() {
     Products.map(async product => {
       await product.addCategories((Math.floor(Math.random() * 5) + 1  ));
     }))
-
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${Products.length} users`)
