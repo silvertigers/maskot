@@ -12,6 +12,7 @@ import {
   Cart
 } from './components'
 import {me} from './store'
+import {editCart} from './store/cart'
 
 /**
  * COMPONENT
@@ -19,6 +20,39 @@ import {me} from './store'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+
+    window.onbeforeunload = event => {
+      const {user, cart} = this.props
+      if (cart[0]) {
+        if (user && user.id) {
+          const userCarts = window.localStorage.getItem('userCarts')
+          const prevCart = userCarts.find(cart => cart.userId === user.id)
+          if (prevCart) {
+            prevCart.cart = cart
+            window.localStorage.setItem('carts', userCarts)
+          } else {
+            window.localStorage.setItem('carts', [
+              ...userCarts,
+              {userId: user.id, cart}
+            ])
+          }
+        } else {
+          window.localStorage.setItem('guestCart', cart)
+        }
+      }
+    }
+
+    window.onload = event => {
+      console.log('WINDOW.ONLOAD STORE', this.props)
+      const {user, editCart} = this.props
+      if (user && user.id) {
+        const userCarts = window.localStorage.getItem('userCarts')
+        const prevCart = userCarts.find(cart => cart.userId === user.id)
+        if (prevCart) {
+          editCart(prevCart)
+        }
+      }
+    }
   }
 
   render() {
@@ -54,7 +88,8 @@ const mapState = state => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
-    isAdmin: !!state.user.isAdmin
+    isAdmin: !!state.user.isAdmin,
+    cart: state.cart
   }
 }
 
@@ -62,6 +97,9 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+    },
+    editCart(cart) {
+      dispatch(editCart(cart))
     }
   }
 }

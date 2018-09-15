@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {getSession} from './session'
 
 /**
  * ACTION TYPES
@@ -25,8 +26,12 @@ const clearStore = () => ({type: LOG_OUT})
  */
 export const me = () => async dispatch => {
   try {
-    const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    const {data} = await axios.get('/auth/me')
+    if (data.id) {
+      dispatch(getUser(data || defaultUser))
+    } else {
+      dispatch(getSession(data))
+    }
   } catch (err) {
     console.error(err)
   }
