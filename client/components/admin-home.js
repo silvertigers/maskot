@@ -13,9 +13,11 @@ class AdminHome extends Component {
       <div>
         <h1>This is a Dashboard page for Admin</h1>
         <div className="dashboard_menu">
+
           <Link to="/dashboard/products">Product</Link>
           <Link to="/dashboard/categories"> Category</Link>
           <Link to="/dashboard/orders"> Order</Link>
+
           <Link to="/dashboard/users"> User</Link>
         </div>
         <Switch>
