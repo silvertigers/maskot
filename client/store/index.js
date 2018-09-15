@@ -2,7 +2,7 @@ import {createStore, combineReducers, applyMiddleware} from 'redux'
 import createLogger from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import user, {LOG_OUT} from './user'
+import user from './user'
 import users from './users'
 import products from './products'
 import product from './product'
@@ -23,14 +23,7 @@ const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
 
-const rootReducer = (state, action) => {
-  if (action.type === LOG_OUT) {
-    state = undefined
-  }
-  return reducer(state, action)
-}
-
-const store = createStore(rootReducer, middleware)
+const store = createStore(reducer, middleware)
 
 export default store
 export * from './user'

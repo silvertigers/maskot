@@ -13,12 +13,13 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
         <Link to="/products">Products</Link>
         <Link to="/cart">Cart</Link>
         {isAdmin && <Link to="/dashboard">DashBoard</Link>}
-        {isLoggedIn && (
+        {isLoggedIn ? (
           <a href="#" onClick={handleClick}>
             Logout
           </a>
+        ) : (
+          <Link to="/login">Login</Link>
         )}
-        <Link to="/login">Login</Link>
         <Link to="/signup">Sign Up</Link>
       </div>
     </nav>

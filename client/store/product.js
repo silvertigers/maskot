@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const GOT_PRODUCT = 'GOT_PRODUCT'
+const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 
 // ACTION CREATORS
 
@@ -18,6 +19,8 @@ export const getProduct = productId => {
   }
 }
 
+export const removeProduct = () => ({type: REMOVE_PRODUCT})
+
 var initialState = {}
 
 // REDUCERS
@@ -26,6 +29,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_PRODUCT:
       return action.product
+    case REMOVE_PRODUCT:
+      return initialState
     default:
       return state
   }

@@ -25,31 +25,36 @@ class Routes extends Component {
       const {user, cart} = this.props
       if (cart[0]) {
         if (user && user.id) {
-          const userCarts = window.localStorage.getItem('userCarts')
+          const [...userCarts] = JSON.parse(
+            window.localStorage.getItem('userCarts')
+          )
           const prevCart = userCarts.find(cart => cart.userId === user.id)
           if (prevCart) {
             prevCart.cart = cart
-            window.localStorage.setItem('carts', userCarts)
+            window.localStorage.setItem('userCarts', JSON.stringify(userCarts))
           } else {
-            window.localStorage.setItem('carts', [
-              ...userCarts,
-              {userId: user.id, cart}
-            ])
+            window.localStorage.setItem(
+              'userCarts',
+              JSON.stringify([...userCarts, {userId: user.id, cart}])
+            )
           }
         } else {
-          window.localStorage.setItem('guestCart', cart)
+          window.localStorage.setItem('guestCart', JSON.stringify(cart))
         }
       }
     }
 
     window.onload = event => {
       const {user, editCart} = this.props
+      const guestCart = JSON.parse(window.localStorage.getItem('guestCart'))
       if (user && user.id) {
-        const userCarts = window.localStorage.getItem('userCarts')
-        const prevCart = userCarts.find(cart => cart.userId === user.id)
+        const userCarts = JSON.parse(window.localStorage.getItem('userCarts'))
+        const prevCart = userCarts.find(cart => cart.userId === user.id).cart
         if (prevCart) {
           editCart(prevCart)
         }
+      } else if (guestCart) {
+        editCart(guestCart)
       }
     }
   }

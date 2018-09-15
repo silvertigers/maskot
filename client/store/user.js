@@ -1,12 +1,14 @@
 import axios from 'axios'
 import history from '../history'
 import {getSession} from './session'
+import {removeProduct} from './product'
 
 /**
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER'
-// const REMOVE_USER = 'REMOVE_USER'
+const REMOVE_USER = 'REMOVE_USER'
+
 export const LOG_OUT = 'LOG_OUT'
 
 /**
@@ -18,8 +20,7 @@ const defaultUser = {}
  * ACTION CREATORS
  */
 const getUser = user => ({type: GET_USER, user})
-// const removeUser = () => ({type: REMOVE_USER})
-const clearStore = () => ({type: LOG_OUT})
+const removeUser = () => ({type: REMOVE_USER})
 
 /**
  * THUNK CREATORS
@@ -56,7 +57,8 @@ export const auth = (email, password, method) => async dispatch => {
 export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
-    dispatch(clearStore())
+    dispatch(removeUser())
+    dispatch(removeProduct())
     history.push('/login')
   } catch (err) {
     console.error(err)
@@ -70,6 +72,8 @@ export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return action.user
+    case REMOVE_USER:
+      return defaultUser
     default:
       return state
   }
