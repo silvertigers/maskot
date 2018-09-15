@@ -16,3 +16,26 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/:orderId', async (req, res, next) => {
+  try {
+    const id = req.params.orderId
+
+    await Order.update({
+      status: req.body.status
+    }, {
+      where: {
+        id,
+      }
+    })
+
+    const updatedOrder = await Order.findById(id, {
+      include: {
+        model: user,
+      }
+    })
+    res.json(updatedOrder)
+  } catch(err) {
+    next(err)
+  }
+})

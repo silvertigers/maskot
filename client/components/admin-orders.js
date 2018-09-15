@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import { gotOrder } from '../store/order'
+import { gotOrder, editedOrder } from '../store/order'
 
 class AdminOrders extends Component {
   constructor() {
@@ -9,6 +9,9 @@ class AdminOrders extends Component {
       filtered: '',
     }
     this.orderFilter = this.orderFilter.bind(this)
+    this.changeOrderStatus = this.changeOrderStatus.bind(this)
+    this.orderStatus = this.orderStatus.bind(this)
+    this.orderCancelled = this.orderCancelled.bind(this)
   }
 
   async componentDidMount() {
@@ -32,9 +35,38 @@ class AdminOrders extends Component {
     })
   }
 
+  async changeOrderStatus(event) {
+    const updatedData = {
+      id: event.target.name,
+      status: event.target.value
+    }
+    await this.props.editOrder(updatedData)
+  }
+
+  async orderStatus(event) {
+    var statuslist = ["placed", "in process", "completed"]
+    var current = statuslist.indexOf(event.target.value)
+    if (current === 2) {
+      return
+    }
+    const orderStatus = {
+      id: event.target.name,
+      status: statuslist[current+1]
+    }
+    await this.props.editOrder(orderStatus)
+  }
+
+  async orderCancelled(event) {
+    const cancelOrder = {
+      id: event.target.name,
+      status: "cancelled"
+    }
+    await this.props.editOrder(cancelOrder)
+  }
+
   render() {
     var { orders } = this.props.orders
-    console.log(this.state.filtered)
+
     return (
       <div>
         <div className="admin_Order_List">
@@ -55,6 +87,19 @@ class AdminOrders extends Component {
                     <li key={order.id}>
                       <h2>{order.user ? order.user.email : order.email}</h2>
                       <h2>status: {order.status}</h2>
+                      <select name={order.id} onChange={this.changeOrderStatus} value={order.status}>
+                        <option value="placed">Placed</option>
+                        <option value="in process">in process</option>
+                        <option value="completed">Completed</option>
+                        <option value="cancelled">Cancelled</option>
+                      </select>
+                      {
+                        !(order.status === "completed" || order.status === "cancelled") &&
+                        <div>
+                          <button name={order.id} value={order.status} onClick={this.orderStatus}>next status</button>
+                          <button name={order.id} onClick={this.orderCancelled}>cancelled</button>
+                        </div>
+                      }
                     </li>
                   )
                 }
@@ -76,7 +121,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    gotOrder: () => dispatch(gotOrder())
+    gotOrder: () => dispatch(gotOrder()),
+    editOrder: order => dispatch(editedOrder(order))
   }
 }
 
