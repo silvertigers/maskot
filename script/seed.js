@@ -59,7 +59,8 @@ async function seed() {
     products.create({
       name: 'Hello Kitty Mask',
       imageUrl: 'hellokittymask.jpg',
-      description: 'Hello Kitty (full name: Kitty White (キティ・ホワイト Kiti Howaito)) is a fictional cartoon character produced by the Japanese company Sanrio',
+      description:
+        'Hello Kitty (full name: Kitty White (キティ・ホワイト Kiti Howaito)) is a fictional cartoon character produced by the Japanese company Sanrio',
       quantity: 22,
       price: 100.04
     }),
@@ -118,7 +119,8 @@ async function seed() {
       quantity: 1,
       price: 4.04,
       productId: 2,
-      orderId: 4})
+      orderId: 4
+    })
   ])
 
   const Review = await Promise.all([
@@ -166,12 +168,14 @@ async function seed() {
 
   await Promise.all(
     Products.map(async product => {
-      await product.addCategories((Math.floor(Math.random() * 5) + 1  ));
-    }))
+      await product.addCategories(Math.floor(Math.random() * 5) + 1)
+    })
+  )
   await Promise.all(
     Products.map(async product => {
-      await product.addCategories((Math.floor(Math.random() * 5) + 1  ));
-    }))
+      await product.addCategories(Math.floor(Math.random() * 5) + 1)
+    })
+  )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${Products.length} users`)
