@@ -75,22 +75,22 @@ async function seed() {
 
   const orders = await Promise.all([
     order.create({
-      status: 'order placed',
+      status: 'placed',
       email: 'silver@myfirst.com',
       userId: 2
     }),
     order.create({
-      status: 'order in process',
+      status: 'in process',
       email: 'bronze@mysecond.com',
       userId: 2
     }),
     order.create({
-      status: 'order is out for delivery',
+      status: 'cancelled',
       email: 'gold@mythird.com',
       userId: 2
     }),
     order.create({
-      status: 'order completed',
+      status: 'completed',
       email: 'platinum@myfinal.com',
       userId: 2
     })

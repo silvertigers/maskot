@@ -54,7 +54,7 @@ export const getCategories = () => {
 
 export const addCategory = category => async dispatch => {
   try {
-    const response = await axios.post('/api/category', category)
+    const response = await axios.post('/api/admin/category', category)
     const addedCategory = response.data
     const action = newCategory(addedCategory)
     dispatch(action)
