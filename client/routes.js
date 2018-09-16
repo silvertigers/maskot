@@ -12,6 +12,7 @@ import {
   Cart
 } from './components'
 import {me} from './store'
+import {setCartToStorage, getCartFromStorage} from './store/cart'
 
 /**
  * COMPONENT
@@ -19,6 +20,14 @@ import {me} from './store'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+
+    window.onbeforeunload = () => {
+      setCartToStorage(this.props)
+    }
+
+    window.onload = () => {
+      this.props.getCartFromStorage(this.props)
+    }
   }
 
   render() {
@@ -31,14 +40,13 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={Products} />
         <Route path="/products/:productId" component={SingleProduct} />
-        {isLoggedIn && (
-          <Switch>
-            <Route path="/home" component={UserHome} />
-            {isAdmin && <Route path="/dashboard" component={AdminHome} />}
-            <Route path="/cart" component={Cart} />
-            <Route path="/products/:productId" component={SingleProduct} />
-          </Switch>
-        )}
+        <Switch>
+          <Route path="/home" component={UserHome} />
+          {isLoggedIn &&
+            (isAdmin && <Route path="/dashboard" component={AdminHome} />)}
+          <Route path="/cart" component={Cart} />
+          <Route path="/products/:productId" component={SingleProduct} />
+        </Switch>
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
       </Switch>
@@ -54,7 +62,9 @@ const mapState = state => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
-    isAdmin: !!state.user.isAdmin
+    isAdmin: !!state.user.isAdmin,
+    cart: state.cart,
+    user: state.user
   }
 }
 
@@ -62,6 +72,9 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me())
+    },
+    getCartFromStorage(props) {
+      dispatch(getCartFromStorage(props))
     }
   }
 }
