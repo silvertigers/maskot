@@ -43,7 +43,8 @@ export const getCartFromStorage = ({user, cart}) => {
       if (cart[0]) {
         mergeToUserCart(dispatch)
       } else {
-        dispatch(gotCartFromStorage(prevUserCart.cart))
+        const products = prevUserCart.cart || []
+        dispatch(gotCartFromStorage(products))
       }
     } else {
       const [...guestCart] =
