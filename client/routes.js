@@ -12,7 +12,7 @@ import {
   Cart
 } from './components'
 import {me} from './store'
-import {editCart} from './store/cart'
+import {setCartToStorage, getCartFromStorage} from './store/cart'
 
 /**
  * COMPONENT
@@ -21,41 +21,12 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
 
-    window.onbeforeunload = event => {
-      const {user, cart} = this.props
-      if (cart[0]) {
-        if (user && user.id) {
-          const [...userCarts] = JSON.parse(
-            window.localStorage.getItem('userCarts')
-          )
-          const prevCart = userCarts.find(cart => cart.userId === user.id)
-          if (prevCart) {
-            prevCart.cart = cart
-            window.localStorage.setItem('userCarts', JSON.stringify(userCarts))
-          } else {
-            window.localStorage.setItem(
-              'userCarts',
-              JSON.stringify([...userCarts, {userId: user.id, cart}])
-            )
-          }
-        } else {
-          window.localStorage.setItem('guestCart', JSON.stringify(cart))
-        }
-      }
+    window.onbeforeunload = () => {
+      setCartToStorage(this.props)
     }
 
-    window.onload = event => {
-      const {user, editCart} = this.props
-      const guestCart = JSON.parse(window.localStorage.getItem('guestCart'))
-      if (user && user.id) {
-        const userCarts = JSON.parse(window.localStorage.getItem('userCarts'))
-        const prevCart = userCarts.find(cart => cart.userId === user.id).cart
-        if (prevCart) {
-          editCart(prevCart)
-        }
-      } else if (guestCart) {
-        editCart(guestCart)
-      }
+    window.onload = () => {
+      this.props.getCartFromStorage(this.props)
     }
   }
 
@@ -92,7 +63,8 @@ const mapState = state => {
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
     isAdmin: !!state.user.isAdmin,
-    cart: state.cart
+    cart: state.cart,
+    user: state.user
   }
 }
 
@@ -101,8 +73,8 @@ const mapDispatch = dispatch => {
     loadInitialData() {
       dispatch(me())
     },
-    editCart(cart) {
-      dispatch(editCart(cart))
+    getCartFromStorage(props) {
+      dispatch(getCartFromStorage(props))
     }
   }
 }
