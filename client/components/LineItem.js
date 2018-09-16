@@ -52,7 +52,7 @@ class LineItem extends React.Component {
         <div className="product-name">
           <h3>{name}</h3>
         </div>
-        <div className="product-price">{price}</div>
+        <div className="product-price">{`$ ${price / 100}`}</div>
         <div>X</div>
         <select
           className="product-quantity"
@@ -66,7 +66,7 @@ class LineItem extends React.Component {
           ))}
         </select>
         <div className="product-total-price">
-          {(price * quantity).toFixed(2)}
+          {`$ ${price * quantity / 100}`}
         </div>
         <button type="button" onClick={this.handleDelete}>
           X
