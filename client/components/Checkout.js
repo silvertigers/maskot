@@ -1,3 +1,15 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {Field, reduxForm} from 'redux-form'
+import {StripeProvider, Elements} from 'react-stripe-elements'
+import CheckoutFrom from './CheckoutForm'
+
+const Checkout = () => {
+  return (
+    <StripeProvider apiKey="pk_test_psRrsym52IH8wxnCWh0h08Tj">
+      <Elements>
+        <CheckoutFrom />
+      </Elements>
+    </StripeProvider>
+  )
+}
+
+export default Checkout

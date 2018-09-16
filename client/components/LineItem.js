@@ -43,7 +43,7 @@ class LineItem extends React.Component {
     const {id, name, imageUrl, price} = this.props.product
     const {quantity} = this.props
     return (
-      <div className="line-item">
+      <li className="line-item">
         <Link to={`/products/${id}`}>
           <div className="product-image">
             <img src={imageUrl} />
@@ -71,7 +71,7 @@ class LineItem extends React.Component {
         <button type="button" onClick={this.handleDelete}>
           X
         </button>
-      </div>
+      </li>
     )
   }
 }
