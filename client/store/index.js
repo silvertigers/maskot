@@ -21,7 +21,7 @@ const reducer = combineReducers({
   category,
   order,
   orders,
-  session,
+  session
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

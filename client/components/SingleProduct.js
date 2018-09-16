@@ -20,21 +20,22 @@ class SingleProduct extends React.Component {
     this.props.getProduct(this.props.match.params.productId)
   }
   render() {
-    const {product} = this.props
+    const {imageUrl, name, description, reviews, price} = this.props.product
     return (
       <div>
         <div className="product-image">
-          <img src={`/${product.imageUrl}`} />
+          <img src={`/${imageUrl}`} />
         </div>
         <div className="product-details">
-          <h2>{product.name}</h2>
-          <p>{product.description}</p>
+          <h2>{name}</h2>
+          <p>{`$ ${price / 100}`}</p>
+          <p>{description}</p>
         </div>
-        <AddToCart product={product} />
-        {product.reviews && product.reviews[0] ? (
+        <AddToCart product={this.props.product} />
+        {reviews && reviews[0] ? (
           <div className="reviews">
             <h2>Reviews</h2>
-            {product.reviews.map(review => (
+            {reviews.map(review => (
               <SingleReview key={review.id} review={review} />
             ))}
           </div>
