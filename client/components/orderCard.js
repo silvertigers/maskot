@@ -5,7 +5,7 @@ import {AddToCart} from './index'
 const OrderCard = props => {
   return (
     <li>
-      <Link to={`./orders/${props.order.id}`}>
+      <Link to={`/orders/${props.order.id}`}>
         <h3>Order #{props.order.id}</h3>
       </Link>
       <h3>Date: {props.order.createdAt}</h3>
