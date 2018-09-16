@@ -59,7 +59,7 @@ export const getProducts = () => {
 
 export const productAdd = newProduct => async dispatch => {
   try {
-    const response = await axios.post('/api/products', newProduct);
+    const response = await axios.post('/api/admin/products', newProduct);
     const product = response.data;
     const action = addProduct(product);
     dispatch(action)
@@ -70,7 +70,7 @@ export const productAdd = newProduct => async dispatch => {
 
 export const productEdit = changedProduct => async dispatch => {
   try {
-    const response = await axios.put(`/api/products/${changedProduct.id}`, changedProduct);
+    const response = await axios.put(`/api/admin/products/${changedProduct.id}`, changedProduct);
     const product = response.data;
     const action = editProduct(product);
     dispatch(action)
@@ -81,7 +81,7 @@ export const productEdit = changedProduct => async dispatch => {
 
 export const productRemove = productId => async dispatch => {
   try {
-    await axios.delete(`/api/products/${productId}`)
+    await axios.delete(`/api/admin/products/${productId}`)
     const action = removeProduct(productId)
     dispatch(action)
   } catch (err) {

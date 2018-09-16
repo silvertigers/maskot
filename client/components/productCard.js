@@ -9,7 +9,7 @@ const ProductCard = props => {
         <img src={props.product.imageUrl} />
       </Link>
       <h3>{props.product.name}</h3>
-      <p>{props.product.price}</p>
+      <p>{`$ ${props.product.price / 100}`}</p>
       <AddToCart product={props.product} />
     </li>
   )

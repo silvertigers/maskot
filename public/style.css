@@ -19,3 +19,9 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.order_list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
