@@ -40,8 +40,10 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/home" component={UserHome} />
         <Route exact path="/products" component={Products} />
         <Route path="/products/:productId" component={SingleProduct} />
+<<<<<<< HEAD
         {isLoggedIn && (
           <Switch>
             <Route exact path="/users/:userId/orders" component={UserOrders} />
@@ -51,6 +53,14 @@ class Routes extends Component {
             (isAdmin && <Route path="/dashboard" component={AdminHome} />)}
             <Route path="/cart" component={Cart} />
             <Route path="/products/:productId" component={SingleProduct} />
+=======
+        <Route path="/cart" component={Cart} />
+        <Route path="/guest/checkout" component={Checkout} />
+        {isLoggedIn && (
+          <Switch>
+            {/* <Route path="/user/checkout" component={UserCheckout} /> */}
+            {isAdmin && <Route path="/dashboard" component={AdminHome} />}
+>>>>>>> feature-visitor-checkout-30
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

@@ -7,6 +7,7 @@ import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
 import history from '../history'
+require('jsdom-global')('', {url: 'https://localhost:8080'})
 
 const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
