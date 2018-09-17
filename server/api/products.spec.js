@@ -1,5 +1,4 @@
 /* global describe beforeEach it */
-
 const {expect} = require('chai')
 const request = require('supertest')
 
@@ -8,6 +7,8 @@ const app = require('../index')
 const Products = db.model('products')
 const Reviews = db.model('reviews')
 const User = db.model('user')
+const Catetory = db.model('category')
+
 
 describe('Products routes', () => {
   describe('GET /api/products', () => {
@@ -78,16 +79,19 @@ describe('Products routes', () => {
     })
   })
 
-  describe('/api/products/', () => {
-    it('Create /api/products', async () => {
+  describe('/api/admin/products/', () => {
+
+
+    it('Create /api/admin/products', async () => {
       const res = await request(app)
-        .post('/api/products')
+        .post('/api/admin/products')
         .send({
           name: 'fancy mask',
           description: 'you should buy this',
           price: 3.5,
           imageUrl: 'http://www.thisisdummy.com',
-          quantity: 10
+          quantity: 10,
+          categories: []
         })
         .expect(200)
 
@@ -96,28 +100,31 @@ describe('Products routes', () => {
     })
   })
 
-  describe('/api/products/:id', () => {
+  describe('/api/admin/products/:id', () => {
     let product
 
     beforeEach(async () => {
       product = await Products.create({
+        id: 1,
         name: 'fancy mask',
-        description: 'you should buy this',
+        description: 'first data',
         price: 3.5,
         imageUrl: 'http://www.thisisdummy.com',
-        quantity: 10
+        quantity: 10,
+        categories: []
       })
     })
 
-    it('Update /api/products', async () => {
+    it('Update /api/admin/products', async () => {
       const res = await request(app)
-        .put('/api/products/' + product.id)
+        .put('/api/admin/products/1')
         .send({
           name: 'fancy mask',
           description: 'you should buy this',
           price: 3.5,
           imageUrl: 'http://www.thisisdummy.com',
-          quantity: 10
+          quantity: 10,
+          categories: []
         })
         .expect(200)
 
@@ -127,7 +134,7 @@ describe('Products routes', () => {
     })
   })
 
-  describe('/api/products/:id', () => {
+  describe('/api/admin/products/:id', () => {
     let removedProduct
 
     beforeEach(async () => {
@@ -140,9 +147,9 @@ describe('Products routes', () => {
       })
     })
 
-    it('Delete /api/products', async () => {
+    it('Delete /api/admin/products', async () => {
       const res = await request(app).delete(
-        '/api/products/' + removedProduct.id
+        '/api/admin/products/' + removedProduct.id
       )
 
       expect(

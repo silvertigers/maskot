@@ -7,6 +7,7 @@ const ALL_USER = 'ALL_USER'
 const ADD_USER = 'ADD_USER'
 const TOGGLE_USER = 'TOGGLE_USER'
 const DELETE_USER = 'DELETE_USER'
+const TEMP_PASSWORD = 'TEMP_PASSWORD'
 
 /**
  * INITIAL STATE
@@ -38,6 +39,11 @@ const toggleAdmin = user => ({
 const removeUser = userId => ({
   type: DELETE_USER,
   userId: Number(userId),
+})
+
+const tempPassword = tempPW => ({
+  type: TEMP_PASSWORD,
+  tempPW
 })
 
 /**
@@ -87,6 +93,17 @@ export const userRemove = userId => async dispatch => {
   }
 }
 
+export const userTempPassword = user => async dispatch => {
+  try {
+    const userId = user.id
+    const { data } = await axios.put(`/api/admin/users/${userId}`, user)
+    const action = tempPassword(data)
+    dispatch(action)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -108,6 +125,8 @@ export default function(state = initialState, action) {
       return {...state, users: [...state.users].filter(user => {
         return user.id !== action.userId
       })}
+    case TEMP_PASSWORD:
+      return {...state, users: state.users}
     default:
       return state
   }

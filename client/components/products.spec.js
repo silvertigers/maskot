@@ -2,21 +2,28 @@
 
 import {expect} from 'chai'
 import React from 'react'
+import {Provider} from 'react-redux'
 import enzyme, {shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import {Products} from './products'
+import Products from './Products'
+import store from '../store'
 
 const adapter = new Adapter()
 enzyme.configure({adapter})
 
 describe('Products', () => {
   let products
+  let productComp
 
   beforeEach(() => {
-    products = shallow(<Products title="hello" />)
+    products = shallow(
+    <Provider store={store}>
+      <Products />
+    </Provider>)
+  productComp = products.instance()
   })
 
   it('renders the product title in an h3', () => {
-    expect(products.find('h3').text()).to.be.equal('hello')
+    expect(productComp).to.exist;
   })
 })

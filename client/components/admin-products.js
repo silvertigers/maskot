@@ -10,9 +10,11 @@ class AdminProducts extends Component {
     this.state = {
       isAdd: false,
       isEdit: 0,
+      test: 'test'
     }
     this.add = this.add.bind(this)
     this.edit = this.edit.bind(this)
+    this.password = this.password.bind(this)
   }
 
   async componentDidMount() {
@@ -46,6 +48,18 @@ class AdminProducts extends Component {
     })
   }
 
+  password() {
+    const temp = this.state.test
+    this.setState({
+      test: "new password time"
+    })
+    setTimeout(() => {
+      this.setState({
+        test: temp
+      })
+    },5000)
+  }
+
   render() {
     const { products } = this.props.products
 
@@ -56,8 +70,10 @@ class AdminProducts extends Component {
         <span onClick={this.add}>ADD</span>
         {
           this.state.isAdd ?
-          <NewProduct add={this.add}/> : <h2>click add button if you want to add a new product</h2>
+          <NewProduct add={this.add}/> : <h3>click add button if you want to add a new product</h3>
         }
+        {this.state.test}
+        <button onClick={this.password}>password reset</button>
         <ul>
         {
           products[0] ?
@@ -76,7 +92,7 @@ class AdminProducts extends Component {
               </li>
             )
           })
-          : <h2>None of products are available at this time</h2>
+          : <h3>None of products are available at this time</h3>
         }
         </ul>
         </div>

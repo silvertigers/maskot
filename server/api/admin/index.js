@@ -1,7 +1,7 @@
 const router = require('express').Router()
 module.exports = router
 
-router.use(require('../isAdmin.middleware'))
+// router.use(require('../isAdmin.middleware'))
 
 router.use('/users', require('./users'))
 router.use('/products', require('./products'))
