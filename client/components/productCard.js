@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {AddToCart} from './index'
 
 const ProductCard = props => {
   return (
@@ -9,6 +10,7 @@ const ProductCard = props => {
       </Link>
       <h3>{props.product.name}</h3>
       <p>{props.product.description}</p>
+      <AddToCart product={props.product} />
     </li>
   )
 }

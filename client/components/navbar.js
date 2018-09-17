@@ -39,10 +39,10 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin, userId}) => (
     {/* <nav>
       <div>
         <Link to="/home">Home</Link>
+        {isAdmin && <Link to="/dashboard">DashBoard</Link>}
         <Link to="/products">Products</Link>
         <Link to="/cart">Cart</Link>
-        <Link to={`/users/${userId}/orders`}>Past Orders</Link>
-        {isAdmin && <Link to="/dashboard">DashBoard</Link>}
+        {isLoggedIn && <Link to={`/users/${userId}/orders`}>Past Orders</Link>}
         {isLoggedIn ? (
           <a href="#" onClick={handleClick}>
             Logout
