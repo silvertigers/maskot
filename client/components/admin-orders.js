@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import { gotOrder, editedOrder } from '../store/order'
 
 class AdminOrders extends Component {
@@ -85,7 +86,9 @@ class AdminOrders extends Component {
                 if (order.status === this.state.filtered || !this.state.filtered) {
                   return (
                     <li key={order.id}>
+                      <Link to={`/users/${order.user.id}/orders/${order.id}`}>
                       <h2>{order.user ? order.user.email : order.email}</h2>
+                      </Link>
                       <h2>status: {order.status}</h2>
                       <select name={order.id} onChange={this.changeOrderStatus} value={order.status}>
                         <option value="placed">Placed</option>

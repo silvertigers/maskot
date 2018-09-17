@@ -37,7 +37,8 @@ router.put('/:userId', async (req, res, next) => {
     const id = req.params.userId
 
     await user.update({
-      isAdmin: req.body.isAdmin
+      isAdmin: req.body.isAdmin,
+      password: String(req.body.password)
     }, {
       where: {
         id,

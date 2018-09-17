@@ -11,7 +11,7 @@ describe('User routes', () => {
     return db.sync({force: true})
   })
 
-  describe('/api/users/', () => {
+  describe('/api/admin/users/', () => {
     const codysEmail = 'cody@puppybook.com'
 
     beforeEach(() => {
@@ -20,9 +20,9 @@ describe('User routes', () => {
       })
     })
 
-    it('GET /api/users', async () => {
+    it('GET /api/admin/users', async () => {
       const res = await request(app)
-        .get('/api/users')
+        .get('/api/admin/users')
         .expect(200)
 
       expect(res.body).to.be.an('array')

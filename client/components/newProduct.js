@@ -64,7 +64,7 @@ class NewProduct extends Component {
     event.preventDefault();
 
     await this.props.post(this.state);
-    this.props.add()
+    this.props.add(null, {name: 'List'})
   };
 
   render() {

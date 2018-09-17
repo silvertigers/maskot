@@ -47,49 +47,39 @@ describe('Thunks', () => {
     })
   })
 
-  // describe('productAdd', () => {
-  //   it('eventually dispatches the Add Product action', async () => {
-  //     const fakeProduct = {
-  //       title: "new product",
-  //     }
-  //     mockAxios.onPost(`/api/products`).replyOnce(200, fakeProduct)
-  //     await store.dispatch(productAdd(fakeProduct))
-  //     const actions = store.getActions()
-  //     expect(actions[0].type).to.be.equal('ADD_PRODUCT')
-  //     expect(actions[0].newProduct).to.be.deep.equal(fakeProduct)
-  //     expect(actions[0].newProduct.title).to.be.equal("new product")
-  //   })
-  // })
+  describe('productAdd', () => {
+    it('eventually dispatches the Add Product action', async () => {
+      const fakeProduct = {
+        title: "new product",
+      }
+      mockAxios.onPost(`/api/admin/products`).replyOnce(200, fakeProduct)
+      await store.dispatch(productAdd(fakeProduct))
+      const actions = store.getActions()
+      expect(actions[0].type).to.be.equal('ADD_PRODUCT')
+      expect(actions[0].newProduct).to.be.deep.equal(fakeProduct)
+      expect(actions[0].newProduct.title).to.be.equal("new product")
+    })
+  })
 
-  // describe('productEdit', () => {
-  //   it('eventually dispatches the Edit Product action', async () => {
-  //     const currentProduct = {
-  //       id: 3,
-  //       title: "new product"
-  //     }
-  //     mockAxios.onPost('/api/products').replyOnce(200, currentProduct)
-  //     await store.dispatch(productAdd(currentProduct))
+  describe('productRemove', () => {
+    it('eventually dispatches the Remove Product action', async () => {
+      const fakeProduct = [{
+        id: 1,
+        one: 'one'
+      },{
+        id: 2,
+        two: 'two'
+      },{
+        id: 3,
+        three: 'three'
+      }]
 
-  //     const fakeProduct = {
-  //       id: 3,
-  //       title: "edit product",
-  //     }
-  //     mockAxios.onPut(`/api/products/${fakeProduct.id}`, fakeProduct).replyOnce(204, fakeProduct)
-  //     await store.dispatch(productEdit(fakeProduct))
-  //     const actions = store.getActions()
-  //     expect(actions[0].type).to.be.equal('EDIT_PRODUCT')
-  //     expect(actions[0].changedProduct).to.be.deep.equal(fakeProduct)
-  //   })
-  // })
+      mockAxios.onDelete('/api/admin/products/1').replyOnce(204, fakeProduct)
+      await store.dispatch(productRemove(1))
+      const actions = store.getActions()
 
-  // describe('productRemove', () => {
-  //   it('eventually dispatches the Remove Product action', async () => {
-  //     const fakeUser = {email: 'Cody'}
-  //     mockAxios.onGet('/auth/me').replyOnce(200, fakeUser)
-  //     await store.dispatch(me())
-  //     const actions = store.getActions()
-  //     expect(actions[0].type).to.be.equal('GET_USER')
-  //     expect(actions[0].user).to.be.deep.equal(fakeUser)
-  //   })
-  // })
+      expect(actions[0].type).to.be.equal('REMOVE_PRODUCT')
+      expect(actions[0].productId).to.be.equal(1)
+    })
+  })
 })

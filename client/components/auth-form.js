@@ -9,26 +9,56 @@ const AuthForm = props => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
+      <div className="ui placeholder segment">
+        <div className="ui two column very relaxed stackable grid">
+          <div className="column">
+          <div id="error-message">
+            {error && error.response && <div> {"*"}{error.response.data} </div>}
+          </div>
+            <div className="ui form">
+              <form onSubmit={handleSubmit} name={name}>
+              <div className="field">
+                <label>Username</label>
+                <div className="ui left icon input">
+                  <input type="text" name="email" placeholder="Username"/>
+                  <i className="user icon"></i>
+                </div>
+              </div>
+              <div className="field">
+                <label>Password</label>
+                <div className="ui left icon input">
+                  <input type="password" name="password"/>
+                  <i className="lock icon"></i>
+                </div>
+              </div>
+              <br/>
+              <button className="ui blue submit button" id="login-button" type="submit">Login</button>
+              </form>
+            </div>
+          </div>
+          <div className="middle aligned column">
+            <div className="auth-button">
+              <a href="/auth/google">
+                <button className="ui google plus button">
+                  <i className="google plus icon"></i>
+                  {displayName} with Google
+                </button>
+              </a>
+            </div>
+            <div className="auth-button">
+              <a href="/auth/facebook">
+                <button className="ui facebook button">
+                  <i className="facebook icon"></i>
+                  {displayName} with Facebook
+                </button>
+              </a>
+            </div>
+          </div>
         </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
+        <div className="ui vertical divider">
+          Or
         </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
-      <a href="/auth/facebook">{displayName} with Facebook</a>
+      </div>
     </div>
   )
 }
@@ -86,5 +116,5 @@ AuthForm.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object
+  error: PropTypes.object,
 }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
-import { gotUser, userRemove, changeAuthority } from '../store/users';
+import { gotUser, userRemove, changeAuthority, userTempPassword } from '../store/users';
 import {me} from '../store'
 import NewUser from "./newUser";
 
@@ -22,6 +22,16 @@ class AdminUsers extends Component {
   async deleteUser(event) {
     const userId = event.target.value;
     await this.props.userRemove(userId)
+  }
+
+  async tempPassword(event) {
+    console.log(event.target.value)
+
+    const tempData = {
+      id: event.target.value,
+      password: '777'
+    }
+    await this.props.createTempPassword(tempData)
   }
 
   async admin(event) {
@@ -74,6 +84,7 @@ class AdminUsers extends Component {
                         </select>
                       </p>
                       <button onClick={event => this.deleteUser(event)} value={user.id}>REMOVE</button>
+                      <button value={user.id} onClick={event => this.tempPassword(event)}>TEMP PASSWORD</button>
                     </div>
                   }
                 </li>
@@ -100,6 +111,7 @@ const mapDispatchToProps = dispatch => {
     gotUser: () => dispatch(gotUser()),
     userRemove: userId => dispatch(userRemove(userId)),
     userAuthority: user => dispatch(changeAuthority(user)),
+    createTempPassword: user => dispatch(userTempPassword(user)),
     loadInitialData: () => dispatch(me())
   }
 }

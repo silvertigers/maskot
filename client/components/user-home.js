@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import { Header } from 'semantic-ui-react'
 
 /**
  * COMPONENT
@@ -10,7 +11,7 @@ export const UserHome = props => {
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <Header as='h1' color='olive'>Welcome, {email}</Header>
     </div>
   )
 }
