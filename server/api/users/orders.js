@@ -1,8 +1,11 @@
 const router = require('express').Router()
 const Orders = require('../../db/models/order')
 const Products = require('../../db/models/products')
+const {orderedProducts} = require('../../db/models')
 
 module.exports = router
+
+// /api/users/orders
 
 router.get('/', async (req, res, next) => {
   try {
@@ -37,12 +40,22 @@ router.get('/:orderId', async (req, res, next) => {
     next(err)
   }
 })
-
 router.post('/', async (req, res, next) => {
-  const {status, email, userId} = req.body
+  const {status, email, userId} = req.body.order
+  const {cart} = req.body
   try {
     const order = await Orders.create({status, email, userId})
-    res.json(order)
+    const products = await Promise.all(
+      cart.map(item => {
+        return orderedProducts.create({
+          productId: item.product.id,
+          price: item.product.price,
+          quantity: item.quantity,
+          orderId: order.id
+        })
+      })
+    )
+    res.status(201).json({order, products})
   } catch (err) {
     next(err)
   }

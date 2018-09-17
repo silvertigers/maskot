@@ -12,7 +12,8 @@ import {
   Cart,
   UserOrders,
   SingleOrder,
-  Checkout
+  Checkout,
+  Confirmation
 } from './components'
 import {me} from './store'
 import {setCartToStorage, getCartFromStorage} from './store/cart'
@@ -43,17 +44,18 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/home" component={UserHome} />
         <Route exact path="/products" component={Products} />
+        <Route path="/confirmation" component={Confirmation} />
         <Route path="/products/:productId" component={SingleProduct} />
+        <Route path="/checkout" component={Checkout} />
         <Route path="/cart" component={Cart} />
-        <Route path="/guest/checkout" component={Checkout} />
         {isLoggedIn && (
           <Switch>
-            {/* <Route path="/user/checkout" component={UserCheckout} /> */}
             <Route exact path="/users/:userId/orders" component={UserOrders} />
             <Route
               path="/users/:userId/orders/:orderId"
               component={SingleOrder}
             />
+            <Route path="/home" component={UserHome} />
             {isAdmin && <Route path="/dashboard" component={AdminHome} />}
           </Switch>
         )}

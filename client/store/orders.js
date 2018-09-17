@@ -1,5 +1,4 @@
 import axios from 'axios'
-// import orderedProducts from '../../server/db'
 
 /**
  * ACTION TYPES
@@ -54,8 +53,7 @@ export const getOrder = (userId, orderId) => {
 
 export const postUserOrder = (order, cart) => {
   return async dispatch => {
-    const {data} = await axios.post(`/api/users/orders`, order)
-    await Promise.all(cart.map(item => data.addProducts(item)))
+    const {data} = await axios.post(`/api/users/orders`, {order, cart})
     const action = gotOrder(data)
     dispatch(action)
   }
@@ -63,18 +61,8 @@ export const postUserOrder = (order, cart) => {
 
 export const postGuestOrder = (order, cart) => {
   return async dispatch => {
-    const {data} = await axios.post(`/api/guests/orders`, order)
+    const {data} = await axios.post(`/api/guests/orders`, {order, cart})
     console.log('DATA SHOULD BE ORDER INSTANCE', data)
-    // await Promise.all(
-    //   cart.map(item => {
-    //     return orderedProducts.create({
-    //       productId: item.product.id,
-    //       price: item.product.price,
-    //       quantity: item.quantity,
-    //       orderId: data.id
-    //     })
-    //   })
-    // )
     const action = gotOrder(data)
     dispatch(action)
   }

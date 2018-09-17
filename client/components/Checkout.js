@@ -43,9 +43,8 @@ class Checkout extends React.Component {
             data.status.source.name
           }`
         )
-        this.saveOrder(data.status.source.name)
-        const
-        // this.props.history.push()
+        await this.saveOrder(data.status.source.name)
+        this.props.history.push(`/confirmation`)
       } catch (err) {
         console.error('Payment failed!')
       }
@@ -59,6 +58,7 @@ class Checkout extends React.Component {
       <div className="checkout">
         <CheckoutForm />
         <StripeCheckout
+          email={this.props.user.email || null}
           name="Maskot Co."
           description={description}
           token={this.onToken(amount, description)}

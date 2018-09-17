@@ -12,7 +12,6 @@ const quantityTotal = cart =>
   cart.reduce((total, item) => total + item.quantity, 0)
 
 export const Cart = props => {
-  const method = props.user.id ? 'user' : 'guest'
   return props.cart[0] ? (
     <div id="cart">
       <h1>Shopping Cart</h1>
@@ -25,7 +24,7 @@ export const Cart = props => {
         <p>Total</p>
       </div>
       <div className="checkout-feature">
-        <Link to={`/${method}/checkout`}>
+        <Link to="/checkout">
           <button type="button" className="checkout-btn">
             Checkout
           </button>
