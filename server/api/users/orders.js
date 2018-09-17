@@ -4,7 +4,7 @@ const Products = require('../../db/models/products')
 
 module.exports = router
 
-router.get('/', async(req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const orders = await Orders.findAll({
       where: {
@@ -20,7 +20,7 @@ router.get('/', async(req, res, next) => {
   }
 })
 
-router.get('/:orderId', async(req, res, next) => {
+router.get('/:orderId', async (req, res, next) => {
   try {
     req.params.userId = req.userId
     const order = await Orders.findOne({
@@ -33,6 +33,16 @@ router.get('/:orderId', async(req, res, next) => {
       }
     })
     res.status(200).json(order)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/', async (req, res, next) => {
+  const {status, email, userId} = req.body
+  try {
+    const order = await Orders.create({status, email, userId})
+    res.json(order)
   } catch (err) {
     next(err)
   }

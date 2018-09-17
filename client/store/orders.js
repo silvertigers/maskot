@@ -1,4 +1,5 @@
 import axios from 'axios'
+// import orderedProducts from '../../server/db'
 
 /**
  * ACTION TYPES
@@ -37,7 +38,7 @@ const gotOrder = userOrder => {
  * THUNK CREATORS
  */
 
-export const getOrders = (userId) => {
+export const getOrders = userId => {
   return async dispatch => {
     const {data} = await axios.get(`/api/users/${userId}/orders`)
     dispatch(gotOrders(data))
@@ -51,6 +52,34 @@ export const getOrder = (userId, orderId) => {
   }
 }
 
+export const postUserOrder = (order, cart) => {
+  return async dispatch => {
+    const {data} = await axios.post(`/api/users/orders`, order)
+    await Promise.all(cart.map(item => data.addProducts(item)))
+    const action = gotOrder(data)
+    dispatch(action)
+  }
+}
+
+export const postGuestOrder = (order, cart) => {
+  return async dispatch => {
+    const {data} = await axios.post(`/api/guests/orders`, order)
+    console.log('DATA SHOULD BE ORDER INSTANCE', data)
+    // await Promise.all(
+    //   cart.map(item => {
+    //     return orderedProducts.create({
+    //       productId: item.product.id,
+    //       price: item.product.price,
+    //       quantity: item.quantity,
+    //       orderId: data.id
+    //     })
+    //   })
+    // )
+    const action = gotOrder(data)
+    dispatch(action)
+  }
+}
+
 /**
  * REDUCER
  */
@@ -58,9 +87,9 @@ export const getOrder = (userId, orderId) => {
 const ordersReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_ORDERS:
-      return { ...state, userOrders: action.userOrders }
+      return {...state, userOrders: action.userOrders}
     case GOT_ORDER:
-      return { ...state, userOrder: action.userOrder }
+      return {...state, userOrder: action.userOrder}
     default:
       return state
   }

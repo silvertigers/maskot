@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-const GET_ORDER = "GET_ORDER"
-const EDIT_ORDER = "EDIT_ORDER"
+const GET_ORDER = 'GET_ORDER'
+const EDIT_ORDER = 'EDIT_ORDER'
 
 const initialState = {
   orders: [],
-  order: {},
+  order: {}
 }
 
 const getOrder = orders => ({
@@ -24,7 +24,7 @@ export const gotOrder = () => async dispatch => {
     const allOrder = response.data
     const action = getOrder(allOrder)
     dispatch(action)
-  } catch(err) {
+  } catch (err) {
     console.error(err)
   }
 }
@@ -36,7 +36,7 @@ export const editedOrder = order => async dispatch => {
     const result = response.data
     const action = editOrder(result)
     dispatch(action)
-  } catch(err) {
+  } catch (err) {
     console.error(err)
   }
 }
@@ -44,11 +44,14 @@ export const editedOrder = order => async dispatch => {
 const ordersReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ORDER:
-      return { ...state, orders: action.orders.sort((a, b) => a.id > b.id)}
+      return {...state, orders: action.orders.sort((a, b) => a.id > b.id)}
     case EDIT_ORDER:
-      return {...state, orders: [...state.orders].map(order => {
-        return (order.id === action.order.id ? action.order : order)
-      })}
+      return {
+        ...state,
+        orders: [...state.orders].map(order => {
+          return order.id === action.order.id ? action.order : order
+        })
+      }
     default:
       return state
   }

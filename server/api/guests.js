@@ -1,9 +1,15 @@
 const router = require('express').Router()
-const db = require('../db')
+const Orders = require('../db/models/order')
 module.exports = router
 
-router.use('/charge', require('./charge'))
-
-router.get('/', (req, res, next) => {
-  res.json(req.session.id)
+// /api/guests/orders
+router.post('/orders', async (req, res, next) => {
+  const sessionId = req.session.id
+  const {status, email} = req.body
+  try {
+    const order = await Orders.create({status, email, sessionId})
+    res.status(201).json(order)
+  } catch (err) {
+    next(err)
+  }
 })
