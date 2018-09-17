@@ -11,9 +11,11 @@ describe('Dashboard Home for Admin', () => {
   let adminHome
 
   beforeEach(() => {
-    adminHome = shallow(<AdminHome/>)
+    adminHome = shallow(<AdminHome />)
   })
   it('renders the dashboard menu in an h1', () => {
-    expect(adminHome.find('h1').text()).to.be.equal('This is a Dashboard page for Admin')
+    expect(adminHome.find('h1').text()).to.be.equal(
+      'This is a Dashboard page for Admin'
+    )
   })
 })

@@ -1,9 +1,8 @@
 import axios from 'axios'
 
-const GET_ORDER = "GET_ORDER"
-const EDIT_ORDER = "EDIT_ORDER"
-const SINGLE_ORDER = "SINGLE_ORDER"
+const GET_ORDER = 'GET_ORDER'
 const EDIT_ORDER = 'EDIT_ORDER'
+const SINGLE_ORDER = 'SINGLE_ORDER'
 
 const initialState = {
   orders: [],
@@ -55,7 +54,7 @@ export const getOneOrder = orderId => async dispatch => {
     const oneOrder = response.data
     const action = singleOrder(oneOrder)
     dispatch(action)
-  } catch(err) {
+  } catch (err) {
     console.error(err)
   }
 }
@@ -65,9 +64,13 @@ const ordersReducer = (state = initialState, action) => {
     case GET_ORDER:
       return {...state, orders: action.orders.sort((a, b) => a.id > b.id)}
     case EDIT_ORDER:
-      return {...state, orders: [...state.orders].map(order => {
-        return (order.id === action.order.id ? action.order : order)
-      }), order: action.order}
+      return {
+        ...state,
+        orders: [...state.orders].map(order => {
+          return order.id === action.order.id ? action.order : order
+        }),
+        order: action.order
+      }
     case SINGLE_ORDER:
       return {...state, order: action.order}
     default:

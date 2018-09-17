@@ -2,7 +2,6 @@ import React from 'react'
 import {getProducts} from '../store/products'
 import {connect} from 'react-redux'
 import ProductCard from './productCard'
-import {AddToCart} from './index'
 import {getCategories, selectCategory} from '../store/category'
 
 const mapStateToProps = state => {
