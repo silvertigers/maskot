@@ -93,6 +93,11 @@ async function seed() {
       status: 'completed',
       email: 'platinum@myfinal.com',
       userId: 2
+    }),
+    order.create({
+      status: 'placed',
+      email: 'silver@myfirst.com',
+      userId: 2
     })
   ])
 
@@ -120,6 +125,12 @@ async function seed() {
       price: 404,
       productId: 2,
       orderId: 4
+    }),
+    orderedProducts.create({
+      quantity: 10,
+      price: 4040,
+      productId: 2,
+      orderId: 5
     })
   ])
 

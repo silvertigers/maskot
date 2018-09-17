@@ -20,10 +20,9 @@ describe('User routes', () => {
       })
     })
 
-    // IT SHOULD BE FIXED, add user information into the test
     it('GET /api/admin/users', async () => {
       const res = await request(app)
-        .get('/api/users')
+        .get('/api/admin/users')
         .expect(200)
 
       expect(res.body).to.be.an('array')

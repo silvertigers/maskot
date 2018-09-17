@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const GET_ORDER = "GET_ORDER"
 const EDIT_ORDER = "EDIT_ORDER"
+const SINGLE_ORDER = "SINGLE_ORDER"
 
 const initialState = {
   orders: [],
@@ -15,6 +16,11 @@ const getOrder = orders => ({
 
 const editOrder = order => ({
   type: EDIT_ORDER,
+  order
+})
+
+const singleOrder = order => ({
+  type: SINGLE_ORDER,
   order
 })
 
@@ -41,6 +47,18 @@ export const editedOrder = order => async dispatch => {
   }
 }
 
+export const getOneOrder = orderId => async dispatch => {
+  try {
+    const id = orderId
+    const response = await axios.get(`/api/admin/orders/${id}`)
+    const oneOrder = response.data
+    const action = singleOrder(oneOrder)
+    dispatch(action)
+  } catch(err) {
+    console.error(err)
+  }
+}
+
 const ordersReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ORDER:
@@ -48,7 +66,9 @@ const ordersReducer = (state = initialState, action) => {
     case EDIT_ORDER:
       return {...state, orders: [...state.orders].map(order => {
         return (order.id === action.order.id ? action.order : order)
-      })}
+      }), order: action.order}
+    case SINGLE_ORDER:
+      return {...state, order: action.order}
     default:
       return state
   }
