@@ -3,7 +3,6 @@ import axios from 'axios'
 const GET_ORDER = "GET_ORDER"
 const EDIT_ORDER = "EDIT_ORDER"
 const SINGLE_ORDER = "SINGLE_ORDER"
-const EDIT_ORDER = 'EDIT_ORDER'
 
 const initialState = {
   orders: [],
