@@ -11,7 +11,8 @@ import {
   SingleProduct,
   Cart,
   UserOrders,
-  SingleOrder
+  SingleOrder,
+  Checkout
 } from './components'
 import {me} from './store'
 import {setCartToStorage, getCartFromStorage} from './store/cart'
@@ -43,24 +44,17 @@ class Routes extends Component {
         <Route path="/home" component={UserHome} />
         <Route exact path="/products" component={Products} />
         <Route path="/products/:productId" component={SingleProduct} />
-<<<<<<< HEAD
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/cart" component={Cart} />
         {isLoggedIn && (
           <Switch>
             <Route exact path="/users/:userId/orders" component={UserOrders} />
-            <Route path="/users/:userId/orders/:orderId" component={SingleOrder} />
+            <Route
+              path="/users/:userId/orders/:orderId"
+              component={SingleOrder}
+            />
             <Route path="/home" component={UserHome} />
-            {isLoggedIn &&
-            (isAdmin && <Route path="/dashboard" component={AdminHome} />)}
-            <Route path="/cart" component={Cart} />
-            <Route path="/products/:productId" component={SingleProduct} />
-=======
-        <Route path="/cart" component={Cart} />
-        <Route path="/guest/checkout" component={Checkout} />
-        {isLoggedIn && (
-          <Switch>
-            {/* <Route path="/user/checkout" component={UserCheckout} /> */}
             {isAdmin && <Route path="/dashboard" component={AdminHome} />}
->>>>>>> feature-visitor-checkout-30
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
