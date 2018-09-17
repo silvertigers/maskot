@@ -62,7 +62,6 @@ export const postUserOrder = (order, cart) => {
 export const postGuestOrder = (order, cart) => {
   return async dispatch => {
     const {data} = await axios.post(`/api/guests/orders`, {order, cart})
-    console.log('DATA SHOULD BE ORDER INSTANCE', data)
     const action = gotOrder(data)
     dispatch(action)
   }

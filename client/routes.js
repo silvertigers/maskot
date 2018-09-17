@@ -35,7 +35,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn, isAdmin} = this.props
+    const {isLoggedIn, isAdmin, cart} = this.props
 
     return (
       <Switch>
@@ -44,7 +44,10 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/home" component={UserHome} />
         <Route exact path="/products" component={Products} />
-        <Route path="/confirmation" component={Confirmation} />
+        <Route
+          path="/confirmation"
+          render={() => <Confirmation cart={cart} />}
+        />
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/checkout" component={Checkout} />
         <Route path="/cart" component={Cart} />

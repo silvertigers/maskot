@@ -20,7 +20,7 @@ export const Cart = props => {
         {props.cart.map(item => <LineItem key={item.product.id} {...item} />)}
       </ul>
       <div className="order-total">
-        <h2>{`$ ${orderTotal(props.cart)}`}</h2>
+        <h2>{`$ ${orderTotal(props.cart).toFixed(2)}`}</h2>
         <p>Total</p>
       </div>
       <div className="checkout-feature">
