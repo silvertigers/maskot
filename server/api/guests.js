@@ -11,7 +11,7 @@ router.post('/orders', async (req, res, next) => {
   const {cart} = req.body
   try {
     const order = await Orders.create({status, email, sessionId})
-    const products = await Promise.all(
+    await Promise.all(
       cart.map(item => {
         return orderedProducts.create({
           productId: item.product.id,
@@ -21,7 +21,7 @@ router.post('/orders', async (req, res, next) => {
         })
       })
     )
-    res.status(201).json({order, products})
+    res.status(201).json(order)
   } catch (err) {
     next(err)
   }
