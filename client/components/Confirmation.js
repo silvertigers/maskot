@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import OrderSummaryLineItem from './OrderSummaryLineItem'
-import {emptyCart, setCartToStorage} from '../store/cart'
+import {emptyCart} from '../store/cart'
 
 class Confirmation extends React.Component {
   componentDidMount() {

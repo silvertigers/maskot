@@ -14,9 +14,7 @@ const createNumberList = number => {
 class LineItem extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      quantity: this.props.quantity
-    }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
   }
