@@ -11,7 +11,9 @@ import {
   SingleProduct,
   Cart,
   UserOrders,
-  SingleOrder
+  SingleOrder,
+  Checkout,
+  Confirmation
 } from './components'
 import {me} from './store'
 import {setCartToStorage, getCartFromStorage} from './store/cart'
@@ -40,17 +42,21 @@ class Routes extends Component {
         {/* Routes placed here are available to all visitors */}
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
+        <Route path="/home" component={UserHome} />
         <Route exact path="/products" component={Products} />
+        <Route path="/confirmation" component={Confirmation} />
         <Route path="/products/:productId" component={SingleProduct} />
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/cart" component={Cart} />
         {isLoggedIn && (
           <Switch>
             <Route exact path="/users/:userId/orders" component={UserOrders} />
-            <Route path="/users/:userId/orders/:orderId" component={SingleOrder} />
+            <Route
+              path="/users/:userId/orders/:orderId"
+              component={SingleOrder}
+            />
             <Route path="/home" component={UserHome} />
-            {isLoggedIn &&
-            (isAdmin && <Route path="/dashboard" component={AdminHome} />)}
-            <Route path="/cart" component={Cart} />
-            <Route path="/products/:productId" component={SingleProduct} />
+            {isAdmin && <Route path="/dashboard" component={AdminHome} />}
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

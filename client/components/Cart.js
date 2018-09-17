@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import LineItem from './LineItem'
 
 const orderTotal = cart =>
@@ -15,22 +16,19 @@ export const Cart = props => {
     <div id="cart">
       <h1>Shopping Cart</h1>
       <h3>Items ({quantityTotal(props.cart)})</h3>
-      <div className="line-items">
+      <ul className="line-items">
         {props.cart.map(item => <LineItem key={item.product.id} {...item} />)}
-      </div>
+      </ul>
       <div className="order-total">
         <h2>{`$ ${orderTotal(props.cart)}`}</h2>
         <p>Total</p>
       </div>
       <div className="checkout-feature">
-        <button type="button" className="user-checkout">
-          Checkout
-        </button>
-        <small>You will be prompted to log in</small>
-        <div>OR</div>
-        <button type="button" className="guest-checkout">
-          Guest Checkout
-        </button>
+        <Link to="/checkout">
+          <button type="button" className="checkout-btn">
+            Checkout
+          </button>
+        </Link>
       </div>
     </div>
   ) : (
@@ -38,6 +36,6 @@ export const Cart = props => {
   )
 }
 
-const mapToStateProps = state => ({cart: state.cart})
+const mapToStateProps = state => ({cart: state.cart, user: state.user})
 
 export default connect(mapToStateProps)(Cart)

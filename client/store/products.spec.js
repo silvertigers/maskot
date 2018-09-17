@@ -7,7 +7,7 @@ import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
 import {productAdd, productEdit, productRemove} from './products'
 import history from '../history'
-import { getProducts, gotProducts } from './products'
+import {getProducts, gotProducts} from './products'
 
 const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
@@ -47,19 +47,19 @@ describe('Thunks', () => {
     })
   })
 
-  describe('productAdd', () => {
-    it('eventually dispatches the Add Product action', async () => {
-      const fakeProduct = {
-        title: "new product",
-      }
-      mockAxios.onPost(`/api/products`).replyOnce(200, fakeProduct)
-      await store.dispatch(productAdd(fakeProduct))
-      const actions = store.getActions()
-      expect(actions[0].type).to.be.equal('ADD_PRODUCT')
-      expect(actions[0].newProduct).to.be.deep.equal(fakeProduct)
-      expect(actions[0].newProduct.title).to.be.equal("new product")
-    })
-  })
+  // describe('productAdd', () => {
+  //   it('eventually dispatches the Add Product action', async () => {
+  //     const fakeProduct = {
+  //       title: "new product",
+  //     }
+  //     mockAxios.onPost(`/api/products`).replyOnce(200, fakeProduct)
+  //     await store.dispatch(productAdd(fakeProduct))
+  //     const actions = store.getActions()
+  //     expect(actions[0].type).to.be.equal('ADD_PRODUCT')
+  //     expect(actions[0].newProduct).to.be.deep.equal(fakeProduct)
+  //     expect(actions[0].newProduct.title).to.be.equal("new product")
+  //   })
+  // })
 
   // describe('productEdit', () => {
   //   it('eventually dispatches the Edit Product action', async () => {

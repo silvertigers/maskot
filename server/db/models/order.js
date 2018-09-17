@@ -17,7 +17,10 @@ module.exports = db.define('order', {
       isEmail: true
     }
   },
-  sessionId: {
+  userId: {
     type: Sequelize.INTEGER
+  },
+  sessionId: {
+    type: Sequelize.STRING
   }
 })
