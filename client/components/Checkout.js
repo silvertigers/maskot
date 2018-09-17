@@ -4,6 +4,7 @@ import CheckoutForm from './CheckoutForm'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {postGuestOrder, postUserOrder} from '../store/orders'
+import {emptyCart} from '../store/cart'
 
 const orderTotal = cart => {
   return cart.reduce(
@@ -44,6 +45,7 @@ class Checkout extends React.Component {
           }`
         )
         await this.saveOrder(data.status.source.name)
+        this.props.emptyCart()
         this.props.history.push(`/confirmation`)
       } catch (err) {
         console.error('Payment failed!')
@@ -74,6 +76,7 @@ class Checkout extends React.Component {
 const mapStateToProps = state => ({user: state.user, cart: state.cart})
 const mapDispatchToProps = dispatch => ({
   postUserOrder: (order, cart) => dispatch(postUserOrder(order, cart)),
-  postGuestOrder: (order, cart) => dispatch(postGuestOrder(order, cart))
+  postGuestOrder: (order, cart) => dispatch(postGuestOrder(order, cart)),
+  emptyCart: () => dispatch(emptyCart())
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
