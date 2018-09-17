@@ -1,11 +1,16 @@
 import axios from 'axios'
 import history from '../history'
+import store from './index'
+import {getSession} from './session'
+import {removeProduct} from './product'
+import {emptyCart, setCartToStorage} from './cart'
 
 /**
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER'
-// const REMOVE_USER = 'REMOVE_USER'
+const REMOVE_USER = 'REMOVE_USER'
+
 export const LOG_OUT = 'LOG_OUT'
 
 /**
@@ -17,16 +22,19 @@ const defaultUser = {}
  * ACTION CREATORS
  */
 const getUser = user => ({type: GET_USER, user})
-// const removeUser = () => ({type: REMOVE_USER})
-const clearStore = () => ({type: LOG_OUT})
+const removeUser = () => ({type: REMOVE_USER})
 
 /**
  * THUNK CREATORS
  */
 export const me = () => async dispatch => {
   try {
-    const res = await axios.get('/auth/me')
-    dispatch(getUser(res.data || defaultUser))
+    const {data} = await axios.get('/auth/me')
+    if (data.id) {
+      dispatch(getUser(data || defaultUser))
+    } else {
+      dispatch(getSession(data))
+    }
   } catch (err) {
     console.error(err)
   }
@@ -51,7 +59,10 @@ export const auth = (email, password, method) => async dispatch => {
 export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
-    dispatch(clearStore())
+    setCartToStorage(store.getState())
+    dispatch(removeUser())
+    dispatch(removeProduct())
+    dispatch(emptyCart())
     history.push('/login')
   } catch (err) {
     console.error(err)
@@ -65,6 +76,8 @@ export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return action.user
+    case REMOVE_USER:
+      return defaultUser
     default:
       return state
   }

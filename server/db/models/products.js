@@ -32,7 +32,7 @@ module.exports = db.define('products', {
     }
   },
   price: {
-    type: Sequelize.DECIMAL(10,2),
+    type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
       notEmpty: true

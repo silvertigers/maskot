@@ -2,30 +2,29 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import store from '../store'
 import {logout} from '../store/user'
+import {setCartToStorage} from '../store/cart'
 
-const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
+const Navbar = ({handleClick, isLoggedIn, isAdmin, userId}) => (
   <div>
     <h1>MASKOT</h1>
     <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          {isAdmin && <Link to="/dashboard">DashBoard</Link>}
-          <Link to="/products">Products</Link>
+      <div>
+        <Link to="/home">Home</Link>
+        <Link to="/products">Products</Link>
+        <Link to="/cart">Cart</Link>
+        <Link to={`/users/${userId}/orders`}>Past Orders</Link>
+        {isAdmin && <Link to="/dashboard">DashBoard</Link>}
+        {isLoggedIn ? (
           <a href="#" onClick={handleClick}>
             Logout
           </a>
-          <Link to="/cart">Cart</Link>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
+        ) : (
           <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-        </div>
-      )}
+        )}
+        <Link to="/signup">Sign Up</Link>
+      </div>
     </nav>
     <hr />
   </div>
@@ -37,13 +36,15 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    isAdmin: !!state.user.isAdmin
+    isAdmin: !!state.user.isAdmin,
+    userId: state.user.id
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     handleClick() {
+      setCartToStorage(store.getState())
       dispatch(logout())
     }
   }

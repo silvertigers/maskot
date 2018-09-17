@@ -28,13 +28,13 @@ describe('thunk creators', () => {
   })
 
   describe('me', () => {
-    it('eventually dispatches the GET USER action', async () => {
+    it('eventually dispatches the GET SESSION action for a non-user', async () => {
       const fakeUser = {email: 'Cody'}
       mockAxios.onGet('/auth/me').replyOnce(200, fakeUser)
       await store.dispatch(me())
       const actions = store.getActions()
-      expect(actions[0].type).to.be.equal('GET_USER')
-      expect(actions[0].user).to.be.deep.equal(fakeUser)
+      expect(actions[0].type).to.be.equal('GET_SESSION')
+      expect(actions[0].user).to.be.an('undefined')
     })
   })
 
@@ -43,7 +43,7 @@ describe('thunk creators', () => {
       mockAxios.onPost('/auth/logout').replyOnce(204)
       await store.dispatch(logout())
       const actions = store.getActions()
-      expect(actions[0].type).to.be.equal('LOG_OUT')
+      expect(actions[0].type).to.be.equal('REMOVE_USER')
       expect(history.location.pathname).to.be.equal('/login')
     })
   })

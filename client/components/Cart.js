@@ -3,7 +3,10 @@ import {connect} from 'react-redux'
 import LineItem from './LineItem'
 
 const orderTotal = cart =>
-  cart.reduce((total, item) => total + item.product.price * item.quantity, 0)
+  cart.reduce(
+    (total, item) => total + item.product.price * item.quantity / 100,
+    0
+  )
 const quantityTotal = cart =>
   cart.reduce((total, item) => total + item.quantity, 0)
 
@@ -16,7 +19,7 @@ export const Cart = props => {
         {props.cart.map(item => <LineItem key={item.product.id} {...item} />)}
       </div>
       <div className="order-total">
-        <h2>{orderTotal(props.cart).toFixed(2)}</h2>
+        <h2>{`$ ${orderTotal(props.cart)}`}</h2>
         <p>Total</p>
       </div>
       <div className="checkout-feature">

@@ -33,42 +33,43 @@ async function seed() {
       imageUrl: 'bearmask.jpg',
       description: 'this is a strong mask as like a tiger',
       quantity: 50,
-      price: 2.02
+      price: 202
     }),
     products.create({
       name: 'Christmas Mask',
       imageUrl: 'christmasmask.jpg',
       description: 'lets wear this mask on our Christmas party',
       quantity: 20,
-      price: 4.04
+      price: 404
     }),
     products.create({
       name: 'Flower mask',
       imageUrl: 'bearmask.jpg',
       description: 'Perfect for a spring day',
       quantity: 15,
-      price: 3.75
+      price: 375
     }),
     products.create({
       name: 'Black Mask',
       imageUrl: 'blackmask.jpg',
       description: 'very slimming',
       quantity: 33,
-      price: 5.04
+      price: 504
     }),
     products.create({
       name: 'Hello Kitty Mask',
       imageUrl: 'hellokittymask.jpg',
-      description: 'Hello Kitty (full name: Kitty White (キティ・ホワイト Kiti Howaito)) is a fictional cartoon character produced by the Japanese company Sanrio',
+      description:
+        'Hello Kitty (full name: Kitty White (キティ・ホワイト Kiti Howaito)) is a fictional cartoon character produced by the Japanese company Sanrio',
       quantity: 22,
-      price: 100.04
+      price: 10004
     }),
     products.create({
       name: 'Abstract Art Mask',
       imageUrl: 'abstractmask.jpg',
       description: 'very post modern',
       quantity: 2,
-      price: 2.04
+      price: 204
     })
   ])
 
@@ -98,27 +99,28 @@ async function seed() {
   const OrderedProducts = await Promise.all([
     orderedProducts.create({
       quantity: 5,
-      price: 10.1,
+      price: 101,
       productId: 1,
       orderId: 1
     }),
     orderedProducts.create({
       quantity: 3,
-      price: 6.06,
+      price: 606,
       productId: 1,
       orderId: 2
     }),
     orderedProducts.create({
       quantity: 2,
-      price: 8.08,
+      price: 808,
       productId: 2,
       orderId: 3
     }),
     orderedProducts.create({
       quantity: 1,
-      price: 4.04,
+      price: 404,
       productId: 2,
-      orderId: 4})
+      orderId: 4
+    })
   ])
 
   const Review = await Promise.all([
@@ -166,12 +168,14 @@ async function seed() {
 
   await Promise.all(
     Products.map(async product => {
-      await product.addCategories((Math.floor(Math.random() * 5) + 1  ));
-    }))
+      await product.addCategories(Math.floor(Math.random() * 5) + 1)
+    })
+  )
   await Promise.all(
     Products.map(async product => {
-      await product.addCategories((Math.floor(Math.random() * 5) + 1  ));
-    }))
+      await product.addCategories(Math.floor(Math.random() * 5) + 1)
+    })
+  )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${Products.length} users`)
