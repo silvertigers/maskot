@@ -12,7 +12,7 @@ class Confirmation extends React.Component {
     return (
       <div id="order-confirmation">
         <h2>Purchase Complete</h2>
-        <h3>You're order is on it's way</h3>
+        <h3>You're order is on its way</h3>
         <p>Please allow for 3-5 business days</p>
         <OrderSummary order={order} />
       </div>

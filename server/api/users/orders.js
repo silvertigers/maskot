@@ -2,6 +2,7 @@ const router = require('express').Router()
 const Orders = require('../../db/models/order')
 const Products = require('../../db/models/products')
 const {orderedProducts} = require('../../db/models')
+const {orderConfirmation, sendMail} = require('../../nodemailer')
 
 module.exports = router
 
@@ -53,6 +54,9 @@ router.post('/', async (req, res, next) => {
         })
       })
     )
+    const {id} = order
+    const mailOptions = orderConfirmation(email, id)
+    sendMail(mailOptions)
     res.status(201).json(order)
   } catch (err) {
     next(err)

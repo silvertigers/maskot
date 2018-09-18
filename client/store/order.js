@@ -1,5 +1,4 @@
 import axios from 'axios'
-import session from './session'
 
 const GOT_ORDER = 'GOT_ORDER'
 const EDIT_ORDER = 'EDIT_ORDER'

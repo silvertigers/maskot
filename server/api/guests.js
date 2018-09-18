@@ -35,8 +35,9 @@ router.post('/orders', async (req, res, next) => {
         })
       })
     )
-    const mailOption = orderConfirmation(email, newOrder.id, cart)
-    sendMail(mailOption)
+    const {id} = newOrder
+    const mailOptions = orderConfirmation(email, id)
+    sendMail(mailOptions)
     res.status(201).json(newOrder)
   } catch (err) {
     next(err)

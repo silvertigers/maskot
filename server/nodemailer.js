@@ -9,30 +9,20 @@ const transporter = nodemailer.createTransport({
   }
 })
 
-const orderConfirmation = (recipientEmail, orderId, products) => ({
+const sendMail = mailOptions => {
+  transporter.sendMail(mailOptions, function(err, info) {
+    if (err) console.error(err)
+    else console.log(info)
+  })
+}
+
+const orderConfirmation = (recipientEmail, orderId) => ({
   from: process.env.GMAIL_EMAIL,
   to: recipientEmail,
   subject: `Order confirmation #${orderId} from Maskot`,
   html: html`<h1>You order is being processed</h1>
-    <h2>Summar</h2>
-    <table>
-    <tbody>
-    <tr><th>Product</th></tr>
-    <tr><th>Price</th></tr>
-    <tr><th>Quantity</th></tr>
-    ${products
-      .map(item => {
-        return html`<tr><td>${item.product.name}</td></tr>
-        <tr><td>${item.product.price}</td></tr>
-        <tr><td>${item.quantity}</td></tr>`
-      })
-      .join('')}
-    <h2>Order total: ${products.reduce((total, item) => {
-      return total + item.product.price
-    }, 0)}</h2>
-    </tbody>
-    </table>
-  `
+  <p>Thank you for shopping with Maskot</p>
+  <p>405 W. Superior Street, Chicago, IL 60654</p>`
 })
 
 const orderShipped = (recipientEmail, orderId) => ({
@@ -48,13 +38,6 @@ const orderDelivered = (recipientEmail, orderId) => ({
   subject: `Order delivered #${orderId} from Maskot`,
   html: '<h1>You order has been delivered</h1>'
 })
-
-const sendMail = mailOptions => {
-  transporter.sendMail(mailOptions, function(err, info) {
-    if (err) console.error(err)
-    else console.log(info)
-  })
-}
 
 module.exports = {
   transporter,

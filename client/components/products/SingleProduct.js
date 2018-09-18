@@ -24,7 +24,7 @@ class SingleProduct extends React.Component {
     return (
       <div>
         <div className="product-image">
-          <img src={`/${imageUrl}`} />
+          <img src={`${imageUrl}`} />
         </div>
         <div className="product-details">
           <h2>{name}</h2>
