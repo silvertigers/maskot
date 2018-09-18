@@ -69,7 +69,7 @@ class AdminUsers extends Component {
         }
         {
           activeItem === 'List' &&
-          <div>
+          <div className="userPage">
             <h2>User List</h2>
               {
                 users[0] ?

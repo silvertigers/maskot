@@ -80,7 +80,8 @@ class AdminOrders extends Component {
               onClick={this.handleItemClick}
             />
           </Menu>
-
+        </div>
+        <div className="orderPage">
           <h2>Order list</h2>
           <ul>
             {this.props.orders[0] ? (

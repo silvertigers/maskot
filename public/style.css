@@ -212,3 +212,24 @@ ul {
 .ui.teal.button {
   width: 363px;
 }
+
+.addForm {
+  margin: 0 15vw;
+}
+
+.categoryPage {
+  margin: 0 15vw;
+  text-align: center;
+}
+
+.ui.form {
+  text-align: center;
+}
+
+.userPage {
+  margin: 0 15vw;
+}
+
+.orderPage {
+  margin: 2vw 15vw;
+}
