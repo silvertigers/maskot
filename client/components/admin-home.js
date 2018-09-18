@@ -22,7 +22,7 @@ class AdminHome extends Component {
       <div className="admin-home">
         <div className="dashboard_menu">
         <Menu vertical>
-          <Menu.Item name='Main' active={activeItem === 'Main'} onClick={this.handleItemClick} />
+          <Menu.Item name='' active={activeItem === ''} onClick={this.handleItemClick}>Main</Menu.Item>
           <Menu.Item name='Product' active={activeItem === 'Product'} onClick={this.handleItemClick} />
           <Menu.Item name='Category' active={activeItem === 'Category'} onClick={this.handleItemClick} />
           <Menu.Item name='Orders' active={activeItem === 'Orders'} onClick={this.handleItemClick} />
@@ -30,7 +30,7 @@ class AdminHome extends Component {
         </Menu>
         </div>
         <Switch>
-          <Route path="/dashboard/Main" component={AdminMain}/>
+          <Route exact path="/dashboard" component={AdminMain}/>
           <Route path="/dashboard/Product" component={AdminProducts}/>
           <Route path="/dashboard/Category" component={AdminCategories}/>
           <Route path="/dashboard/Orders" component={AdminOrders}/>

@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import { productAdd } from '../store/products';
 import { getCategories } from '../store/category';
 import { FormProduct } from './formProduct';
+import { log } from 'util';
 
 class NewProduct extends Component {
   constructor() {

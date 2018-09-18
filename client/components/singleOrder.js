@@ -1,4 +1,5 @@
 import React from 'react'
+import {Button} from 'semantic-ui-react'
 import {getOrder} from '../store/orders'
 import { getOneOrder, editedOrder } from '../store/order'
 import {connect} from 'react-redux'
@@ -60,7 +61,7 @@ class SingleOrder extends React.Component {
   render() {
     const isAdmin = this.props.isAdmin
     const { order } = this.props.order
-    console.log(order)
+
     if (this.props.userOrder.id) {return (
         <div>
           <div>
@@ -83,15 +84,15 @@ class SingleOrder extends React.Component {
             {
               isAdmin &&
               <div>
-                <button name={this.props.userOrder.id} value={order.status} onClick={this.orderStatus}>next status</button>
-                <button name={this.props.userOrder.id} onClick={this.orderCancelled} >cancelled</button>
+                <Button content='cancel' color='red' name={this.props.userOrder.id} onClick={this.orderCancelled} icon='cancel' labelPosition='left'/>
+                <Button content='next status' color='olive' name={this.props.userOrder.id} value={order.status} onClick={this.orderStatus} icon='right arrow' labelPosition='right'/>
               </div>
             }
 
           </div>
           {
             isAdmin ?
-            <Link to={`/dashboard/orders`}>Back to Order List</Link> :
+            <Link to={`/dashboard/orders`}><Button content='Back to Order'/></Link> :
             <Link to={`/users/${this.props.match.params.userId}/orders`}><p>Back To Your Orders</p></Link>
           }
 

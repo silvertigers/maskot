@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import { Button, Header, Image, Modal, Card } from 'semantic-ui-react'
 import { productEdit } from '../store/products';
 import { getProduct } from '../store/product';
 import { getCategories } from '../store/category';
@@ -83,11 +84,19 @@ class EditProduct extends Component {
   render() {
 
     return (
-      <div>
-        <h2 className="title">Edit Product</h2>
-
+    <div className="edit-button">
+    <Modal trigger={<Button basic color='green'>EDIT</Button>}>
+    <Modal.Header>Edit Product</Modal.Header>
+    <Modal.Content image>
+      <Image wrapped size='medium' src={this.state.imageUrl} />
+        {/* <h2 className="title">Edit Product</h2> */}
+      <Modal.Description>
         <FormProduct textChange={this.textChange} increment={this.increment} decrement={this.decrement} handleSubmit={this.handleSubmit} inputCategory={this.inputCategory} value={this.state} category={this.props.categories}/>
-      </div>
+      </Modal.Description>
+
+    </Modal.Content>
+    </Modal>
+    </div>
     )
   };
 };

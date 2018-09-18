@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import { Menu } from 'semantic-ui-react'
 import { getCategories } from '../store/category'
 import NewCategory from './newCategory'
 
@@ -8,50 +9,42 @@ class AdminCategories extends Component {
     super()
     this.state = {
       isAdd: false,
+      activeItem: 'List'
     }
-    this.add = this.add.bind(this)
   }
 
   async componentDidMount() {
     await this.props.gotCategories()
   }
 
-  add() {
-    this.state.isAdd ?
-    this.setState({
-      isAdd: false,
-    }) :
-    this.setState({
-      isAdd: true,
-    })
-  }
-
   render() {
     const { categories } = this.props.categories
+    const { activeItem } = this.state
 
     return (
       <div>
         <div className="admin_Categories_List">
-        <h2>Categories List</h2>
-        <span onClick={this.add}>ADD</span>
-        {
-          this.state.isAdd ?
-          <NewCategory add={this.add} /> : <p>click add button if you want to add a new categories</p>
-        }
-        <ul>
-        {
-          categories[0] ?
-          categories.map(category => {
-            return (
-              <li key={category.id}>
-                <h3>{category.type}</h3>
-              </li>
-            )
-          })
-          : <h2>None of categories are exist</h2>
-        }
-        </ul>
+        <Menu tabular>
+          <Menu.Item name='List' active={activeItem === 'List'}/>
+        </Menu>
+          <div>
+          <h2>Categories List</h2>
+          <div className="category">
+          {
+            categories[0] ?
+            categories.map(category => {
+              return (
+                <div id="category" key={category.id}>
+                  <h3>#{category.type}</h3>
+                </div>
+              )
+            })
+            : <h2>None of categories are exist</h2>
+          }
+          </div>
+          </div>
         </div>
+        <NewCategory />
       </div>
     )
   }

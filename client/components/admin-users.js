@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
+import { Menu,  Button, Card, Image, Modal, Checkbox } from 'semantic-ui-react'
 import { gotUser, userRemove, changeAuthority, userTempPassword } from '../store/users';
 import {me} from '../store'
 import NewUser from "./newUser";
@@ -9,9 +10,8 @@ class AdminUsers extends Component {
   constructor() {
     super()
     this.state = {
-      isAdd: false,
+      activeItem: "List"
     }
-    this.add = this.add.bind(this)
   }
 
   async componentDidMount() {
@@ -35,6 +35,7 @@ class AdminUsers extends Component {
   }
 
   async admin(event) {
+    // console.log(event.target)
     var bool
     (event.target.value === "true") ? bool = true : bool = false
 
@@ -46,54 +47,62 @@ class AdminUsers extends Component {
     await this.props.userAuthority(updatedData)
   }
 
-  add() {
-    this.state.isAdd ?
-    this.setState({
-      isAdd: false,
-    }) :
-    this.setState({
-      isAdd: true,
-    })
-  }
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   render() {
     const { users } = this.props.users
+    const { activeItem } = this.state
 
     return (
-      <div>
-        <h2>User List</h2>
-        <span onClick={this.add}>ADD</span>
+      <div className="admin_User_List">
+        <Menu tabular>
+          <Menu.Item name='List' active={activeItem === 'List'} onClick={this.handleItemClick} />
+          <Menu.Item name='Add' active={activeItem === 'Add'} onClick={this.handleItemClick} />
+        </Menu>
         {
-          this.state.isAdd ?
-          <NewUser add={this.add}/> : <h2>click add button if you want to add a new product</h2>
+          activeItem === 'Add' &&
+          <NewUser add={this.handleItemClick}/>
         }
-        <ul>
-          {
-            users[0] ?
-            users.map(user => {
-              return (
-                <li key={user.id}>
-                  <h3>{user.email}</h3>
-                  {
-                    this.props.loggedInUser !== user.id &&
-                    <div>
-                      <p>admin? {user.isAdmin.toString()}
-                        <select name={user.id} onChange={event => this.admin(event)} value={user.isAdmin}>
-                          <option value={false}>USER</option>
-                          <option value={true}>ADMIN</option>
-                        </select>
-                      </p>
-                      <button onClick={event => this.deleteUser(event)} value={user.id}>REMOVE</button>
-                      <button value={user.id} onClick={event => this.tempPassword(event)}>TEMP PASSWORD</button>
+        {
+          activeItem === 'List' &&
+          <div>
+            <h2>User List</h2>
+              {
+                users[0] ?
+                users.map(user => {
+                  return (
+                    <div className="single-user-card" key={user.id}>
+                    <Card>
+                      <Card.Content>
+                      <Card.Header key={user.id}>{user.email}</Card.Header>
+                      {
+                        this.props.loggedInUser !== user.id &&
+                        <div>
+                          <div>admin? <Card.Meta>{user.isAdmin.toString()}</Card.Meta>
+                          {/* <Checkbox toggle label='Admin' value={true} onClick={event => this.admin(event)} defaultChecked={user.isAdmin}/> */}
+                            <select name={user.id} onChange={event => this.admin(event)} value={user.isAdmin}>
+                              <option value={false}>USER</option>
+                              <option value={true}>ADMIN</option>
+                            </select>
+                          </div>
+                          <div className="button">
+                          <Button content='REMOVE' color='red' onClick={event => this.deleteUser(event)} value={user.id} icon='cancel' labelPosition='left' />
+                          <Button content='TEMP PASSWORD' color='olive'/>
+                          </div>
+                          {/* <button onClick={event => this.deleteUser(event)} value={user.id}>REMOVE</button> */}
+                          {/* <button value={user.id} onClick={event => this.tempPassword(event)}>TEMP PASSWORD</button> */}
+                        </div>
+                      }
+                    </Card.Content>
+                    </Card>
                     </div>
-                  }
-                </li>
-              )
-            })
-            :
-            <h2>None of Users are registered yet</h2>
-          }
-        </ul>
+                  )
+                })
+                :
+                <h2>None of Users are registered yet</h2>
+              }
+          </div>
+        }
       </div>
     )
   }
