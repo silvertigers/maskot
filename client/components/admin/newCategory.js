@@ -22,20 +22,16 @@ class NewCategory extends Component {
   async handleSubmit(event) {
     event.preventDefault()
 
-    await this.props.post(this.state)
-    this.props.add()
-  }
+    await this.props.post(this.state);
+    this.setState({
+      type: ""
+    })
+  };
 
   render() {
     return (
       <div>
-        <h2 className="title">Add a new Category</h2>
-
-        <FormCategory
-          textChange={this.textChange}
-          handleSubmit={this.handleSubmit}
-          value={this.state}
-        />
+        <FormCategory textChange={this.textChange} handleSubmit={this.handleSubmit} value={this.state}/>
       </div>
     )
   }

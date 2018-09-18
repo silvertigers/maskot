@@ -20,9 +20,11 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin, userId}) => (
         <Link to="/cart" className="item">
           Cart
         </Link>
-        <Link to={`/users/${userId}/orders`} className="item">
-          Past Orders
-        </Link>
+        {isLoggedIn && (
+          <Link to={`/users/${userId}/orders`} className="item">
+            Orders
+          </Link>
+        )}
         {isAdmin && (
           <Link to="/dashboard" className="item">
             DashBoard
@@ -37,9 +39,11 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin, userId}) => (
             Login
           </Link>
         )}
-        <Link to="/signup" className="item">
-          Sign Up
-        </Link>
+        {!isLoggedIn && (
+          <Link to="/signup" className="item">
+            Sign Up
+          </Link>
+        )}
       </div>
     </div>
   </div>

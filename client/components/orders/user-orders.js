@@ -26,18 +26,22 @@ class UserOrders extends React.Component {
       return <p>You are not authorized to view this user's order history.</p>
     }
     return (
-      <div>
-        <ul>
-          {this.props.orders.map(order => {
-            return (
-              <OrderCard
-                order={order}
-                userId={this.props.userId}
-                key={order.id}
-              />
-            )
-          })}
-        </ul>
+      <div className="user-orders">
+        {this.props.orders[0] ? (
+          <ul>
+            {this.props.orders.map(order => {
+              return (
+                <OrderCard
+                  order={order}
+                  userId={this.props.userId}
+                  key={order.id}
+                />
+              )
+            })}
+          </ul>
+        ) : (
+          <h2>You have no orders</h2>
+        )}
       </div>
     )
   }

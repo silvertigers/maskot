@@ -3,8 +3,10 @@ import {getProducts} from '../../store/products'
 import {connect} from 'react-redux'
 import ProductCard from './productCard'
 import {getCategories, selectCategory} from '../../store/category'
-import { Search, Grid, Header, Segment } from 'semantic-ui-react'
-import _ from 'lodash'
+// import { Search, Grid, Header, Segment, List } from 'semantic-ui-react'
+// import _ from 'lodash'
+// =======
+// import {Grid, List} from 'semantic-ui-react'
 
 const mapStateToProps = state => {
   return {
@@ -76,7 +78,7 @@ class Products extends React.Component {
       }
     }}
     return (
-      <div className="products">
+      <div className="products-grid">
         <h1>Products</h1>
           <input type="search" id="products-search" placeholder="Search products..." onChange={this.handleSearchChange} />
         <select onChange={this.handleCategoryChange}>
@@ -93,16 +95,18 @@ class Products extends React.Component {
             )
           })}
         </select>
-        <ul id="productsul">
-          {this.state.searchTerm === '' ?
-            filteredProducts.map(product => {
+        <div className="listing flex-grid">
+          <ul id="productsul">
+            {this.state.searchTerm === '' ?
+              filteredProducts.map(product => {
+                return <ProductCard key={product.id} product={product} />
+              })
+            : this.state.matches.map(product => {
               return <ProductCard key={product.id} product={product} />
             })
-          : this.state.matches.map(product => {
-            return <ProductCard key={product.id} product={product} />
-          })
-          }
-        </ul>
+            }
+          </ul>
+        </div>
       </div>
     )
   }

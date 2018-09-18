@@ -3,9 +3,8 @@ import StripeCheckout from 'react-stripe-checkout'
 import CheckoutForm from './CheckoutForm'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import OrderSummary from './OrderSummary'
+import {OrderSummary} from './OrderSummary'
 import {postGuestOrder, postUserOrder} from '../../store/order'
-import {emptyCart} from '../../store/cart'
 
 const orderTotal = cart => {
   return cart.reduce(
@@ -20,14 +19,15 @@ class Checkout extends React.Component {
     this.onToken = this.onToken.bind(this)
   }
 
-  saveOrder(email) {
+  async saveOrder(email) {
     const status = 'placed'
     const {user, cart, postUserOrder, postGuestOrder} = this.props
     if (user.id) {
-      postUserOrder({email, status, userId: user.id}, cart)
+      await postUserOrder({email, status, userId: user.id}, cart)
     } else {
-      postGuestOrder({email, status}, cart)
+      await postGuestOrder({email, status}, cart)
     }
+    this.props.history.push(`/confirmation`)
   }
 
   onToken(amount, description) {
@@ -46,8 +46,6 @@ class Checkout extends React.Component {
           }`
         )
         await this.saveOrder(data.status.source.name)
-        this.props.emptyCart()
-        this.props.history.push(`/confirmation`)
       } catch (err) {
         console.error('Payment failed!')
       }
@@ -75,10 +73,14 @@ class Checkout extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({user: state.user, cart: state.cart})
+const mapStateToProps = state => ({
+  user: state.user,
+  cart: state.cart,
+  order: state.order
+})
 const mapDispatchToProps = dispatch => ({
   postUserOrder: (order, cart) => dispatch(postUserOrder(order, cart)),
-  postGuestOrder: (order, cart) => dispatch(postGuestOrder(order, cart)),
-  emptyCart: () => dispatch(emptyCart())
+  postGuestOrder: (order, cart) => dispatch(postGuestOrder(order, cart))
 })
+
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
