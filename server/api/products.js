@@ -6,7 +6,6 @@ const Categories = require('../db/models/category')
 
 module.exports = router
 
-
 // GET all products at /api/products
 router.get('/', async (req, res, next) => {
   try {
@@ -39,7 +38,6 @@ router.get('/:productId', async (req, res, next) => {
   } catch (err) {
     next(err)
   }
-
 })
 
 router.post('/', async (req, res, next) => {

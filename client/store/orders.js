@@ -1,66 +1,37 @@
 import axios from 'axios'
 
-/**
- * ACTION TYPES
- */
 const GOT_ORDERS = 'GOT_ORDERS'
-const GOT_ORDER = 'GOT_ORDER'
+const EDIT_ORDER = 'EDIT_ORDER'
 
-/**
- * INITIAL STATE
- */
+const initialState = []
 
-const initialState = {
-  userOrders: [],
-  userOrder: {}
-}
-
-/**
- * ACTION CREATORS
- */
-
-const gotOrders = userOrders => {
+const gotOrders = orders => {
   return {
     type: GOT_ORDERS,
-    userOrders
+    orders
   }
 }
 
-const gotOrder = userOrder => {
-  return {
-    type: GOT_ORDER,
-    userOrder
+export const getOrders = userId => async dispatch => {
+  try {
+    if (userId) {
+      const {data} = await axios.get(`/api/users/${userId}/orders`)
+      dispatch(gotOrders(data))
+    } else {
+      const response = await axios.get('/api/admin/orders')
+      const allOrder = response.data
+      const action = gotOrders(allOrder)
+      dispatch(action)
+    }
+  } catch (err) {
+    console.error(err)
   }
 }
-
-/**
- * THUNK CREATORS
- */
-
-export const getOrders = (userId) => {
-  return async dispatch => {
-    const {data} = await axios.get(`/api/users/${userId}/orders`)
-    dispatch(gotOrders(data))
-  }
-}
-
-export const getOrder = (userId, orderId) => {
-  return async dispatch => {
-    const {data} = await axios.get(`/api/users/${userId}/orders/${orderId}`)
-    dispatch(gotOrder(data))
-  }
-}
-
-/**
- * REDUCER
- */
 
 const ordersReducer = (state = initialState, action) => {
   switch (action.type) {
     case GOT_ORDERS:
-      return { ...state, userOrders: action.userOrders }
-    case GOT_ORDER:
-      return { ...state, userOrder: action.userOrder }
+      return action.orders.sort((a, b) => a.id > b.id)
     default:
       return state
   }
