@@ -40,7 +40,7 @@ class SingleOrder extends React.Component {
               order.products.map(product => {
                 return (
                   <ul key={product.id}>
-                    <img src={product.imageUrl} />
+                    <img src={`../../../${product.imageUrl}`} />
                     <li>{product.name}</li>
                     <li>{product.description}</li>
                     <li>quantity: {product.quantity}</li>
