@@ -1,5 +1,5 @@
 import React from 'react'
-import {Form, Checkbox} from 'semantic-ui-react'
+import {Form, Label, Checkbox} from 'semantic-ui-react'
 
 export const FormProduct = props => {
   const { name, imageUrl, description, quantity, price, categories } = props.value
@@ -10,14 +10,17 @@ export const FormProduct = props => {
     <Form.Field>
       <label htmlFor="name">Product Name</label>
       <input type="text" name="name" value={name} placeholder='Product Name' onChange={event => props.textChange(event)}/>
+      <Label pointing>Please enter a value</Label>
     </Form.Field>
     <Form.Field>
       <label htmlFor="imageUrl">Image Url</label>
       <input type="text" name="imageUrl" value={imageUrl} placeholder='Image Url'onChange={event => props.textChange(event)}/>
+      <Label pointing>Please enter a value</Label>
     </Form.Field>
     <Form.Field>
       <label htmlFor="description">Description</label>
       <textarea type="text" name="description" value={description} placeholder='Description' onChange={event => props.textChange(event)}/>
+      <Label pointing>Please enter a value</Label>
     </Form.Field>
     <Form.Field>
       <label htmlFor="quantity">Quantity</label>
@@ -30,6 +33,7 @@ export const FormProduct = props => {
       <input type="number" name="price" value={price} onChange={event => props.textChange(event)}></input>
     </Form.Field>
     <Form.Field>
+      <Label pointing="below">Please choose at least one of categories</Label>
       <label name="categoryId">Categories</label>
     </Form.Field>
     <Form.Group inline>
