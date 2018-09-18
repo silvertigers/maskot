@@ -179,19 +179,18 @@ form {
   width: 70vw;
 }
 
+h2.ui.icon.header {
+  margin: 0 20vw;
+}
+
 .products-column {
   display: flex;
   justify-content: center;
 }
 
-.flex-grid {
-  width: 400px;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-}
-
 #productsul {
+  width: 400px;
+  margin: 10px;
   display: flex;
   flex-wrap: wrap;
 }
