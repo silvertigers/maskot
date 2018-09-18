@@ -36,6 +36,9 @@ class Products extends React.Component {
 
   render() {
     let filteredProducts = []
+    if (this.props.category.selectedCategory === 0){
+      filteredProducts = this.props.products
+    } else {
     for (let i = 0; i < this.props.products.length; i++) {
       for (let j = 0; j < this.props.products[i].categories.length; j++) {
         if (
@@ -45,11 +48,12 @@ class Products extends React.Component {
           filteredProducts.push(this.props.products[i])
         }
       }
-    }
+    }}
     return (
       <div className="products">
         <h1>Products</h1>
         <select onChange={this.handleCategoryChange}>
+          <option value="0">All</option>
           {this.props.category.categories.map(category => {
             return (
               <option

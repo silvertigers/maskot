@@ -21,6 +21,14 @@ export const getProduct = productId => {
 
 export const removeProduct = () => ({type: REMOVE_PRODUCT})
 
+export const addReview = (newReview, productId) => {
+  return async (dispatch) => {
+    await axios.post(`/api/products/${productId}/review`, {newReview})
+    const {data} = await axios.get(`/api/products/${productId}`)
+    dispatch(gotProduct(data))
+  }
+}
+
 var initialState = {}
 
 // REDUCERS
@@ -30,7 +38,7 @@ export default function(state = initialState, action) {
     case GOT_PRODUCT:
       return action.product
     case REMOVE_PRODUCT:
-      return initialState
+      return initialState.product
     default:
       return state
   }
