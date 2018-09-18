@@ -67,7 +67,7 @@ class Products extends React.Component {
             )
           })}
         </select>
-        <div className="listing flex-grid">
+        <div className="flex-grid">
           <ul id="productsul">
             {filteredProducts[0] &&
               filteredProducts.map(product => {
