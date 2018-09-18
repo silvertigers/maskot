@@ -1,6 +1,10 @@
 const router = require('express').Router()
 module.exports = router
 
+router.use((req, res, next) => {
+  req.user.dataValues.id ? next() : res.status(401).send('unauthorized')
+})
+
 router.use('/orders', require('./orders'))
 
 router.use(
