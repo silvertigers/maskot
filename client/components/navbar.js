@@ -11,49 +11,37 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin, userId}) => (
     <div className="ui teal inverted segment">
       <h1 className="nav-title">MASKOT</h1>
       <div className="ui inverted secondary menu">
-        <a className="item">
-          <Link to="/home">Home</Link>
-        </a>
-        <a className="item">
-          <Link to="/products">Products</Link>
-        </a>
-        <a className="item" href="/cart">
-          <Link to="/cart">Cart</Link>
-        </a>
-        <a className="item" href={`/users/${userId}/orders`}>
-          <Link to={`/users/${userId}/orders`}>Past Orders</Link>
-        </a>
-        {isAdmin && <a className="item">
-          <Link to="/dashboard">DashBoard</Link>
-        </a>}
+        <Link to="/home" className="item">
+          Home
+        </Link>
+        <Link to="/products" className="item">
+          Products
+        </Link>
+        <Link to="/cart" className="item">
+          Cart
+        </Link>
+        <Link to={`/users/${userId}/orders`} className="item">
+          Past Orders
+        </Link>
+        {isAdmin && (
+          <Link to="/dashboard" className="item">
+            DashBoard
+          </Link>
+        )}
         {isLoggedIn ? (
           <a className="item" href="#" onClick={handleClick}>
             Logout
           </a>
         ) : (
-          <a className="item"><Link to="/login">Login</Link></a>
+          <Link to="/login" className="item">
+            Login
+          </Link>
         )}
-        <a className="item" href="/signup"><Link to="/signup">Sign Up</Link></a>
+        <Link to="/signup" className="item">
+          Sign Up
+        </Link>
       </div>
     </div>
-    {/* <nav>
-      <div>
-        <Link to="/home">Home</Link>
-        {isAdmin && <Link to="/dashboard">DashBoard</Link>}
-        <Link to="/products">Products</Link>
-        <Link to="/cart">Cart</Link>
-        {isLoggedIn && <Link to={`/users/${userId}/orders`}>Past Orders</Link>}
-        {isLoggedIn ? (
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        ) : (
-          <Link to="/login">Login</Link>
-        )}
-        <Link to="/signup">Sign Up</Link>
-      </div>
-    </nav>
-    <hr /> */}
   </div>
 )
 

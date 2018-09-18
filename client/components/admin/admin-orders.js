@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {gotOrder, editedOrder} from '../../store/order'
+import {editedOrder} from '../../store/order'
+import {getOrders} from '../../store/orders'
 
 class AdminOrders extends Component {
   constructor() {
@@ -15,8 +16,8 @@ class AdminOrders extends Component {
     this.orderCancelled = this.orderCancelled.bind(this)
   }
 
-  async componentDidMount() {
-    this.props.gotOrder()
+  componentDidMount() {
+    this.props.getOrders()
   }
 
   orderFilter(event) {
@@ -66,7 +67,7 @@ class AdminOrders extends Component {
   }
 
   render() {
-    var {orders} = this.props.orders
+    var {orders} = this.props
 
     return (
       <div>
@@ -77,7 +78,7 @@ class AdminOrders extends Component {
               All Orders
             </button>
             <button value="placed" onClick={this.orderFilter}>
-              In placed
+              Placed
             </button>
             <button value="in process" onClick={this.orderFilter}>
               In process
@@ -121,10 +122,15 @@ class AdminOrders extends Component {
                             name={order.id}
                             value={order.status}
                             onClick={this.orderStatus}
+                            type="button"
                           >
                             next status
                           </button>
-                          <button name={order.id} onClick={this.orderCancelled}>
+                          <button
+                            name={order.id}
+                            onClick={this.orderCancelled}
+                            type="button"
+                          >
                             cancelled
                           </button>
                         </div>
@@ -145,13 +151,13 @@ class AdminOrders extends Component {
 
 const mapStateToProps = state => {
   return {
-    orders: state.order
+    orders: state.orders
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    gotOrder: () => dispatch(gotOrder()),
+    getOrders: () => dispatch(getOrders()),
     editOrder: order => dispatch(editedOrder(order))
   }
 }
