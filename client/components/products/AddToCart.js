@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {editCart} from '../../store/cart'
+import {Button, Icon} from 'semantic-ui-react'
 
 const mapStateToProps = state => {
   return {
@@ -59,21 +60,19 @@ class AddToCart extends React.Component {
   render() {
     return (
       <div className="add-to-cart">
-        <button type="button" onClick={this.addToCart}>
-          Add to cart
-        </button>
-        <input
-          className="quantity"
-          onChange={this.handleChange}
-          value={this.state.quantity}
-          type="number"
-        />
-        <button type="button" className="plus" onClick={this.increment}>
-          +
-        </button>
-        <button type="button" className="minus" onClick={this.decrement}>
-          -
-        </button>
+        <Button.Group className="add-to-cart">
+          <Button type="button" className="minus" onClick={this.decrement}>
+            -
+          </Button>
+          <Button.Or text={this.state.quantity} />
+          <Button type="button" className="plus" onClick={this.increment}>
+            +
+          </Button>
+        </Button.Group>
+
+        <Button type="button" onClick={this.addToCart}>
+          <Icon name="shopping cart" />
+        </Button>
       </div>
     )
   }

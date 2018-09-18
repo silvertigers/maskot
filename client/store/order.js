@@ -75,13 +75,7 @@ const ordersReducer = (state = initialState, action) => {
     case GOT_ORDER:
       return action.order
     case EDIT_ORDER:
-      return {
-        ...state,
-        orders: [...state.orders].map(order => {
-          return order.id === action.order.id ? action.order : order
-        }),
-        order: action.order
-      }
+      return action.order
     default:
       return state
   }

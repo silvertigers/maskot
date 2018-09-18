@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {editedOrder} from '../../store/order'
 import {getOrders} from '../../store/orders'
+import AdminOrderCard from './admin-order-card'
 
 class AdminOrders extends Component {
   constructor() {
@@ -25,8 +25,8 @@ class AdminOrders extends Component {
     var filterWord = ''
     if (word === 'placed') {
       filterWord = 'placed'
-    } else if (word === 'in process') {
-      filterWord = 'in process'
+    } else if (word === 'processing') {
+      filterWord = 'processing'
     } else if (word === 'completed') {
       filterWord = 'completed'
     } else if (word === 'cancelled') {
@@ -46,7 +46,7 @@ class AdminOrders extends Component {
   }
 
   async orderStatus(event) {
-    var statuslist = ['placed', 'in process', 'completed']
+    var statuslist = ['placed', 'processing', 'completed']
     var current = statuslist.indexOf(event.target.value)
     if (current === 2) {
       return
@@ -74,19 +74,19 @@ class AdminOrders extends Component {
         <div className="admin_Order_List">
           <h2>Order list</h2>
           <div className="order_list">
-            <button value="all" onClick={this.orderFilter}>
+            <button type="button" value="all" onClick={this.orderFilter}>
               All Orders
             </button>
-            <button value="placed" onClick={this.orderFilter}>
+            <button type="button" value="placed" onClick={this.orderFilter}>
               Placed
             </button>
-            <button value="in process" onClick={this.orderFilter}>
-              In process
+            <button type="button" value="processing" onClick={this.orderFilter}>
+              Processing
             </button>
-            <button value="completed" onClick={this.orderFilter}>
+            <button type="button" value="completed" onClick={this.orderFilter}>
               Completed
             </button>
-            <button value="cancelled" onClick={this.orderFilter}>
+            <button type="button" value="cancelled" onClick={this.orderFilter}>
               Cancelled
             </button>
           </div>
@@ -98,49 +98,18 @@ class AdminOrders extends Component {
                   !this.state.filtered
                 ) {
                   return (
-                    <li key={order.id}>
-                      <Link to={`/users/${order.user.id}/orders/${order.id}`}>
-                        <h2>{order.user ? order.user.email : order.email}</h2>
-                      </Link>
-                      <h2>status: {order.status}</h2>
-                      <select
-                        name={order.id}
-                        onChange={this.changeOrderStatus}
-                        value={order.status}
-                      >
-                        <option value="placed">Placed</option>
-                        <option value="in process">in process</option>
-                        <option value="completed">Completed</option>
-                        <option value="cancelled">Cancelled</option>
-                      </select>
-                      {!(
-                        order.status === 'completed' ||
-                        order.status === 'cancelled'
-                      ) && (
-                        <div>
-                          <button
-                            name={order.id}
-                            value={order.status}
-                            onClick={this.orderStatus}
-                            type="button"
-                          >
-                            next status
-                          </button>
-                          <button
-                            name={order.id}
-                            onClick={this.orderCancelled}
-                            type="button"
-                          >
-                            cancelled
-                          </button>
-                        </div>
-                      )}
-                    </li>
+                    <AdminOrderCard
+                      key={order.id}
+                      order={order}
+                      changeOrderStatus={this.changeOrderStatus}
+                      orderStatus={this.orderStatus}
+                      orderCancelled={this.orderCancelled}
+                    />
                   )
                 }
               })
             ) : (
-              <h2>None of products are available at this time</h2>
+              <h2>No products are available at this time</h2>
             )}
           </ul>
         </div>

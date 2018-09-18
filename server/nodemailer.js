@@ -29,14 +29,17 @@ const orderShipped = (recipientEmail, orderId) => ({
   from: process.env.GMAIL_EMAIL,
   to: recipientEmail,
   subject: `Order shipped #${orderId} from Maskot`,
-  html: '<h1>Your order is one its way</h1>'
+  html: html`<h1>Your order is on its way</h1>
+  <p>405 W. Superior Street, Chicago, IL 60654</p>`
 })
 
 const orderDelivered = (recipientEmail, orderId) => ({
   from: process.env.GMAIL_EMAIL,
   to: recipientEmail,
   subject: `Order delivered #${orderId} from Maskot`,
-  html: '<h1>You order has been delivered</h1>'
+  html: html`<h1>You order has been delivered</h1>
+  <p>Visit us again!</p>
+  <p>405 W. Superior Street, Chicago, IL 60654</p>`
 })
 
 module.exports = {

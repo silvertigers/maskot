@@ -3,6 +3,7 @@ import {getProducts} from '../../store/products'
 import {connect} from 'react-redux'
 import ProductCard from './productCard'
 import {getCategories, selectCategory} from '../../store/category'
+import {Grid, List} from 'semantic-ui-react'
 
 const mapStateToProps = state => {
   return {
@@ -47,7 +48,7 @@ class Products extends React.Component {
       }
     }
     return (
-      <div className="products">
+      <div className="products-grid">
         <h1>Products</h1>
         <select onChange={this.handleCategoryChange}>
           {this.props.category.categories.map(category => {
@@ -62,12 +63,14 @@ class Products extends React.Component {
             )
           })}
         </select>
-        <ul id="productsul">
-          {filteredProducts[0] &&
-            filteredProducts.map(product => {
-              return <ProductCard key={product.id} product={product} />
-            })}
-        </ul>
+        <div className="listing flex-grid">
+          <ul id="productsul">
+            {filteredProducts[0] &&
+              filteredProducts.map(product => {
+                return <ProductCard key={product.id} product={product} />
+              })}
+          </ul>
+        </div>
       </div>
     )
   }
