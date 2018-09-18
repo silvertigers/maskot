@@ -5,8 +5,6 @@ const {orderedProducts} = require('../../db/models')
 
 module.exports = router
 
-// /api/users/orders
-
 router.get('/', async (req, res, next) => {
   try {
     const orders = await Orders.findAll({
