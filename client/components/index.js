@@ -18,3 +18,5 @@ export {default as UserOrders} from './orders/user-orders'
 export {default as SingleOrder} from './orders/SingleOrder'
 export {default as Checkout} from './cart/Checkout'
 export {default as Confirmation} from './cart/Confirmation'
+export {default as ReviewForm} from './reviewForm'
+

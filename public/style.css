@@ -20,6 +20,15 @@ form div {
   display: inline-block;
 }
 
+#reviewComments{
+  height: 100px;
+  width: 500px
+}
+
+#reviewForm{
+  width: 500px
+}
+
 .order_list {
   display: flex;
   flex-direction: row;
