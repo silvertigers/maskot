@@ -52,10 +52,10 @@ router.put('/:orderId', async (req, res, next) => {
     })
 
     if (req.body.status === 'processing') {
-      mailOptions = orderShipped(email)
+      mailOptions = orderShipped(email, id)
       sendMail(mailOptions)
     } else if (req.body.status === 'completed') {
-      mailOptions = orderDelivered(email)
+      mailOptions = orderDelivered(email, id)
       sendMail(mailOptions)
     }
     res.json(updatedOrder)

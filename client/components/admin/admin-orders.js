@@ -13,55 +13,29 @@ class AdminOrders extends Component {
       filtered: '',
       activeItem: 'List'
     }
-    this.changeOrderStatus = this.changeOrderStatus.bind(this)
-    this.orderStatus = this.orderStatus.bind(this)
-    this.orderCancelled = this.orderCancelled.bind(this)
+    this.orderFilter = this.orderFilter.bind(this)
   }
 
   componentDidMount() {
     this.props.getOrders()
   }
 
-  async changeOrderStatus(event) {
-    const updatedData = {
-      id: event.target.name,
-      status: event.target.value
+  orderFilter(event) {
+    const word = event.target.value
+    var filterWord = ''
+    if (word === 'placed') {
+      filterWord = 'placed'
+    } else if (word === 'processing') {
+      filterWord = 'processing'
+    } else if (word === 'completed') {
+      filterWord = 'completed'
+    } else if (word === 'cancelled') {
+      filterWord = 'cancelled'
     }
-    await this.props.editOrder(updatedData)
-  }
-
-  async orderStatus(event) {
-    var statuslist = ['placed', 'processing', 'completed']
-    var current = statuslist.indexOf(event.target.value)
-    if (current === 2) {
-      return
-    }
-    const orderStatus = {
-      id: event.target.name,
-      status: statuslist[current + 1]
-    }
-    await this.props.editOrder(orderStatus)
-  }
-
-  async orderCancelled(event) {
-    const cancelOrder = {
-      id: event.target.name,
-      status: 'cancelled'
-    }
-    await this.props.editOrder(cancelOrder)
-  }
-
-  handleItemClick = (e, { name }) => (
-    name === "List" ?
-      this.setState({
-        activeItem: name,
-        filtered: "",
-      }) :
-      this.setState({
-      activeItem: name,
-      filtered: name
+    this.setState({
+      filtered: filterWord
     })
-  )
+  }
 
   render() {
     var { orders } = this.props.orders
@@ -146,15 +120,7 @@ class AdminOrders extends Component {
                   order.status === this.state.filtered ||
                   !this.state.filtered
                 ) {
-                  return (
-                    <AdminOrderCard
-                      key={order.id}
-                      order={order}
-                      changeOrderStatus={this.changeOrderStatus}
-                      orderStatus={this.orderStatus}
-                      orderCancelled={this.orderCancelled}
-                    />
-                  )
+                  return <AdminOrderCard key={order.id} order={order} />
                 }
               })
             ) : (
