@@ -13,8 +13,7 @@ import {
   UserOrders,
   SingleOrder,
   Checkout,
-  Confirmation,
-  AdminOrderCard
+  Confirmation
 } from './components'
 import {me} from './store'
 import {setCartToStorage, getCartFromStorage} from './store/cart'
@@ -56,16 +55,15 @@ class Routes extends Component {
           path="/guests/:sessionId/orders/:orderId"
           component={SingleOrder}
         />
+        <Route
+          exact
+          path="/products/categories/:categoryId"
+          component={Products}
+        />
         {isLoggedIn && (
           <Switch>
             <Route exact path="/users/:userId/orders" component={UserOrders} />
             {isAdmin && <Route path="/dashboard" component={AdminHome} />}
-            {/* {isAdmin && (
-              <Route
-                path="/users/:userId/orders/:orderId"
-                component={AdminOrderCard}
-              />
-            )} */}
             <Route
               path="/users/:userId/orders/:orderId"
               component={SingleOrder}

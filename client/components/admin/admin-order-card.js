@@ -62,6 +62,7 @@ class AdminOrderCard extends React.Component {
         <Segment>
           <List.Item>
             <List.Content>
+              <List.Header>Order {id}</List.Header>
               <List.Header>
                 {userId ? (
                   <Link to={`/users/${userId}/orders/${id}`}>
@@ -75,7 +76,7 @@ class AdminOrderCard extends React.Component {
                   </div>
                 )}
               </List.Header>
-              <h2>Status: {status}</h2>
+              <List.Description>Status: {status}</List.Description>
 
               {this.props.order.products &&
                 this.props.order.products.map(product => {

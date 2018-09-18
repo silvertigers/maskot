@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Menu, Button, List, Segment, Select, Dropdown} from 'semantic-ui-react'
-import {Link} from 'react-router-dom'
+import {Menu} from 'semantic-ui-react'
 import {editedOrder} from '../../store/order'
 import {getOrders} from '../../store/orders'
 import AdminOrderCard from './admin-order-card'
@@ -32,7 +31,6 @@ class AdminOrders extends Component {
     } else if (word === 'cancelled') {
       filterWord = 'cancelled'
     }
-    console.log('filter', this.state.filtered)
     this.setState({
       filtered: filterWord
     })
