@@ -2,6 +2,7 @@ import React from 'react'
 import {getOrder, editedOrder} from '../../store/order'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {Button} from 'semantic-ui-react'
 
 const mapStateToProps = state => {
   return {
@@ -73,7 +74,7 @@ class SingleOrder extends React.Component {
               order.products.map(product => {
                 return (
                   <ul key={product.id}>
-                    <img src={product.imageUrl} />
+                    <img src={`../../../${product.imageUrl}`} />
                     <li>{product.name}</li>
                     <li>{product.description}</li>
                     <li>quantity: {product.quantity}</li>
