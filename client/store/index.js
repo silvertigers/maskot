@@ -11,6 +11,7 @@ import category from './category'
 import session from './session'
 import order from './order'
 import orders from './orders'
+import review from './review'
 
 const reducer = combineReducers({
   user,
@@ -21,7 +22,8 @@ const reducer = combineReducers({
   category,
   order,
   orders,
-  session
+  session,
+  review
 })
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))

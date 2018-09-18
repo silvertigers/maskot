@@ -120,6 +120,23 @@ router.delete('/:productId', async (req, res, next) => {
   }
 })
 
+router.post('/:productId/review', async(req,res,next) => {
+  try {
+    console.log(req.body)
+    console.log(req.params.productId)
+    const newReview = await Reviews.create({
+      title: req.body.newReview.title,
+      rating: req.body.newReview.rating,
+      comments: req.body.newReview.comments,
+      userId: req.body.newReview.userId,
+      productId: req.body.newReview.productId
+    })
+    res.json(newReview)
+  } catch (err) {
+    next(err)
+  }
+})
+
 // router.post('/', async (req, res, next) => {
 //   try {
 //     const name = req.body.name
@@ -199,4 +216,3 @@ router.delete('/:productId', async (req, res, next) => {
 // })
 // =======
 // })
->>>>>>> cc619f6b4259b74a2b5324e07a4d42b45d9ee8ac
