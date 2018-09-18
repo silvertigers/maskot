@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
-import { Menu,  Button, Card, Image, Modal, Checkbox } from 'semantic-ui-react'
+import { Menu,  Button, Card, Image, Modal, Select} from 'semantic-ui-react'
 import {
   gotUser,
   userRemove,
@@ -40,7 +40,6 @@ class AdminUsers extends Component {
   }
 
   async admin(event) {
-    // console.log(event.target)
     var bool
     event.target.value === 'true' ? (bool = true) : (bool = false)
 
@@ -84,7 +83,6 @@ class AdminUsers extends Component {
                         this.props.loggedInUser !== user.id &&
                         <div>
                           <div>admin? <Card.Meta>{user.isAdmin.toString()}</Card.Meta>
-                          {/* <Checkbox toggle label='Admin' value={true} onClick={event => this.admin(event)} defaultChecked={user.isAdmin}/> */}
                             <select name={user.id} onChange={event => this.admin(event)} value={user.isAdmin}>
                               <option value={false}>USER</option>
                               <option value={true}>ADMIN</option>
@@ -94,8 +92,6 @@ class AdminUsers extends Component {
                           <Button content='REMOVE' color='red' onClick={event => this.deleteUser(event)} value={user.id} icon='cancel' labelPosition='left' />
                           <Button content='TEMP PASSWORD' color='olive'/>
                           </div>
-                          {/* <button onClick={event => this.deleteUser(event)} value={user.id}>REMOVE</button> */}
-                          {/* <button value={user.id} onClick={event => this.tempPassword(event)}>TEMP PASSWORD</button> */}
                         </div>
                       }
                     </Card.Content>

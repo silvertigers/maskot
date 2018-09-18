@@ -1,4 +1,5 @@
 import React from 'react'
+import { Card, Icon, Image } from 'semantic-ui-react'
 import {getProduct} from '../../store/product'
 import {connect} from 'react-redux'
 import {SingleReview, AddToCart, ReviewForm} from '../index'
@@ -25,7 +26,7 @@ class SingleProduct extends React.Component {
   render() {
     const {imageUrl, name, description, reviews, price} = this.props.product
     return (
-      <div>
+      <div className='single-product'>
         <div className="product-image">
           <img src={`${imageUrl}`} />
         </div>
