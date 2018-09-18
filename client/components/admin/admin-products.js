@@ -13,7 +13,6 @@ class AdminProducts extends Component {
       activeItem: 'List'
     }
     this.edit = this.edit.bind(this)
-    // this.password = this.password.bind(this)
   }
 
   componentDidMount() {
@@ -36,18 +35,6 @@ class AdminProducts extends Component {
           isEdit: Number(event.target.value)
         })
   }
-
-  // password() {
-  //   const temp = this.state.test
-  //   this.setState({
-  //     test: "new password time"
-  //   })
-  //   setTimeout(() => {
-  //     this.setState({
-  //       test: temp
-  //     })
-  //   },5000)
-  // }
 
   handleItemClick = (e, {name}) => this.setState({activeItem: name})
 
@@ -73,8 +60,6 @@ class AdminProducts extends Component {
           {this.state.activeItem === 'Add' && (
             <NewProduct add={this.handleItemClick} />
           )}
-          {/* <button onClick={this.password}>password reset</button> */}
-          {/* <ul> */}
           {this.state.activeItem === 'List' && (
             <div>
               <h2>Products List</h2>

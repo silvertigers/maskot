@@ -46,6 +46,7 @@ class AdminHome extends Component {
             onClick={this.handleItemClick} />
         </Menu>
         </div>
+        <div className="components">
         <Switch>
           <Route exact path="/dashboard" component={AdminMain}/>
           <Route path="/dashboard/Product" component={AdminProducts}/>
@@ -53,6 +54,7 @@ class AdminHome extends Component {
           <Route path="/dashboard/Orders" component={AdminOrders}/>
           <Route path="/dashboard/Users" component={AdminUsers}/>
         </Switch>
+        </div>
       </div>
     )
   }
