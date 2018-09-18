@@ -1,8 +1,8 @@
 import React from 'react'
 
 const OrderSummaryLineItem = props => {
-  const {name, imageUrl, price} = props.item.product
-  const {quantity} = props.item
+  const {name, imageUrl, price} = props.item
+  const {quantity} = props
   return (
     <tr>
       <td>

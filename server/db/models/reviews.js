@@ -15,8 +15,8 @@ module.exports = db.define('reviews', {
     validate: {
       notEmpty: true,
       len: {
-        args: [100],
-        msg: 'Minimum of 100 characters'
+        args: [10],
+        msg: 'Minimum of 10 characters'
       }
     }
   },

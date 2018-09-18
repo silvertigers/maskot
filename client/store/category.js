@@ -14,7 +14,7 @@ const ADD_CATEGORY = "ADD_CATEGORY"
 
 const initialState = {
   categories: [],
-  selectedCategory: 1,
+  selectedCategory: 0,
   category: {},
 }
 

@@ -1,11 +1,14 @@
 import React from 'react'
 import {getProduct} from '../../store/product'
 import {connect} from 'react-redux'
-import {SingleReview, AddToCart} from '../index'
+import {SingleReview, AddToCart, ReviewForm} from '../index'
+import {List} from 'semantic-ui-react'
+
 
 const mapStateToProps = state => {
   return {
-    product: state.product
+    product: state.product,
+    user: state.user,
   }
 }
 
@@ -24,7 +27,7 @@ class SingleProduct extends React.Component {
     return (
       <div>
         <div className="product-image">
-          <img src={`/${imageUrl}`} />
+          <img src={`${imageUrl}`} />
         </div>
         <div className="product-details">
           <h2>{name}</h2>
@@ -35,6 +38,7 @@ class SingleProduct extends React.Component {
         {reviews && reviews[0] ? (
           <div className="reviews">
             <h2>Reviews</h2>
+            <ReviewForm productId={this.props.match.params.productId} />
             {reviews.map(review => (
               <SingleReview key={review.id} review={review} />
             ))}

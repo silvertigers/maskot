@@ -3,6 +3,7 @@ import {getProducts} from '../../store/products'
 import {connect} from 'react-redux'
 import ProductCard from './productCard'
 import {getCategories, selectCategory} from '../../store/category'
+import {Grid, List} from 'semantic-ui-react'
 
 const mapStateToProps = state => {
   return {
@@ -36,6 +37,9 @@ class Products extends React.Component {
 
   render() {
     let filteredProducts = []
+    if (this.props.category.selectedCategory === 0){
+      filteredProducts = this.props.products
+    } else {
     for (let i = 0; i < this.props.products.length; i++) {
       for (let j = 0; j < this.props.products[i].categories.length; j++) {
         if (
@@ -45,11 +49,12 @@ class Products extends React.Component {
           filteredProducts.push(this.props.products[i])
         }
       }
-    }
+    }}
     return (
-      <div className="products">
+      <div className="products-grid">
         <h1>Products</h1>
         <select onChange={this.handleCategoryChange}>
+          <option value="0">All</option>
           {this.props.category.categories.map(category => {
             return (
               <option
@@ -62,12 +67,14 @@ class Products extends React.Component {
             )
           })}
         </select>
-        <ul id="productsul">
-          {filteredProducts[0] &&
-            filteredProducts.map(product => {
-              return <ProductCard key={product.id} product={product} />
-            })}
-        </ul>
+        <div className="listing flex-grid">
+          <ul id="productsul">
+            {filteredProducts[0] &&
+              filteredProducts.map(product => {
+                return <ProductCard key={product.id} product={product} />
+              })}
+          </ul>
+        </div>
       </div>
     )
   }
