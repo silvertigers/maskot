@@ -8,7 +8,6 @@ export const FormUser = props => {
     <div className="addForm">
       <h2 className="title">Add a new User</h2>
       <Form onSubmit={event => props.handleSubmit(event)}>
-      {/* <form > */}
       <Form.Field>
         <label htmlFor="email">Emal Address</label>
         <input type="text" name="email" value={email} onChange={event => props.textChange(event)}/>
@@ -22,8 +21,6 @@ export const FormUser = props => {
           <option value={true}>ADMIN</option>
         </select>
         <Form.Button disabled={!email || !password} type="submit" color="blue">Submit</Form.Button>
-        {/* <button disabled={!email || !password} type="submit">Submit</button> */}
-      {/* </form> */}
       </Form>
     </div>
   )
