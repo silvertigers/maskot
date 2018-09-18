@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {editCart} from '../store/cart'
+import {editCart} from '../../store/cart'
 
 const createNumberList = number => {
   const list = []
@@ -14,9 +14,7 @@ const createNumberList = number => {
 class LineItem extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      quantity: this.props.quantity
-    }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
   }
@@ -43,7 +41,7 @@ class LineItem extends React.Component {
     const {id, name, imageUrl, price} = this.props.product
     const {quantity} = this.props
     return (
-      <div className="line-item">
+      <li className="line-item">
         <Link to={`/products/${id}`}>
           <div className="product-image">
             <img src={imageUrl} />
@@ -52,7 +50,7 @@ class LineItem extends React.Component {
         <div className="product-name">
           <h3>{name}</h3>
         </div>
-        <div className="product-price">{price}</div>
+        <div className="product-price">{`$ ${price / 100}`}</div>
         <div>X</div>
         <select
           className="product-quantity"
@@ -66,12 +64,12 @@ class LineItem extends React.Component {
           ))}
         </select>
         <div className="product-total-price">
-          {(price * quantity).toFixed(2)}
+          {`$ ${price * quantity / 100}`}
         </div>
         <button type="button" onClick={this.handleDelete}>
           X
         </button>
-      </div>
+      </li>
     )
   }
 }

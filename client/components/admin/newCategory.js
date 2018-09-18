@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import { addCategory } from '../store/category'
-import { FormCategory } from './formCategory'
+import {addCategory} from '../../store/category'
+import {FormCategory} from './formCategory'
 
 class NewCategory extends Component {
   constructor() {
@@ -20,19 +20,22 @@ class NewCategory extends Component {
   }
 
   async handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault()
 
-    await this.props.post(this.state);
+    await this.props.post(this.state)
     this.props.add()
-  };
+  }
 
   render() {
-
     return (
       <div>
         <h2 className="title">Add a new Category</h2>
 
-        <FormCategory textChange={this.textChange} handleSubmit={this.handleSubmit} value={this.state}/>
+        <FormCategory
+          textChange={this.textChange}
+          handleSubmit={this.handleSubmit}
+          value={this.state}
+        />
       </div>
     )
   }

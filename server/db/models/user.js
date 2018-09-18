@@ -27,12 +27,12 @@ const User = db.define('user', {
   googleId: {
     type: Sequelize.STRING
   },
+  facebookId: {
+    type: Sequelize.STRING
+  },
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
-  },
-  facebookId: {
-    type: Sequelize.STRING
   }
 })
 

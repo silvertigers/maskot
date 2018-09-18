@@ -1,7 +1,7 @@
 import React from 'react'
-import {getProduct} from '../store/product'
+import {getProduct} from '../../store/product'
 import {connect} from 'react-redux'
-import {SingleReview, AddToCart, ReviewForm} from './index'
+import {SingleReview, AddToCart, ReviewForm} from '../index'
 
 const mapStateToProps = state => {
   return {

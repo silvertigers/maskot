@@ -8,25 +8,40 @@ import {setCartToStorage} from '../store/cart'
 
 const Navbar = ({handleClick, isLoggedIn, isAdmin, userId}) => (
   <div>
-    <h1>MASKOT</h1>
-    <nav>
-      <div>
-        <Link to="/home">Home</Link>
-        <Link to="/products">Products</Link>
-        <Link to="/cart">Cart</Link>
-        <Link to={`/users/${userId}/orders`}>Past Orders</Link>
-        {isAdmin && <Link to="/dashboard">DashBoard</Link>}
+    <div className="ui teal inverted segment">
+      <h1 className="nav-title">MASKOT</h1>
+      <div className="ui inverted secondary menu">
+        <Link to="/home" className="item">
+          Home
+        </Link>
+        <Link to="/products" className="item">
+          Products
+        </Link>
+        <Link to="/cart" className="item">
+          Cart
+        </Link>
+        <Link to={`/users/${userId}/orders`} className="item">
+          Past Orders
+        </Link>
+        {isAdmin && (
+          <Link to="/dashboard" className="item">
+            DashBoard
+          </Link>
+        )}
         {isLoggedIn ? (
-          <a href="#" onClick={handleClick}>
+          <a className="item" href="#" onClick={handleClick}>
             Logout
           </a>
         ) : (
-          <Link to="/login">Login</Link>
+          <Link to="/login" className="item">
+            Login
+          </Link>
         )}
-        <Link to="/signup">Sign Up</Link>
+        <Link to="/signup" className="item">
+          Sign Up
+        </Link>
       </div>
-    </nav>
-    <hr />
+    </div>
   </div>
 )
 

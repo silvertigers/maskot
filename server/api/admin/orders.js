@@ -17,6 +17,16 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:orderId', async (req, res, next) => {
+  try {
+    const id = req.params.orderId
+    const oneOrder = await Order.findById(id)
+    res.json(oneOrder)
+  } catch(err) {
+    next(err)
+  }
+})
+
 router.put('/:orderId', async (req, res, next) => {
   try {
     const id = req.params.orderId
