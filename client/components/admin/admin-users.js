@@ -40,7 +40,6 @@ class AdminUsers extends Component {
   }
 
   async admin(event) {
-    // console.log(event.target)
     var bool
     event.target.value === 'true' ? (bool = true) : (bool = false)
 
