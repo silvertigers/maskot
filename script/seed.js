@@ -31,35 +31,40 @@ async function seed() {
   const Products = await Promise.all([
     products.create({
       name: 'Bear Mask',
-      imageUrl: 'https://postfiles.pstatic.net/20160324_171/smr0077_1458823643640DbfXw_JPEG/PIQ0116S0260_pz_a001.jpg?type=w3',
+      imageUrl:
+        'https://postfiles.pstatic.net/20160324_171/smr0077_1458823643640DbfXw_JPEG/PIQ0116S0260_pz_a001.jpg?type=w3',
       description: 'this is a strong mask as like a tiger',
       quantity: 50,
       price: 202
     }),
     products.create({
       name: 'Christmas Mask',
-      imageUrl: 'https://postfiles.pstatic.net/20151213_72/gawon10201_14500146882475pDAA_JPEG/SAM_1893.JPG?type=w1',
+      imageUrl:
+        'https://postfiles.pstatic.net/20151213_72/gawon10201_14500146882475pDAA_JPEG/SAM_1893.JPG?type=w1',
       description: 'lets wear this mask on our Christmas party',
       quantity: 20,
       price: 404
     }),
     products.create({
       name: 'Flower mask',
-      imageUrl: 'https://postfiles.pstatic.net/MjAxODA0MDRfMTEw/MDAxNTIyODQzMjg5MTYz.OP8ya4h-YCCHxE4fqjM8nVs_mwTtAozLguZHmMZAsAgg.UmeF53bwWbWvdxO2Xz6td4MS58a8bKdiPDQ7jg-NBUcg.JPEG.boochouclab/IMG_0987-2.jpg?type=w1',
+      imageUrl:
+        'https://postfiles.pstatic.net/MjAxODA0MDRfMTEw/MDAxNTIyODQzMjg5MTYz.OP8ya4h-YCCHxE4fqjM8nVs_mwTtAozLguZHmMZAsAgg.UmeF53bwWbWvdxO2Xz6td4MS58a8bKdiPDQ7jg-NBUcg.JPEG.boochouclab/IMG_0987-2.jpg?type=w1',
       description: 'Perfect for a spring day',
       quantity: 15,
       price: 375
     }),
     products.create({
       name: 'Black Mask',
-      imageUrl: 'https://postfiles.pstatic.net/MjAxODAxMTZfMTEg/MDAxNTE2MDMwMDA3NTg3.7Kt0M7JcnJ7tZd8uMN7F6rz0KlrGgsYO7MGw9XVgl_Mg.tV74N88MHv01IbfWmq4i4YQW-yqJY_sRFAtHaY76fFog.PNG.bmw850307/%EB%B9%85%EB%B1%85%EC%8A%B9%EB%A6%AC.png?type=w773',
+      imageUrl:
+        'https://postfiles.pstatic.net/MjAxODAxMTZfMTEg/MDAxNTE2MDMwMDA3NTg3.7Kt0M7JcnJ7tZd8uMN7F6rz0KlrGgsYO7MGw9XVgl_Mg.tV74N88MHv01IbfWmq4i4YQW-yqJY_sRFAtHaY76fFog.PNG.bmw850307/%EB%B9%85%EB%B1%85%EC%8A%B9%EB%A6%AC.png?type=w773',
       description: 'very slimming',
       quantity: 33,
       price: 504
     }),
     products.create({
       name: 'Hello Kitty Mask',
-      imageUrl: 'http://shop1.daumcdn.net/thumb/R500x500/?fname=http%3A%2F%2Fshop1.daumcdn.net%2Fshophow%2Fp%2FB4048086814.jpg%3Fut%3D20171109124044',
+      imageUrl:
+        'http://shop1.daumcdn.net/thumb/R500x500/?fname=http%3A%2F%2Fshop1.daumcdn.net%2Fshophow%2Fp%2FB4048086814.jpg%3Fut%3D20171109124044',
       description:
         'Hello Kitty (full name: Kitty White (キティ・ホワイト Kiti Howaito)) is a fictional cartoon character produced by the Japanese company Sanrio',
       quantity: 22,
@@ -226,7 +231,7 @@ async function seed() {
       userId: 2
     }),
     order.create({
-      status: 'in process',
+      status: 'processing',
       email: 'bronze@mysecond.com',
       userId: 2
     }),
