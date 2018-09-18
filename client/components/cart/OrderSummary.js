@@ -1,7 +1,7 @@
 import React from 'react'
 import OrderSummaryLineItem from './OrderSummaryLineItem'
 
-const OrderSummary = props => {
+export const OrderSummary = props => {
   const {cart, order} = props
   const items = cart ? cart : order.products
   return (

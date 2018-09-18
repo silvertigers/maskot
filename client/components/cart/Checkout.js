@@ -3,7 +3,7 @@ import StripeCheckout from 'react-stripe-checkout'
 import CheckoutForm from './CheckoutForm'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import OrderSummary from './OrderSummary'
+import {OrderSummary} from './OrderSummary'
 import {postGuestOrder, postUserOrder} from '../../store/order'
 
 const orderTotal = cart => {

@@ -84,31 +84,16 @@ class SingleOrder extends React.Component {
             <div>
               {isAdmin && (
                 <div>
-                  <button
-                    name={order.id}
-                    value={order.status}
-                    onClick={this.orderStatus}
-                    type="button"
-                  >
-                    next status
-                  </button>
-                  <button
-                    name={order.id}
-                    onClick={this.orderCancelled}
-                    type="button"
-                  >
-                    cancelled
-                  </button>
+                  <Button content='cancel' color='red' name={this.props.userOrder.id} onClick={this.orderCancelled} icon='cancel' labelPosition='left'/>
+                  <Button content='next status' color='olive' name={this.props.userOrder.id} value={order.status} onClick={this.orderStatus} icon='right arrow' labelPosition='right'/>
                 </div>
               )}
             </div>
-            {isAdmin ? (
-              <Link to="/dashboard/orders">Back to Order List</Link>
-            ) : (
-              <Link to={`/users/${this.props.match.params.userId}/orders`}>
-                <p>Back To Your Orders</p>
-              </Link>
-            )}
+            {
+              isAdmin ?
+              <Link to={`/dashboard/orders`}><Button content='Back to Order'/></Link> :
+              <Link to={`/users/${this.props.match.params.userId}/orders`}><Button content='Back To Your Orders'/></Link>
+            }
           </div>
         </div>
       )

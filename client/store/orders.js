@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const GOT_ORDERS = 'GOT_ORDERS'
+const EDIT_ORDER = 'EDIT_ORDER'
 
 const initialState = []
 
