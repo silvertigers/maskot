@@ -3,6 +3,7 @@ import StripeCheckout from 'react-stripe-checkout'
 import CheckoutForm from './CheckoutForm'
 import axios from 'axios'
 import {connect} from 'react-redux'
+import OrderSummary from './OrderSummary'
 import {postGuestOrder, postUserOrder} from '../../store/order'
 import {emptyCart} from '../../store/cart'
 
@@ -58,6 +59,7 @@ class Checkout extends React.Component {
     const description = 'Fashion-forward facewear'
     return (
       <div className="checkout">
+        <OrderSummary cart={this.props.cart} />
         <CheckoutForm />
         <StripeCheckout
           email={this.props.user.email || null}
