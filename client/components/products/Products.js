@@ -64,19 +64,20 @@ class Products extends React.Component {
     console.log(this.state)
     if (this.props.products[0]) {console.log(this.props.products[0].name)}
     let filteredProducts = []
-    if (this.props.category.selectedCategory === 0){
+    if (this.props.category.selectedCategory === 0) {
       filteredProducts = this.props.products
     } else {
-    for (let i = 0; i < this.props.products.length; i++) {
-      for (let j = 0; j < this.props.products[i].categories.length; j++) {
-        if (
-          this.props.products[i].categories[j].id ===
-          this.props.category.selectedCategory
-        ) {
-          filteredProducts.push(this.props.products[i])
+      for (let i = 0; i < this.props.products.length; i++) {
+        for (let j = 0; j < this.props.products[i].categories.length; j++) {
+          if (
+            this.props.products[i].categories[j].id ===
+            this.props.category.selectedCategory
+          ) {
+            filteredProducts.push(this.props.products[i])
+          }
         }
       }
-    }}
+    }
     return (
       <div className="products-grid">
         <h1>Products</h1>

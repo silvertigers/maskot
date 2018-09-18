@@ -51,15 +51,24 @@ class Routes extends Component {
         <Route path="/products/:productId" component={SingleProduct} />
         <Route path="/checkout" component={Checkout} />
         <Route path="/cart" component={Cart} />
+        <Route
+          path="/guests/:sessionId/orders/:orderId"
+          component={SingleOrder}
+        />
+        <Route
+          exact
+          path="/products/categories/:categoryId"
+          component={Products}
+        />
         {isLoggedIn && (
           <Switch>
             <Route exact path="/users/:userId/orders" component={UserOrders} />
+            {isAdmin && <Route path="/dashboard" component={AdminHome} />}
             <Route
               path="/users/:userId/orders/:orderId"
               component={SingleOrder}
             />
             <Route path="/home" component={UserHome} />
-            {isAdmin && <Route path="/dashboard" component={AdminHome} />}
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
