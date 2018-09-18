@@ -2,6 +2,8 @@ import React from 'react'
 import {getProduct} from '../../store/product'
 import {connect} from 'react-redux'
 import {SingleReview, AddToCart, ReviewForm} from '../index'
+import {List} from 'semantic-ui-react'
+
 
 const mapStateToProps = state => {
   return {
@@ -25,7 +27,7 @@ class SingleProduct extends React.Component {
     return (
       <div>
         <div className="product-image">
-          <img src={`/${imageUrl}`} />
+          <img src={`${imageUrl}`} />
         </div>
         <div className="product-details">
           <h2>{name}</h2>

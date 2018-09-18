@@ -69,17 +69,18 @@ class SingleOrder extends React.Component {
             <p>Order status: {order.status}</p>
           </div>
           <div>
-            {order.products.map(product => {
-              return (
-                <ul key={product.id}>
-                  <img src={product.imageUrl} />
-                  <li>{product.name}</li>
-                  <li>{product.description}</li>
-                  <li>quantity: {product.quantity}</li>
-                  <li>price: {product.price}</li>
-                </ul>
-              )
-            })}
+            {order.products &&
+              order.products.map(product => {
+                return (
+                  <ul key={product.id}>
+                    <img src={product.imageUrl} />
+                    <li>{product.name}</li>
+                    <li>{product.description}</li>
+                    <li>quantity: {product.quantity}</li>
+                    <li>price: {product.price}</li>
+                  </ul>
+                )
+              })}
             <div>
               {isAdmin && (
                 <div>

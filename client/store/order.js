@@ -25,10 +25,15 @@ export const editedOrder = order => async dispatch => {
   }
 }
 
-export const getOrder = (orderId, userId) => {
+export const getOrder = (orderId, userId, sessionId) => {
   return async dispatch => {
     if (userId) {
       const {data} = await axios.get(`/api/users/${userId}/orders/${orderId}`)
+      dispatch(gotOrder(data))
+    } else if (sessionId) {
+      const {data} = await axios.get(
+        `/api/guests/${sessionId}/orders/${orderId}`
+      )
       dispatch(gotOrder(data))
     } else {
       const response = await axios.get(`/api/admin/orders/${orderId}`)
@@ -41,17 +46,25 @@ export const getOrder = (orderId, userId) => {
 
 export const postUserOrder = (order, cart) => {
   return async dispatch => {
-    const {data} = await axios.post(`/api/users/orders`, {order, cart})
-    const action = gotOrder(data)
-    dispatch(action)
+    try {
+      const {data} = await axios.post(`/api/users/orders`, {order, cart})
+      const {id, userId} = data
+      await dispatch(getOrder(id, userId))
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 
 export const postGuestOrder = (order, cart) => {
   return async dispatch => {
-    const {data} = await axios.post(`/api/guests/orders`, {order, cart})
-    const action = gotOrder(data)
-    dispatch(action)
+    try {
+      const {data} = await axios.post(`/api/guests/orders`, {order, cart})
+      const {id, sessionId} = data
+      await dispatch(getOrder(id, null, sessionId))
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 
@@ -62,13 +75,7 @@ const ordersReducer = (state = initialState, action) => {
     case GOT_ORDER:
       return action.order
     case EDIT_ORDER:
-      return {
-        ...state,
-        orders: [...state.orders].map(order => {
-          return order.id === action.order.id ? action.order : order
-        }),
-        order: action.order
-      }
+      return action.order
     default:
       return state
   }
