@@ -11,9 +11,6 @@ class AdminOrders extends Component {
       filtered: ''
     }
     this.orderFilter = this.orderFilter.bind(this)
-    this.changeOrderStatus = this.changeOrderStatus.bind(this)
-    this.orderStatus = this.orderStatus.bind(this)
-    this.orderCancelled = this.orderCancelled.bind(this)
   }
 
   componentDidMount() {
@@ -35,35 +32,6 @@ class AdminOrders extends Component {
     this.setState({
       filtered: filterWord
     })
-  }
-
-  async changeOrderStatus(event) {
-    const updatedData = {
-      id: event.target.name,
-      status: event.target.value
-    }
-    await this.props.editOrder(updatedData)
-  }
-
-  async orderStatus(event) {
-    var statuslist = ['placed', 'processing', 'completed']
-    var current = statuslist.indexOf(event.target.value)
-    if (current === 2) {
-      return
-    }
-    const orderStatus = {
-      id: event.target.name,
-      status: statuslist[current + 1]
-    }
-    await this.props.editOrder(orderStatus)
-  }
-
-  async orderCancelled(event) {
-    const cancelOrder = {
-      id: event.target.name,
-      status: 'cancelled'
-    }
-    await this.props.editOrder(cancelOrder)
   }
 
   render() {
@@ -97,15 +65,7 @@ class AdminOrders extends Component {
                   order.status === this.state.filtered ||
                   !this.state.filtered
                 ) {
-                  return (
-                    <AdminOrderCard
-                      key={order.id}
-                      order={order}
-                      changeOrderStatus={this.changeOrderStatus}
-                      orderStatus={this.orderStatus}
-                      orderCancelled={this.orderCancelled}
-                    />
-                  )
+                  return <AdminOrderCard key={order.id} order={order} />
                 }
               })
             ) : (
