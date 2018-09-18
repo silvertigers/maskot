@@ -21,7 +21,7 @@ class AdminOrders extends Component {
   }
 
   orderFilter(event) {
-    const word = event.target.value
+    const word = event.target.name
     var filterWord = ''
     if (word === 'placed') {
       filterWord = 'placed'
@@ -32,6 +32,7 @@ class AdminOrders extends Component {
     } else if (word === 'cancelled') {
       filterWord = 'cancelled'
     }
+    console.log('filter', this.state.filtered)
     this.setState({
       filtered: filterWord
     })
@@ -49,7 +50,6 @@ class AdminOrders extends Component {
         })
 
   render() {
-    var {orders} = this.props.orders
     const {activeItem} = this.state
 
     return (
@@ -57,7 +57,7 @@ class AdminOrders extends Component {
         <div className="admin_Order_List">
           <Menu tabular>
             <Menu.Item
-              name="List"
+              name="All"
               active={activeItem === 'List'}
               onClick={this.handleItemClick}
             />
@@ -67,8 +67,8 @@ class AdminOrders extends Component {
               onClick={this.handleItemClick}
             />
             <Menu.Item
-              name="in process"
-              active={activeItem === 'in process'}
+              name="processing"
+              active={activeItem === 'processing'}
               onClick={this.handleItemClick}
             />
             <Menu.Item
@@ -91,67 +91,7 @@ class AdminOrders extends Component {
                   order.status === this.state.filtered ||
                   !this.state.filtered
                 ) {
-                  return (
-                    <div key={order.id} className="single-user-card">
-                      <Segment>
-                        <List.Item>
-                          <List.Content>
-                            <List.Header>
-                              <Link
-                                to={`/users/${order.user.id}/orders/${
-                                  order.id
-                                }`}
-                              >
-                                <div className="linkColor">
-                                  <h2>
-                                    {order.user
-                                      ? order.user.email
-                                      : order.email}
-                                  </h2>
-                                </div>
-                              </Link>
-                            </List.Header>
-                            <h2>status: {order.status}</h2>
-                            {/* <Dropdown fluid selection options={[{text: "placed", value: "placed"}, {text:"in process", value: "in process"}, {text: "completed", value: "completed"}, {text: "cancelled", value: "cancelled"}]} defaultValue={order.status} name={order.id} onChange={this.changeOrderStatus} /> */}
-                            <select
-                              name={order.id}
-                              onChange={this.changeOrderStatus}
-                              value={order.status}
-                            >
-                              <option value="placed">Placed</option>
-                              <option value="in process">in process</option>
-                              <option value="completed">Completed</option>
-                              <option value="cancelled">Cancelled</option>
-                            </select>
-                            {!(
-                              order.status === 'completed' ||
-                              order.status === 'cancelled'
-                            ) && (
-                              <div>
-                                <Button
-                                  content="Cancelled"
-                                  color="red"
-                                  name={order.id}
-                                  onClick={this.orderCancelled}
-                                  icon="cancel"
-                                  labelPosition="left"
-                                />
-                                <Button
-                                  content="Next"
-                                  color="olive"
-                                  name={order.id}
-                                  value={order.status}
-                                  onClick={this.orderStatus}
-                                  icon="right arrow"
-                                  labelPosition="right"
-                                />
-                              </div>
-                            )}
-                          </List.Content>
-                        </List.Item>
-                      </Segment>
-                    </div>
-                  )
+                  return <AdminOrderCard key={order.id} order={order} />
                 }
               })
             ) : (
