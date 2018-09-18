@@ -73,15 +73,6 @@ class AdminOrderCard extends React.Component {
         </select>
         {!(status === 'completed' || status === 'cancelled') && (
           <div>
-            {/* will leave to fix bugs
-            <button
-              name={id}
-              value={status}
-              onClick={this.orderStatus}
-              type="button"
-            >
-              Next status
-            </button> */}
             <button name={id} onClick={this.orderCancelled} type="button">
               Cancel
             </button>
