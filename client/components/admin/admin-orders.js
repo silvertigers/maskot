@@ -20,7 +20,7 @@ class AdminOrders extends Component {
   }
 
   orderFilter(event) {
-    const word = event.target.value
+    const word = event.target.name
     var filterWord = ''
     if (word === 'placed') {
       filterWord = 'placed'
@@ -31,6 +31,7 @@ class AdminOrders extends Component {
     } else if (word === 'cancelled') {
       filterWord = 'cancelled'
     }
+    console.log('filter', this.state.filtered)
     this.setState({
       filtered: filterWord
     })
@@ -45,40 +46,41 @@ class AdminOrders extends Component {
             <Menu.Item
               name="List"
               active={activeItem === 'List'}
-              onClick={this.handleItemClick}
+              onClick={this.orderFilter}
             />
             <Menu.Item
               name="placed"
               active={activeItem === 'placed'}
-              onClick={this.handleItemClick}
+              onClick={this.orderFilter}
             />
             <Menu.Item
               name="in process"
               active={activeItem === 'in process'}
-              onClick={this.handleItemClick}
+              onClick={this.orderFilter}
             />
             <Menu.Item
               name="completed"
               active={activeItem === 'completed'}
-              onClick={this.handleItemClick}
+              onClick={this.orderFilter}
             />
             <Menu.Item
               name="cancelled"
               active={activeItem === 'cancelled'}
-              onClick={this.handleItemClick}
+              onClick={this.orderFilter}
             />
           </Menu>
 
           <h2>Order list</h2>
           <ul>
+            {console.log('this.props.orders', this.props.orders)}
             {this.props.orders[0] ? (
               this.props.orders.map(order => {
-                if (
-                  order.status === this.state.filtered ||
-                  !this.state.filtered
-                ) {
-                  return <AdminOrderCard key={order.id} order={order} />
-                }
+                return (
+                  (order.status === this.state.filtered ||
+                    !this.state.filtered) && (
+                    <AdminOrderCard key={order.id} order={order} />
+                  )
+                )
               })
             ) : (
               <h2>None of products are available at this time</h2>
