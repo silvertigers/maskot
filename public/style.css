@@ -117,6 +117,7 @@ form div {
 
 .ui.tiny.right.floated.image {
   max-height: 70px;
+  object-fit: cover;
 }
 
 .edit-button {
@@ -219,13 +220,17 @@ ul {
   flex-direction: row;
 }
 
-.order-card {
-  justify-content: space-between;
+.nav-items.end {
+  position: absolute;
+  right: 30px;
 }
 
-.nav-items.end {
-  position: fixed;
-  right: 20px;
+.orderPage {
+  column-count: 2;
+}
+
+.order-card {
+  justify-content: space-between;
 }
 
 .admin-order.small-detail {
@@ -234,6 +239,8 @@ ul {
 
 .select {
   height: 25px;
+}
+
 .ui.teal.button {
   width: 363px;
 }
