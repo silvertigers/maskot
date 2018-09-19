@@ -3,10 +3,7 @@ import {getProducts} from '../../store/products'
 import {connect} from 'react-redux'
 import ProductCard from './productCard'
 import {getCategories, selectCategory} from '../../store/category'
-// import { Search, Grid, Header, Segment, List } from 'semantic-ui-react'
-// import _ from 'lodash'
-// =======
-// import {Grid, List} from 'semantic-ui-react'
+import { Grid, Input, Select } from 'semantic-ui-react'
 
 const mapStateToProps = state => {
   return {
@@ -43,7 +40,6 @@ class Products extends React.Component {
     this.setState({
       searchTerm: event.target.value
     })
-    let caseInsensitiveSearch = new RegExp(this.state.searchTerm, "i")
     let matchArr2 = []
     for (let i = 0; i < this.props.products.length; i++){
       if (this.props.products[i].name.toLowerCase().startsWith(this.state.searchTerm.toLowerCase())){
@@ -55,13 +51,12 @@ class Products extends React.Component {
     })
   }
 
-  handleCategoryChange(event) {
-    this.props.selectCategory(Number(event.target.value))
+  handleCategoryChange(data) {
+    this.props.selectCategory(Number(data.value))
+    console.log(data)
   }
 
   render() {
-    console.log(this.props.products)
-    console.log(this.state)
     if (this.props.products[0]) {console.log(this.props.products[0].name)}
     let filteredProducts = []
     if (this.props.category.selectedCategory === 0) {
@@ -78,37 +73,53 @@ class Products extends React.Component {
         }
       }
     }
+    let categoryOptions = this.props.category.categories.map(category => { return (
+        {
+          key: category.id,
+          name: category.type,
+          value: category.id,
+          text: category.type
+        }
+      )}
+    )
+
+    categoryOptions.unshift({
+      key: 0,
+      name: 'All',
+      value: 0,
+      text: 'All'
+    })
+
+
     return (
-      <div className="products-grid">
-        <h1>Products</h1>
-          <input type="search" id="products-search" placeholder="Search products..." onChange={this.handleSearchChange} />
-        <select onChange={this.handleCategoryChange}>
-          <option value="0">All</option>
-          {this.props.category.categories.map(category => {
-            return (
-              <option
-                key={category.id}
-                name={category.type}
-                value={category.id}
-              >
-                {category.type}
-              </option>
-            )
-          })}
-        </select>
-        <div id="productsul">
-          {this.state.searchTerm === '' ?
-            filteredProducts.map(product => {
-              return <ProductCard key={product.id} product={product} />
-            })
-          : this.state.matches.map(product => {
-            return <ProductCard key={product.id} product={product} />
-          })
-          }
+    <div className="products-div">
+      <div className="products-nav">
+        <div>
+        <Input className='search-input' icon='search' id="products-search" placeholder="Search products..." onChange={this.handleSearchChange} />
+        </div>
+        <div>
+        <Select className='selector-category' placeholder='Categories' options={categoryOptions} onChange={(evt, data)=>{this.handleCategoryChange(data)}} />
         </div>
       </div>
-    )
-  }
-}
+      <div className="container-list">
+        <Grid columns={3} divided>
+            {this.state.searchTerm === '' ?
+              filteredProducts.map(product => {
+                return (
+                <Grid.Column key={product.id} width={5}>
+                  <ProductCard key={product.id} product={product} />
+                </Grid.Column>
+              )})
+            : this.state.matches.map(product => {
+              return (
+                <Grid.Column key={product.id} width={5}>
+                  <ProductCard product={product} />
+                </Grid.Column>
+              )})
+            }
+        </Grid>
+      </div>
+  </div>
+)}}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products)
