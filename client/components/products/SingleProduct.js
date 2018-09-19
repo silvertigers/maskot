@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Icon, Image } from 'semantic-ui-react'
+import {Card} from 'semantic-ui-react'
 import {getProduct} from '../../store/product'
 import {connect} from 'react-redux'
 import {SingleReview, AddToCart, ReviewForm} from '../index'
@@ -24,16 +24,22 @@ class SingleProduct extends React.Component {
   render() {
     const {imageUrl, name, description, reviews, price} = this.props.product
     return (
-      <div className='single-product'>
-        <div className="product-image">
-          <img src={`${imageUrl}`} />
+      <div>
+        <div className="single-product">
+          <div className="product product-image">
+            <img src={`${imageUrl}`} />
+          </div>
+          <div className="product product-details">
+            <Card>
+              <Card.Content header={name} />
+              <Card.Content>{`$ ${price / 100}`}</Card.Content>
+              <Card.Content description={description} />
+              <Card.Content extra>
+                <AddToCart product={this.props.product} />
+              </Card.Content>
+            </Card>
+          </div>
         </div>
-        <div className="product-details">
-          <h2>{name}</h2>
-          <p>{`$ ${price / 100}`}</p>
-          <p>{description}</p>
-        </div>
-        <AddToCart product={this.props.product} />
         {reviews && reviews[0] ? (
           <div className="reviews">
             <h2>Reviews</h2>

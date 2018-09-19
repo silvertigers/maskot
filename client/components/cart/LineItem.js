@@ -2,11 +2,12 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {editCart} from '../../store/cart'
+import {Grid, Image, Select, Button} from 'semantic-ui-react'
 
 const createNumberList = number => {
   const list = []
   for (let i = 1; i <= number; i++) {
-    list.push(i)
+    list.push({key: i, value: i, text: `${i}`})
   }
   return list
 }
@@ -19,14 +20,22 @@ class LineItem extends React.Component {
     this.handleDelete = this.handleDelete.bind(this)
   }
 
-  handleChange(event) {
+  handleChange(event, {value}) {
     const prodIndex = this.props.cart.findIndex(item => {
       return item.product.id === this.props.product.id
     })
     const newCart = [...this.props.cart]
-    newCart[prodIndex].quantity = Number(event.target.value)
+    newCart[prodIndex].quantity = value
     this.props.editCart(newCart)
   }
+  // handleChange(event) {
+  //   const prodIndex = this.props.cart.findIndex(item => {
+  //     return item.product.id === this.props.product.id
+  //   })
+  //   const newCart = [...this.props.cart]
+  //   newCart[prodIndex].quantity = Number(event.target.value)
+  //   this.props.editCart(newCart)
+  // }
 
   handleDelete(event) {
     const prodIndex = this.props.cart.findIndex(item => {
@@ -41,35 +50,59 @@ class LineItem extends React.Component {
     const {id, name, imageUrl, price} = this.props.product
     const {quantity} = this.props
     return (
-      <li className="line-item">
-        <Link to={`/products/${id}`}>
-          <div className="product-image">
-            <img src={imageUrl} />
-          </div>
-        </Link>
-        <div className="product-name">
-          <h3>{name}</h3>
-        </div>
-        <div className="product-price">{`$ ${price / 100}`}</div>
-        <div>X</div>
-        <select
-          className="product-quantity"
-          value={quantity}
-          onChange={this.handleChange}
-        >
-          {createNumberList(15).map(num => (
-            <option key={num} value={num}>
-              {num}
-            </option>
-          ))}
-        </select>
-        <div className="product-total-price">
+      <Grid className="line-item">
+        <Grid.Column width={4}>
+          <Link to={`/products/${id}`}>
+            <Image src={imageUrl} />
+          </Link>
+        </Grid.Column>
+        <Grid.Column width={9}>
+          <h2>{name}</h2>
+          <Button onClick={this.handleDelete} basic color="red">
+            Remove
+          </Button>
+        </Grid.Column>
+        <Grid.Column width={3}>
+          <div className="product-price">{`$ ${price / 100}`}</div> x
+          <Select
+            className="select"
+            placeholder={quantity}
+            options={createNumberList()}
+            onChange={this.handleChange}
+          />
           {`$ ${price * quantity / 100}`}
-        </div>
-        <button type="button" onClick={this.handleDelete}>
-          X
-        </button>
-      </li>
+        </Grid.Column>
+      </Grid>
+
+      // <li className="line-item">
+      // <Link to={`/products/${id}`}>
+      //   <div className="product-image">
+      //     <img src={imageUrl} />
+      //   </div>
+      // </Link>
+      //   <div className="product-name">
+      //     <h3>{name}</h3>
+      //   </div>
+      //   <div className="product-price">{`$ ${price / 100}`}</div>
+      //   <div>X</div>
+      //   <select
+      //     className="product-quantity"
+      //     value={quantity}
+      //     onChange={this.handleChange}
+      //   >
+      //     {createNumberList(15).map(num => (
+      //       <option key={num} value={num}>
+      //         {num}
+      //       </option>
+      //     ))}
+      //   </select>
+      //   <div className="product-total-price">
+      //     {`$ ${price * quantity / 100}`}
+      //   </div>
+      //   <button type="button" onClick={this.handleDelete}>
+      //     X
+      //   </button>
+      // </li>
     )
   }
 }

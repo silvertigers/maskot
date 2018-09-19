@@ -39,7 +39,6 @@ class Checkout extends React.Component {
           source: token.id,
           currency: 'usd'
         })
-        console.log('Success', data)
         console.log(
           `User's email will be saved to order history: ${
             data.status.source.name
