@@ -16,21 +16,6 @@ const OrderCard = props => {
         <Card.Description>Order status: {props.order.status}</Card.Description>
       </Card.Content>
     </Card>
-
-
-
-
-
-
-
-
-    // <li>
-    //   <Link to={`/users/${props.userId}/orders/${props.order.id}`}>
-    //     <h3>Order #{props.order.id}</h3>
-    //   </Link>
-    //   <h3>Date: {props.order.createdAt}</h3>
-    //   <p>Status: {props.order.status}</p>
-    // </li>
   )
 }
 
