@@ -2,7 +2,14 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {editedOrder, getOrder} from '../../store/order'
-import {Button, List, Segment} from 'semantic-ui-react'
+import {Button, List, Segment, Select} from 'semantic-ui-react'
+
+const statuses = [
+  {key: 'placed', value: 'placed', text: 'Placed'},
+  {key: 'processing', value: 'processing', text: 'Processing'},
+  {key: 'completed', value: 'completed', text: 'Completed'},
+  {key: 'cancelled', value: 'cancelled', text: 'Cancelled'}
+]
 
 class AdminOrderCard extends React.Component {
   constructor(props) {
@@ -23,12 +30,12 @@ class AdminOrderCard extends React.Component {
     }
   }
 
-  async changeOrderStatus(event) {
+  async changeOrderStatus(e, {value}) {
     const updatedData = {
-      id: event.target.name,
-      status: event.target.value
+      id: this.props.order.id,
+      status: value
     }
-    this.setState({status: event.target.value})
+    this.setState({status: value})
     await this.props.editOrder(updatedData)
   }
 
@@ -62,7 +69,16 @@ class AdminOrderCard extends React.Component {
         <Segment>
           <List.Item>
             <List.Content>
-              <List.Header>Order {id}</List.Header>
+              <div className="nav-items order-card">
+                <List.Header className="admin-order small-detail">
+                  Order {id}
+                </List.Header>
+                <Select
+                  placeholder={this.props.order.status}
+                  options={statuses}
+                  onChange={this.changeOrderStatus}
+                />
+              </div>
               <List.Header>
                 {userId ? (
                   <Link to={`/users/${userId}/orders/${id}`}>
@@ -90,16 +106,11 @@ class AdminOrderCard extends React.Component {
                     </ul>
                   )
                 })}
-              <select
-                name={id}
+              {/* <Select
+                placeholder={this.props.order.status}
+                options={statuses}
                 onChange={this.changeOrderStatus}
-                value={this.state.status}
-              >
-                <option value="placed">Placed</option>
-                <option value="processing">Processing</option>
-                <option value="completed">Completed</option>
-                <option value="cancelled">Cancelled</option>
-              </select>
+              /> */}
               {!(status === 'completed' || status === 'cancelled') && (
                 <div>
                   <Button

@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 import store from '../store'
 import {logout} from '../store/user'
 import {setCartToStorage} from '../store/cart'
-import {Label} from 'semantic-ui-react'
+import {Label, Icon} from 'semantic-ui-react'
 
 class Navbar extends React.Component {
   shouldComponentUpdate(nextProps) {
@@ -19,40 +19,48 @@ class Navbar extends React.Component {
         <div className="ui teal inverted segment">
           <h1 className="nav-title">MASKOT</h1>
           <div className="ui inverted secondary menu">
-            <Link to="/home" className="item">
-              Home
-            </Link>
-            <Link to="/products" className="item">
-              Products
-            </Link>
-            <Link to="/cart" className="item">
-              Cart
-              <Label>{cartItems}</Label>
-            </Link>
-            {isLoggedIn && (
-              <Link to={`/users/${userId}/orders`} className="item">
-                Orders
+            <div className="nav-items">
+              <Link to="/home" className="item">
+                Home
               </Link>
-            )}
-            {isAdmin && (
-              <Link to="/dashboard" className="item">
-                DashBoard
+              <Link to="/products" className="item">
+                Products
               </Link>
-            )}
-            {isLoggedIn ? (
-              <a className="item" href="#" onClick={handleClick}>
-                Logout
-              </a>
-            ) : (
-              <Link to="/login" className="item">
-                Login
+            </div>
+
+            <div className="nav-items end">
+              {isAdmin && (
+                <Link to="/dashboard" className="item">
+                  DashBoard
+                </Link>
+              )}
+              {isLoggedIn && (
+                <Link to={`/users/${userId}/orders`} className="item">
+                  Orders
+                </Link>
+              )}
+
+              {isLoggedIn ? (
+                <a className="item" href="#" onClick={handleClick}>
+                  Logout
+                </a>
+              ) : (
+                <Link to="/login" className="item">
+                  Login
+                </Link>
+              )}
+              {!isLoggedIn && (
+                <Link to="/signup" className="item">
+                  Sign Up
+                </Link>
+              )}
+              <Link to="/cart" className="item">
+                <Icon size="large" name="cart" />
+                <Label circular floating size="small" color="orange">
+                  {cartItems}
+                </Label>
               </Link>
-            )}
-            {!isLoggedIn && (
-              <Link to="/signup" className="item">
-                Sign Up
-              </Link>
-            )}
+            </div>
           </div>
         </div>
       </div>
