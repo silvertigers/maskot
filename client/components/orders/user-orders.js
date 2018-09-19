@@ -27,6 +27,7 @@ class UserOrders extends React.Component {
     }
     return (
       <div className="user-orders">
+      <h3> Your Orders </h3>
         {this.props.orders[0] ? (
           <ul>
             {this.props.orders.map(order => {

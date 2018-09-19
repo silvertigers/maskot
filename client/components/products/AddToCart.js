@@ -60,7 +60,7 @@ class AddToCart extends React.Component {
   render() {
     return (
       <div className="add-to-cart">
-        <Button.Group className="add-to-cart">
+        <Button.Group className="add-to-cart" id="button-group">
           <Button type="button" className="minus" onClick={this.decrement}>
             -
           </Button>
