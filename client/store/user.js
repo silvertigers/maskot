@@ -61,7 +61,7 @@ export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
     dispatch(removeUser())
-    dispatch(removeProduct())
+    // dispatch(removeProduct())
     dispatch(emptyCart())
     history.push('/products')
   } catch (err) {
