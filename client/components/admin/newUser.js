@@ -42,8 +42,6 @@ class NewUser extends Component {
   render() {
     return (
       <div>
-        <h2 className="title">Add a new User</h2>
-
         <FormUser
           textChange={this.textChange}
           userType={this.userType}

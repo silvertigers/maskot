@@ -78,10 +78,12 @@ form div {
   margin: 3em;
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
-.reviewForm {
-  text-align: center;
+#reviewForm {
+  margin: 15px 0;
+  text-align: left;
 }
 
 .card-view {
@@ -177,13 +179,27 @@ form {
   width: 70vw;
 }
 
+h2.ui.icon.header {
+  margin: 0 20vw;
+}
+
 .products-column {
   display: flex;
   justify-content: center;
 }
 
+#productsul {
+  width: 400px;
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-cart {
+  margin: 30px;
+}
+
 .col {
-  /* flex: 1; */
   grid-column: 1;
   grid-row: 1;
 }
@@ -218,4 +234,27 @@ ul {
 
 .select {
   height: 25px;
+.ui.teal.button {
+  width: 363px;
+}
+
+.addForm {
+  margin: 0 15vw;
+}
+
+.categoryPage {
+  margin: 0 15vw;
+  text-align: center;
+}
+
+.ui.form {
+  text-align: center;
+}
+
+.userPage {
+  margin: 0 15vw;
+}
+
+.orderPage {
+  margin: 2vw 15vw;
 }

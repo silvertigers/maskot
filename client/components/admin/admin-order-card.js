@@ -74,6 +74,7 @@ class AdminOrderCard extends React.Component {
                   Order {id}
                 </List.Header>
                 <Select
+                  className="select"
                   placeholder={this.props.order.status}
                   options={statuses}
                   onChange={this.changeOrderStatus}

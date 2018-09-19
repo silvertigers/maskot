@@ -32,7 +32,6 @@ class NewProduct extends Component {
     })
   }
 
-  // We may don't need this section depend on Semantic UI
   increment() {
     this.setState({
       quantity: this.state.quantity + 1
@@ -69,7 +68,7 @@ class NewProduct extends Component {
 
   render() {
     return (
-      <div>
+      <div className="addForm">
         <h2 className="title">Add a new Product</h2>
 
         <FormProduct

@@ -96,17 +96,15 @@ class Products extends React.Component {
             )
           })}
         </select>
-        <div className="listing flex-grid">
-          <ul id="productsul">
-            {this.state.searchTerm === '' ?
-              filteredProducts.map(product => {
-                return <ProductCard key={product.id} product={product} />
-              })
-            : this.state.matches.map(product => {
+        <div id="productsul">
+          {this.state.searchTerm === '' ?
+            filteredProducts.map(product => {
               return <ProductCard key={product.id} product={product} />
             })
-            }
-          </ul>
+          : this.state.matches.map(product => {
+            return <ProductCard key={product.id} product={product} />
+          })
+          }
         </div>
       </div>
     )
