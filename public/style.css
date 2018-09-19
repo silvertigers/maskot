@@ -278,3 +278,28 @@ ul {
 .cart-button {
   width: 50;
 }
+#checkout-price {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+}
+.select-quantity {
+  height: 20px;
+}
+.select-wrap {
+  width: 50px;
+  display: inline-block;
+}
+.cart-image {
+  object-fit: scale-down;
+  max-height: 200px;
+  max-width: 200px;
+  width: 100%;
+}
+#cart {
+  padding: 40px;
+}
+.checkout-wrap {
+  display: flex;
+  flex-flow: row;
+}
