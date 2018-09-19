@@ -26,7 +26,7 @@ class AdminCategories extends Component {
         <Menu tabular>
           <Menu.Item name='List' active={activeItem === 'List'}/>
         </Menu>
-          <div>
+          <div className="categoryPage">
           <h2>Categories List</h2>
           <div className="category">
           {
@@ -41,9 +41,9 @@ class AdminCategories extends Component {
             : <h2>None of categories are exist</h2>
           }
           </div>
+            <NewCategory />
           </div>
         </div>
-        <NewCategory />
       </div>
     )
   }
