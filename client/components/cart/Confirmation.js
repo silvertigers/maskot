@@ -8,7 +8,7 @@ class Confirmation extends React.Component {
   }
   render() {
     return (
-      <div id="order-confirmation">
+      <div style={{padding: '40px'}} id="order-confirmation">
         <h2>Purchase Complete</h2>
         <h3>You're order is on its way</h3>
         <p>Please allow for 3-5 business days</p>

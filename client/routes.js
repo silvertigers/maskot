@@ -62,13 +62,13 @@ class Routes extends Component {
         />
         {isLoggedIn && (
           <Switch>
+            <Route path="/home" component={UserHome} />
             <Route exact path="/users/:userId/orders" component={UserOrders} />
             {isAdmin && <Route path="/dashboard" component={AdminHome} />}
             <Route
               path="/users/:userId/orders/:orderId"
               component={SingleOrder}
             />
-            <Route path="/home" component={UserHome} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

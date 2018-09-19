@@ -24,8 +24,11 @@ class SingleProduct extends React.Component {
   render() {
     const {imageUrl, name, description, reviews, price} = this.props.product
     return (
-      <div>
-        <div className="single-product">
+      <div style={{padding: '40px'}}>
+        <div
+          className="single-product"
+          style={{display: 'flex', justifyContent: 'space-evenly'}}
+        >
           <div className="product product-image">
             <img src={`${imageUrl}`} />
           </div>
@@ -42,7 +45,7 @@ class SingleProduct extends React.Component {
         </div>
         {reviews && reviews[0] ? (
           <div className="reviews">
-            <h2>Reviews</h2>
+            <h2 style={{textAlign: 'left'}}>Reviews</h2>
             <ReviewForm productId={this.props.match.params.productId} />
             {reviews.map(review => (
               <SingleReview key={review.id} review={review} />

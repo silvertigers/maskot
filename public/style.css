@@ -349,10 +349,7 @@ ul {
   max-width: 200px;
   width: 100%;
 }
-#cart {
-  padding: 40px;
-}
-.checkout-wrap {
+.flex-wrapper {
   display: flex;
   flex-flow: row;
 }

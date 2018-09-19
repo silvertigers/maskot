@@ -61,11 +61,19 @@ class AddToCart extends React.Component {
     return (
       <div className="add-to-cart">
         <Button.Group className="add-to-cart" id="button-group">
-          <Button type="button" className="minus" onClick={this.decrement}>
+          <Button
+            style={{width: '50px'}}
+            className="minus"
+            onClick={this.decrement}
+          >
             -
           </Button>
           <Button.Or text={this.state.quantity} />
-          <Button type="button" className="plus" onClick={this.increment}>
+          <Button
+            style={{width: '50px'}}
+            className="plus"
+            onClick={this.increment}
+          >
             +
           </Button>
         </Button.Group>
@@ -73,9 +81,14 @@ class AddToCart extends React.Component {
         <Button
           className="cart-button"
           color="teal"
-          size="large"
           type="button"
           onClick={this.addToCart}
+          style={{
+            width: '52px',
+            marginLeft: '20px',
+            right: '50px',
+            position: 'absolute'
+          }}
         >
           <Icon name="shopping cart" />
         </Button>

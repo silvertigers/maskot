@@ -17,7 +17,12 @@ class Navbar extends React.Component {
     return (
       <div>
         <div className="ui teal inverted segment">
-          <h1 className="nav-title">MASKOT</h1>
+          <h1 style={{display: 'inline-block'}} className="nav-title">
+            MASKOT
+          </h1>
+          <p style={{display: 'inline-block', marginLeft: '20px'}}>
+            Fashion-forward facewear
+          </p>
           <div className="ui inverted secondary menu">
             <div className="nav-items">
               <Link to="/home" className="item">

@@ -3,7 +3,7 @@ import {getProducts} from '../../store/products'
 import {connect} from 'react-redux'
 import ProductCard from './productCard'
 import {getCategories, selectCategory} from '../../store/category'
-import { Grid, Input, Select } from 'semantic-ui-react'
+import {Grid, Input, Select} from 'semantic-ui-react'
 
 const mapStateToProps = state => {
   return {
@@ -41,8 +41,12 @@ class Products extends React.Component {
       searchTerm: event.target.value
     })
     let matchArr2 = []
-    for (let i = 0; i < this.props.products.length; i++){
-      if (this.props.products[i].name.toLowerCase().startsWith(this.state.searchTerm.toLowerCase())){
+    for (let i = 0; i < this.props.products.length; i++) {
+      if (
+        this.props.products[i].name
+          .toLowerCase()
+          .startsWith(this.state.searchTerm.toLowerCase())
+      ) {
         matchArr2.push(this.props.products[i])
       }
     }
@@ -57,7 +61,9 @@ class Products extends React.Component {
   }
 
   render() {
-    if (this.props.products[0]) {console.log(this.props.products[0].name)}
+    if (this.props.products[0]) {
+      console.log(this.props.products[0].name)
+    }
     let filteredProducts = []
     if (this.props.category.selectedCategory === 0) {
       filteredProducts = this.props.products
@@ -73,15 +79,14 @@ class Products extends React.Component {
         }
       }
     }
-    let categoryOptions = this.props.category.categories.map(category => { return (
-        {
-          key: category.id,
-          name: category.type,
-          value: category.id,
-          text: category.type
-        }
-      )}
-    )
+    let categoryOptions = this.props.category.categories.map(category => {
+      return {
+        key: category.id,
+        name: category.type,
+        value: category.id,
+        text: category.type
+      }
+    })
 
     categoryOptions.unshift({
       key: 0,
@@ -90,36 +95,59 @@ class Products extends React.Component {
       text: 'All'
     })
 
-
     return (
-    <div className="products-div">
-      <div className="products-nav">
-        <div>
-        <Input className='search-input' icon='search' id="products-search" placeholder="Search products..." onChange={this.handleSearchChange} />
+      <div className="products-div" style={{padding: '40px'}}>
+        <div
+          style={{display: 'flex', marginBottom: '60px'}}
+          className="products-nav"
+        >
+          <div>
+            <Input
+              className="search-input"
+              icon="search"
+              id="products-search"
+              placeholder="Search products..."
+              onChange={this.handleSearchChange}
+            />
+          </div>
+          <div>
+            <Select
+              style={{display: 'inline-block', marginLeft: '20px'}}
+              className="selector-category"
+              placeholder="Categories"
+              options={categoryOptions}
+              onChange={(evt, data) => {
+                this.handleCategoryChange(data)
+              }}
+            />
+          </div>
         </div>
-        <div>
-        <Select className='selector-category' placeholder='Categories' options={categoryOptions} onChange={(evt, data)=>{this.handleCategoryChange(data)}} />
+        <div className="container-list">
+          <Grid columns={3} divided>
+            {this.state.searchTerm === ''
+              ? filteredProducts.map(product => {
+                  return (
+                    <Grid.Column
+                      key={product.id}
+                      width={5}
+                      style={{display: 'flex', justifyContent: 'center'}}
+                    >
+                      <ProductCard key={product.id} product={product} />
+                    </Grid.Column>
+                  )
+                })
+              : this.state.matches.map(product => {
+                  return (
+                    <Grid.Column key={product.id} width={5}>
+                      <ProductCard product={product} />
+                    </Grid.Column>
+                  )
+                })}
+          </Grid>
         </div>
       </div>
-      <div className="container-list">
-        <Grid columns={3} divided>
-            {this.state.searchTerm === '' ?
-              filteredProducts.map(product => {
-                return (
-                <Grid.Column key={product.id} width={5}>
-                  <ProductCard key={product.id} product={product} />
-                </Grid.Column>
-              )})
-            : this.state.matches.map(product => {
-              return (
-                <Grid.Column key={product.id} width={5}>
-                  <ProductCard product={product} />
-                </Grid.Column>
-              )})
-            }
-        </Grid>
-      </div>
-  </div>
-)}}
+    )
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Products)

@@ -51,7 +51,7 @@ class LineItem extends React.Component {
         <Grid.Column width={4}>
           <h2>{name}</h2>
           <Button
-            style={{'margin-top': '20px'}}
+            style={{marginTop: '20px'}}
             onClick={this.handleDelete}
             basic
             color="red"
@@ -59,7 +59,11 @@ class LineItem extends React.Component {
             Remove
           </Button>
         </Grid.Column>
-        <Grid.Column id="checkout-price" width={4}>
+        <Grid.Column
+          style={{display: 'flex', justifyContent: 'space-around'}}
+          id="checkout-price"
+          width={4}
+        >
           {`$ ${price / 100}`} x
           <div className="select-wrap">
             <Select

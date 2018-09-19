@@ -30,10 +30,10 @@ export class Cart extends React.Component {
   render() {
     const {animation, duration, visible} = this.state
     return this.props.cart[0] ? (
-      <div id="cart">
+      <div id="cart" style={{padding: '40px'}}>
         <h1>Shopping Cart</h1>
         <h3>Items ({quantityTotal(this.props.cart)})</h3>
-        <div className="checkout-wrap">
+        <div style={{display: 'flex'}} className="flex-wrapper">
           <ul className="line-items">
             {this.props.cart.map(item => (
               <LineItem key={item.product.id} {...item} />
@@ -46,6 +46,7 @@ export class Cart extends React.Component {
               color="orange"
               className="checkout-btn"
               onClick={this.handleVisibility}
+              style={{marginBottom: '30px'}}
             >
               Checkout
             </Button>
