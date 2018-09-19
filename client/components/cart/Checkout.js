@@ -3,7 +3,6 @@ import StripeCheckout from 'react-stripe-checkout'
 import CheckoutForm from './CheckoutForm'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {OrderSummary} from './OrderSummary'
 import {postGuestOrder, postUserOrder} from '../../store/order'
 
 const orderTotal = cart => {
@@ -39,7 +38,6 @@ class Checkout extends React.Component {
           source: token.id,
           currency: 'usd'
         })
-        console.log('Success', data)
         console.log(
           `User's email will be saved to order history: ${
             data.status.source.name
@@ -57,7 +55,6 @@ class Checkout extends React.Component {
     const description = 'Fashion-forward facewear'
     return (
       <div className="checkout">
-        <OrderSummary cart={this.props.cart} />
         <CheckoutForm />
         <StripeCheckout
           email={this.props.user.email || null}

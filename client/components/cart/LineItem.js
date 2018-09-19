@@ -2,11 +2,12 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {editCart} from '../../store/cart'
+import {Grid, Image, Select, Button} from 'semantic-ui-react'
 
 const createNumberList = number => {
   const list = []
   for (let i = 1; i <= number; i++) {
-    list.push(i)
+    list.push({key: i, value: i, text: `${i}`})
   }
   return list
 }
@@ -19,12 +20,12 @@ class LineItem extends React.Component {
     this.handleDelete = this.handleDelete.bind(this)
   }
 
-  handleChange(event) {
+  handleChange(event, {value}) {
     const prodIndex = this.props.cart.findIndex(item => {
       return item.product.id === this.props.product.id
     })
     const newCart = [...this.props.cart]
-    newCart[prodIndex].quantity = Number(event.target.value)
+    newCart[prodIndex].quantity = value
     this.props.editCart(newCart)
   }
 
@@ -41,35 +42,38 @@ class LineItem extends React.Component {
     const {id, name, imageUrl, price} = this.props.product
     const {quantity} = this.props
     return (
-      <li className="line-item">
-        <Link to={`/products/${id}`}>
-          <div className="product-image">
-            <img src={imageUrl} />
+      <Grid className="line-item">
+        <Grid.Column width={4}>
+          <Link to={`/products/${id}`}>
+            <Image className="cart-image" src={imageUrl} />
+          </Link>
+        </Grid.Column>
+        <Grid.Column width={4}>
+          <h2>{name}</h2>
+          <Button
+            style={{'margin-top': '20px'}}
+            onClick={this.handleDelete}
+            basic
+            color="red"
+          >
+            Remove
+          </Button>
+        </Grid.Column>
+        <Grid.Column id="checkout-price" width={4}>
+          {`$ ${price / 100}`} x
+          <div className="select-wrap">
+            <Select
+              fluid
+              style={{width: '50px'}}
+              className="select-quantity"
+              placeholder={`${quantity}`}
+              options={createNumberList(10)}
+              onChange={this.handleChange}
+            />
           </div>
-        </Link>
-        <div className="product-name">
-          <h3>{name}</h3>
-        </div>
-        <div className="product-price">{`$ ${price / 100}`}</div>
-        <div>X</div>
-        <select
-          className="product-quantity"
-          value={quantity}
-          onChange={this.handleChange}
-        >
-          {createNumberList(15).map(num => (
-            <option key={num} value={num}>
-              {num}
-            </option>
-          ))}
-        </select>
-        <div className="product-total-price">
-          {`$ ${price * quantity / 100}`}
-        </div>
-        <button type="button" onClick={this.handleDelete}>
-          X
-        </button>
-      </li>
+          {`$ ${(price * quantity / 100).toFixed(2)}`}
+        </Grid.Column>
+      </Grid>
     )
   }
 }

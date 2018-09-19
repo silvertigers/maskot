@@ -70,7 +70,13 @@ class AddToCart extends React.Component {
           </Button>
         </Button.Group>
 
-        <Button color="teal" size="large" type="button" onClick={this.addToCart}>
+        <Button
+          className="cart-button"
+          color="teal"
+          size="large"
+          type="button"
+          onClick={this.addToCart}
+        >
           <Icon name="shopping cart" />
         </Button>
       </div>

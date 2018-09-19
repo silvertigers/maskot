@@ -11,6 +11,11 @@ const statuses = [
   {key: 'cancelled', value: 'cancelled', text: 'Cancelled'}
 ]
 
+const makeInitialCaps = string => {
+  const initial = string[0].toUpperCase()
+  return initial + string.slice(1)
+}
+
 class AdminOrderCard extends React.Component {
   constructor(props) {
     super(props)
@@ -72,10 +77,12 @@ class AdminOrderCard extends React.Component {
               <div className="nav-items order-card">
                 <List.Header className="admin-order small-detail">
                   Order {id}
+                  <br />
+                  {userId ? 'User' : 'Guest'}
                 </List.Header>
                 <Select
                   className="select"
-                  placeholder={this.props.order.status}
+                  placeholder={makeInitialCaps(this.props.order.status)}
                   options={statuses}
                   onChange={this.changeOrderStatus}
                 />
@@ -92,8 +99,8 @@ class AdminOrderCard extends React.Component {
                     </Link>
                   </div>
                 )}
+                <List.Description>Status: {status}</List.Description>
               </List.Header>
-              <List.Description>Status: {status}</List.Description>
 
               {this.props.order.products &&
                 this.props.order.products.map(product => {
@@ -107,11 +114,6 @@ class AdminOrderCard extends React.Component {
                     </ul>
                   )
                 })}
-              {/* <Select
-                placeholder={this.props.order.status}
-                options={statuses}
-                onChange={this.changeOrderStatus}
-              /> */}
               {!(status === 'completed' || status === 'cancelled') && (
                 <div>
                   <Button
