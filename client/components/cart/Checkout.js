@@ -1,9 +1,8 @@
 import React from 'react'
 import StripeCheckout from 'react-stripe-checkout'
-import CheckoutForm from './CheckoutForm'
+import {withRouter} from 'react-router-dom'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {OrderSummary} from './OrderSummary'
 import {postGuestOrder, postUserOrder} from '../../store/order'
 
 const orderTotal = cart => {
@@ -23,9 +22,9 @@ class Checkout extends React.Component {
     const status = 'placed'
     const {user, cart, postUserOrder, postGuestOrder} = this.props
     if (user.id) {
-      await postUserOrder({email, status, userId: user.id}, cart)
+      postUserOrder({email, status, userId: user.id}, cart)
     } else {
-      await postGuestOrder({email, status}, cart)
+      postGuestOrder({email, status}, cart)
     }
     this.props.history.push(`/confirmation`)
   }
@@ -39,7 +38,6 @@ class Checkout extends React.Component {
           source: token.id,
           currency: 'usd'
         })
-        console.log('Success', data)
         console.log(
           `User's email will be saved to order history: ${
             data.status.source.name
@@ -57,8 +55,6 @@ class Checkout extends React.Component {
     const description = 'Fashion-forward facewear'
     return (
       <div className="checkout">
-        <OrderSummary cart={this.props.cart} />
-        <CheckoutForm />
         <StripeCheckout
           email={this.props.user.email || null}
           name="Maskot Co."
@@ -83,4 +79,6 @@ const mapDispatchToProps = dispatch => ({
   postGuestOrder: (order, cart) => dispatch(postGuestOrder(order, cart))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Checkout)
+)

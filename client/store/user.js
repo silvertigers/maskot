@@ -63,7 +63,7 @@ export const logout = () => async dispatch => {
     dispatch(removeUser())
     dispatch(removeProduct())
     dispatch(emptyCart())
-    history.push('/login')
+    history.push('/products')
   } catch (err) {
     console.error(err)
   }

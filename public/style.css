@@ -24,13 +24,13 @@ form div {
   display: inline-block;
 }
 
-#reviewComments{
+#reviewComments {
   height: 100px;
-  width: 500px
+  width: 500px;
 }
 
-#reviewForm{
-  width: 500px
+#reviewForm {
+  width: 500px;
 }
 
 .order_list {
@@ -64,14 +64,6 @@ form div {
 
 .dashboard_menu {
   margin-right: 30px;
-}
-
-.single-product {
-  width: 70vw;
-  margin: 5em;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
 }
 
 .reviews {
@@ -116,7 +108,8 @@ form div {
 }
 
 .ui.tiny.right.floated.image {
-  max-height: 70px
+  max-height: 70px;
+  object-fit: cover;
 }
 
 .edit-button {
@@ -209,6 +202,35 @@ ul {
   padding: 0;
 }
 
+.menu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-items {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-items.end {
+  position: absolute;
+  right: 30px;
+}
+
+.orderPage {
+  column-count: 2;
+}
+
+.order-card {
+  justify-content: space-between;
+}
+
+.admin-order.small-detail {
+  display: inline;
+}
+
+.select {
+  height: 25px;
 .user-orders {
   padding-left: 45px;
   padding-top: 20px
@@ -285,6 +307,49 @@ ul {
   margin: 0 15vw;
 }
 
-.orderPage {
-  margin: 2vw 15vw;
+.order-page {
+  column-count: 2;
+}
+
+.single-product {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-evenly;
+  padding: 50px;
+}
+
+.add-to-cart {
+  display: flex;
+  justify-content: space-evenly;
+}
+.button.plus {
+  width: 50px;
+}
+.button.minus {
+  width: 50px;
+}
+.cart-button {
+  width: 50;
+}
+#checkout-price {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+}
+.select-quantity {
+  height: 20px;
+}
+.select-wrap {
+  width: 50px;
+  display: inline-block;
+}
+.cart-image {
+  object-fit: scale-down;
+  max-height: 200px;
+  max-width: 200px;
+  width: 100%;
+}
+.flex-wrapper {
+  display: flex;
+  flex-flow: row;
 }

@@ -37,7 +37,7 @@ class AdminOrders extends Component {
   }
 
   handleItemClick = (e, {name}) =>
-    name === 'List'
+    name === 'All'
       ? this.setState({
           activeItem: name,
           filtered: ''
@@ -56,7 +56,7 @@ class AdminOrders extends Component {
           <Menu tabular>
             <Menu.Item
               name="All"
-              active={activeItem === 'List'}
+              active={activeItem === 'All'}
               onClick={this.handleItemClick}
             />
             <Menu.Item
@@ -81,22 +81,20 @@ class AdminOrders extends Component {
             />
           </Menu>
         </div>
-        <div className="orderPage">
-          <h2>Order list</h2>
-          <ul>
-            {this.props.orders[0] ? (
-              this.props.orders.map(order => {
-                if (
-                  order.status === this.state.filtered ||
-                  !this.state.filtered
-                ) {
-                  return <AdminOrderCard key={order.id} order={order} />
-                }
-              })
-            ) : (
-              <h2>None of products are available at this time</h2>
-            )}
-          </ul>
+        <h2>Order list</h2>
+        <div className="order-page">
+          {this.props.orders[0] ? (
+            this.props.orders.map(order => {
+              if (
+                order.status === this.state.filtered ||
+                !this.state.filtered
+              ) {
+                return <AdminOrderCard key={order.id} order={order} />
+              }
+            })
+          ) : (
+            <h2>None of products are available at this time</h2>
+          )}
         </div>
       </div>
     )
