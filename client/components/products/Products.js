@@ -130,7 +130,11 @@ class Products extends React.Component {
                     <Grid.Column
                       key={product.id}
                       width={5}
-                      style={{display: 'flex', justifyContent: 'center'}}
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        marginBottom: '50px'
+                      }}
                     >
                       <ProductCard key={product.id} product={product} />
                     </Grid.Column>

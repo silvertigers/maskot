@@ -16,8 +16,11 @@ class Navbar extends React.Component {
     const {handleClick, isLoggedIn, isAdmin, userId, cartItems} = this.props
     return (
       <div>
-        <div className="ui teal inverted segment">
-          <h1 style={{display: 'inline-block'}} className="nav-title">
+        <div className="ui teal inverted segment" style={{borderRadius: '0px'}}>
+          <h1
+            style={{fontSize: '40px', display: 'inline-block'}}
+            className="nav-title"
+          >
             MASKOT
           </h1>
           <p style={{display: 'inline-block', marginLeft: '20px'}}>

@@ -5,14 +5,22 @@ import {Card, Image} from 'semantic-ui-react'
 
 const ProductCard = props => {
   return (
-    <div className="product-card">
+    <div className="product-card" style={{maxWidth: '350px'}}>
       <Link to={`/products/${props.product.id}`}>
-        <Image size="medium" src={props.product.imageUrl} />
+        <Image
+          size="medium"
+          style={{
+            maxHeight: '275px',
+            maxWidth: '275px',
+            minHeight: '275px',
+            minWidth: '275px',
+            objectFit: 'cover'
+          }}
+          src={props.product.imageUrl}
+        />
       </Link>
 
-      <Card.Header className="product-card-header">
-        {props.product.name}
-      </Card.Header>
+      <h2 className="product-card-header">{props.product.name}</h2>
 
       <div className="product-card-buttons">
         <Card.Content className="product-card-content">

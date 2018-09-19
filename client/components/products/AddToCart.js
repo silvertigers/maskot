@@ -86,7 +86,6 @@ class AddToCart extends React.Component {
           style={{
             width: '52px',
             marginLeft: '20px',
-            right: '50px',
             position: 'absolute'
           }}
         >

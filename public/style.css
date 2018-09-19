@@ -29,10 +29,6 @@ form div {
   width: 500px;
 }
 
-#reviewForm {
-  width: 500px;
-}
-
 .order_list {
   display: flex;
   flex-direction: row;
@@ -67,15 +63,14 @@ form div {
 }
 
 .reviews {
-  margin: 3em;
   display: flex;
   flex-direction: column;
   text-align: center;
 }
 
 #reviewForm {
-  margin: 15px 0;
   text-align: left;
+  margin-bottom: 10px;
 }
 
 .card-view {

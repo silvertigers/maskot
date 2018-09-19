@@ -29,31 +29,46 @@ class SingleProduct extends React.Component {
           className="single-product"
           style={{display: 'flex', justifyContent: 'space-evenly'}}
         >
-          <div className="product product-image">
-            <img src={`${imageUrl}`} />
-          </div>
-          <div className="product product-details">
-            <Card>
-              <Card.Content header={name} />
-              <Card.Content>{`$ ${price / 100}`}</Card.Content>
-              <Card.Content description={description} />
-              <Card.Content extra>
-                <AddToCart product={this.props.product} />
-              </Card.Content>
-            </Card>
+          <img
+            src={`${imageUrl}`}
+            style={{maxHeight: '400px', objectFit: 'contain'}}
+          />
+          <div
+            style={{display: 'flex', flexFlow: 'column', alignItems: 'center'}}
+          >
+            <div className="product product-details">
+              <Card>
+                <Card.Content header={name} />
+                <Card.Content>{`$ ${price / 100}`}</Card.Content>
+                <Card.Content description={description} />
+                <Card.Content extra>
+                  <AddToCart product={this.props.product} />
+                </Card.Content>
+              </Card>
+            </div>
+
+            {reviews && reviews[0] ? (
+              <div className="reviews">
+                <h2
+                  style={{
+                    textAlign: 'left',
+                    marginTop: '30px'
+                  }}
+                >
+                  Reviews
+                </h2>
+                <ReviewForm productId={this.props.match.params.productId} />
+                {reviews.map(review => (
+                  <SingleReview key={review.id} review={review} />
+                ))}
+              </div>
+            ) : (
+              <p style={{marginTop: '60px'}}>
+                There are no reviews for this product
+              </p>
+            )}
           </div>
         </div>
-        {reviews && reviews[0] ? (
-          <div className="reviews">
-            <h2 style={{textAlign: 'left'}}>Reviews</h2>
-            <ReviewForm productId={this.props.match.params.productId} />
-            {reviews.map(review => (
-              <SingleReview key={review.id} review={review} />
-            ))}
-          </div>
-        ) : (
-          <h2>There are no reviews for this product</h2>
-        )}
       </div>
     )
   }

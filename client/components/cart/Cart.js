@@ -57,7 +57,7 @@ export class Cart extends React.Component {
         </div>
       </div>
     ) : (
-      <h1>Your Shopping Cart is Empty!</h1>
+      <h1 style={{padding: '40px'}}>Your Shopping Cart is Empty!</h1>
     )
   }
 }
